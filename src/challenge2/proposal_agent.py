@@ -4,12 +4,13 @@ import re
 
 from .brand_agent import BrandAgent
 from .archive_agent import ArchiveAgent
+from pathlib import Path
 
 
 class ProposalAgent:
-    def __init__(self):
+    def __init__(self, archive_path: Path | None = None):
         self.brand = BrandAgent()
-        self.archive = ArchiveAgent()
+        self.archive = ArchiveAgent(archive_path)
 
     def build(self, trend_signals: list[dict], limit: int = 5) -> tuple[list[dict], list[dict]]:
         candidates: list[dict] = []

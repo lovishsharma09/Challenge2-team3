@@ -75,6 +75,28 @@ python -m src.challenge2.api_server
 Open `http://127.0.0.1:8000/mock` or request
 `http://127.0.0.1:8000/api/proposals`.
 
+### Supplied 5,000-recipe archive
+
+The shared archive is available at
+`C:\Users\User\Documents\OMMAX Hackathon\auswahl_manifest.json` with
+its 5,000 XML files in the adjacent `rezepte_export` directory.
+
+Set `DAS_SCHMECKT_ARCHIVE_MANIFEST` to the manifest path if the archive is
+installed somewhere else. The Agent:
+
+1. Loads each XML file listed by the manifest.
+2. Verifies the manifest SHA-256 checksum against the original XML bytes.
+3. Reads the title, ingredients, quantities, units, preparation steps,
+   serving count and available dates.
+4. Searches by title and ingredient-name/ID text for candidate matches.
+5. Reports `matches_found` or `no_match_found`, plus repetition risk,
+   recurring ingredients, methods and the most recent available date.
+
+The XML `DateCreated` value is currently used as the publication date
+proxy. It is not the same as a verified magazine publication date. The
+handoff therefore includes `date_source` and should not present this value
+as a confirmed issue date. Where no date is available, it remains `null`.
+
 Generated proposals, review reports and assumptions are written to
 `logs/decisions.jsonl`. Generated HTML is written to `output/recipes.html`.
 

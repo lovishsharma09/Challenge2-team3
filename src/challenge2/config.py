@@ -4,6 +4,12 @@ import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+ARCHIVE_MANIFEST_PATH = Path(
+    os.getenv(
+        "DAS_SCHMECKT_ARCHIVE_MANIFEST",
+        str(ROOT.parent / "auswahl_manifest.json"),
+    )
+)
 
 # To run live web research, paste the key here.
 # It is ignored by git only if the value is kept in .env/secrets_local.py.

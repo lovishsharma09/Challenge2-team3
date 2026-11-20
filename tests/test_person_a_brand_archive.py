@@ -46,6 +46,18 @@ class BrandArchiveTest(unittest.TestCase):
         self.assertEqual(result["most_recent_comparable_publication"], "2026-09-04")
         self.assertIn("kürbis", result["recurring_ingredients"])
 
+    def test_supplied_manifest_is_loaded_when_available(self):
+        manifest = Path(r"C:\Users\User\Documents\OMMAX Hackathon\auswahl_manifest.json")
+        if not manifest.exists():
+            self.skipTest("Shared archive not present on this machine")
+        from src.challenge2.archive_agent import ArchiveAgent
+
+        result = ArchiveAgent(manifest).check("Vanillekipferl")
+        self.assertTrue(result["available"])
+        self.assertEqual(result["match_status"], "matches_found")
+        self.assertGreater(len(result["similar_recipes"]), 0)
+        self.assertEqual(result["repetition_risk"], "high")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Any
 from datetime import date, timedelta
 
-from .config import ROOT
+from .config import ARCHIVE_MANIFEST_PATH, ROOT
 from .logging import DecisionLog
 from .nutrition_agent import NutritionAgent
 from .proposal_agent import ProposalAgent
@@ -21,7 +21,8 @@ class ChallengeOrchestrator:
         self.trend = TrendAgent(
             self.root / "data" / "trends" / "google-trends"
         )
-        self.proposals = ProposalAgent()
+        archive_path = ARCHIVE_MANIFEST_PATH if ARCHIVE_MANIFEST_PATH.exists() else None
+        self.proposals = ProposalAgent(archive_path)
         self.recipe = RecipeAgent()
         self.review = ReviewAgent()
         self.nutrition = NutritionAgent(
