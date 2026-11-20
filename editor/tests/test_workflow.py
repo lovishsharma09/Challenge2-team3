@@ -228,7 +228,8 @@ class WorkflowTest(unittest.TestCase):
         self.assertEqual(len(cards), 2)
         for card, recipe in zip(cards, wf.bundle["recipes"]):
             page = card.read_text(encoding="utf-8")
-            self.assertIn("KI-generierter Rezeptentwurf", page)
+            self.assertIn("MOCK-Entwurf · kein echtes Rezept", page)              # the stub is active: never claim "AI-generated"
+            self.assertNotIn("KI-generierter Rezeptentwurf", page)
             self.assertIn(recipe["title"], page)
         warned = next(i for i in wf.result["approved_with_warnings"])
         self.assertEqual(warned["recipe_index"], 0)             # the soft finding concerns recipe 1 only

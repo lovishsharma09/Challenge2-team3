@@ -97,17 +97,53 @@ def trends_slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.casefold().translate(str.maketrans("äöüß", "aous"))).strip("-") or "topic"
 
 
+MOCK_NOTE_DE = "MOCK-Beispiel zur Probe des Ablaufs (feste Linsensuppen-Rezepte), nicht aus dem gewählten Pitch erzeugt"
+
+# Where the stub reviser puts a forgotten ingredient: (recipe title, ingredient) -> (step index, corrected step text).
+# Written like an editor would: the ingredient joins the step where it is actually used, not after serving.
+STUB_FIXES = {
+    ("Rote Linsensuppe mit Zitrone", "Zitronensaft"): (
+        2, "Die Suppe aufkochen und bei mittlerer Hitze 15 Minuten köcheln lassen, bis die Linsen weich sind. Dann fein pürieren "
+           "und mit 2 EL Zitronensaft, Salz und Pfeffer abschmecken."),
+    ("Linsen-Eintopf mit Kartoffeln", "Lorbeerblatt"): (
+        1, "200 g Tellerlinsen und die Kartoffeln zugeben, mit 800 ml Gemüsebrühe aufgießen, 1 Lorbeerblatt zugeben und "
+           "25 Minuten köcheln lassen."),
+}
+
+
 def generate(proposal: dict, notes: str = "") -> dict:
-    topic = proposal["topic"]
-    base = lambda title, sub, extra: {  # noqa: E731
-        "title": title, "subtitle": sub, "servings": 4, "prep_time_minutes": 15, "cook_time_minutes": 25,
-        "ingredients": [{"name": topic, "amount": 500, "unit": "g"}, {"name": "Olivenöl", "amount": 2, "unit": "EL"},
-                        {"name": "Petersilie", "amount": 1, "unit": "Bund"}, {"name": "Salz", "amount": None, "unit": ""}],
-        "steps": [f"{topic} waschen und in Stücke schneiden.", f"Mit Olivenöl mischen und {extra} garen.", "Servieren."],
-        "image_url": None}
-    return {"proposal_id": proposal["id"], "steering_notes": notes.strip(),
-            "recipes": [base(f"{topic} aus dem Ofen", "MOCK: klassisch", "30 Minuten im Ofen"),
-                        base(f"{topic}-Pfanne", "MOCK: schnell", "10 Minuten in der Pfanne")]}
+    """STUB: always returns two fixed, realistic lentil-soup recipes (flagged mock). Each has one forgotten ingredient, the kind of
+    slip the review loop exists to catch. The content does NOT come from the selected pitch."""
+    soup = {
+        "title": "Rote Linsensuppe mit Zitrone", "subtitle": "Cremig, schnell und alltagstauglich", "servings": 4,
+        "prep_time_minutes": 15, "cook_time_minutes": 25, "difficulty": "leicht", "image_url": None, "mock": True,
+        "ingredients": [
+            {"name": "Olivenöl", "amount": 2, "unit": "EL"}, {"name": "Zwiebel", "amount": 1, "unit": "Stück"},
+            {"name": "Knoblauch", "amount": 2, "unit": "Zehen"}, {"name": "Kreuzkümmel", "amount": 1, "unit": "TL"},
+            {"name": "rote Linsen", "amount": 250, "unit": "g"}, {"name": "Gemüsebrühe", "amount": 1, "unit": "l"},
+            {"name": "Zitronensaft", "amount": 2, "unit": "EL"}, {"name": "Salz", "amount": None, "unit": ""},
+            {"name": "Pfeffer", "amount": None, "unit": ""}, {"name": "Petersilie", "amount": 1, "unit": "Bund"}],
+        "steps": [
+            "Zwiebel und Knoblauch schälen und fein hacken. 2 EL Olivenöl in einem Topf erhitzen und beides 3 Minuten glasig dünsten.",
+            "1 TL Kreuzkümmel kurz mitrösten. 250 g rote Linsen gründlich abspülen, dazugeben und mit 1 l Gemüsebrühe aufgießen.",
+            "Die Suppe aufkochen und bei mittlerer Hitze 15 Minuten köcheln lassen, bis die Linsen weich sind. Dann fein pürieren "
+            "und mit Salz und Pfeffer würzen.",
+            "1 Bund Petersilie hacken, über die Suppe streuen und heiß servieren."]}
+    stew = {
+        "title": "Linsen-Eintopf mit Kartoffeln", "subtitle": "Herzhaft, sättigend und gut vorzubereiten", "servings": 4,
+        "prep_time_minutes": 20, "cook_time_minutes": 30, "difficulty": "leicht", "image_url": None, "mock": True,
+        "ingredients": [
+            {"name": "Olivenöl", "amount": 1, "unit": "EL"}, {"name": "Zwiebel", "amount": 1, "unit": "Stück"},
+            {"name": "Karotten", "amount": 2, "unit": "Stück"}, {"name": "Kartoffeln", "amount": 400, "unit": "g"},
+            {"name": "Tellerlinsen", "amount": 200, "unit": "g"}, {"name": "Gemüsebrühe", "amount": 800, "unit": "ml"},
+            {"name": "Lorbeerblatt", "amount": 1, "unit": "Stück"}, {"name": "Apfelessig", "amount": 1, "unit": "EL"},
+            {"name": "Salz", "amount": None, "unit": ""}, {"name": "Pfeffer", "amount": None, "unit": ""}],
+        "steps": [
+            "Zwiebel und Karotten schälen und würfeln, Kartoffeln in 2 cm große Stücke schneiden. 1 EL Olivenöl erhitzen und Zwiebel "
+            "und Karotten darin 5 Minuten anbraten.",
+            "200 g Tellerlinsen und die Kartoffeln zugeben, mit 800 ml Gemüsebrühe aufgießen und 25 Minuten köcheln lassen.",
+            "Mit 1 EL Apfelessig, Salz und Pfeffer abschmecken und heiß servieren."]}
+    return {"proposal_id": proposal["id"], "steering_notes": notes.strip(), "recipes": [soup, stew]}
 
 
 def review(bundle: dict, notes: str = "") -> list[dict]:
@@ -118,6 +154,8 @@ def review(bundle: dict, notes: str = "") -> list[dict]:
 
 
 def revise(proposal: dict, notes: str, bundle: dict, issues: list[dict], comment: str = "") -> dict:
+    """STUB reviser: fixes a forgotten ingredient inside the step where it belongs (known sample recipes), otherwise inserts a
+    mention BEFORE the final serving step."""
     out = copy.deepcopy(bundle)
     if "demo-stuck" in notes:
         return out
@@ -125,8 +163,13 @@ def revise(proposal: dict, notes: str, bundle: dict, issues: list[dict], comment
         if issue["criterion"] == "ingredient_unused" and issue["recipe_index"] is not None:
             recipe = out["recipes"][issue["recipe_index"]]
             name = issue["message"].split("'")[1]
-            if name.casefold() not in " ".join(recipe["steps"]).casefold():
-                recipe["steps"].append(f"Mit {name} abschmecken bzw. bestreuen.")
+            if name.casefold() in " ".join(recipe["steps"]).casefold():
+                continue
+            fix = STUB_FIXES.get((recipe["title"], name))
+            if fix and fix[0] < len(recipe["steps"]):
+                recipe["steps"][fix[0]] = fix[1]
+            else:
+                recipe["steps"].insert(max(len(recipe["steps"]) - 1, 0), f"Mit {name} abschmecken.")
     if comment:
         for recipe in out["recipes"]:
             recipe["subtitle"] += f" [Editor: {comment}]"

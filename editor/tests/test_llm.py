@@ -75,7 +75,7 @@ class ReviseTest(unittest.TestCase):
     def test_merges_recipes_and_keeps_other_fields(self):
         b = bundle()
         b["recipes"][0]["image_url"] = "keep.png"
-        fixed = [dict(r, steps=r["steps"] + ["Mit Petersilie und Salz abschmecken."]) for r in b["recipes"]]
+        fixed = [dict(r, steps=r["steps"] + ["Mit " + ", ".join(i["name"] for i in r["ingredients"]) + " fertigstellen."]) for r in b["recipes"]]
         out = revise_llm({"topic": "Kürbis"}, "", b, [{"criterion": "ingredient_unused", "message": "m"}],
                          "comment", ask=lambda s, u: {"recipes": fixed})
         self.assertEqual(out["recipes"][0]["image_url"], "keep.png")

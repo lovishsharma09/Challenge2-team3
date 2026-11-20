@@ -6,3 +6,6 @@ logs/
 output/
 src/challenge2/secrets_local.py
 
+
+# local-only proposal batches and any file that may contain archive data
+data/local/

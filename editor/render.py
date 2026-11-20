@@ -134,9 +134,14 @@ def _column_pages(items: list[tuple[list[str], float, float]], first_top: float,
     return pages
 
 
+AI_LABEL = "KI-generierter Rezeptentwurf"
+MOCK_LABEL = "MOCK-Entwurf · kein echtes Rezept"
+
+
 def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) -> str:
     parts = _template_parts()
     title = str(recipe.get("title", "Rezept"))
+    label = MOCK_LABEL if recipe.get("mock") else AI_LABEL
 
     # ---------- page 1 title block
     t_lines = wrap(title, 331.236, 29)
@@ -160,7 +165,7 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
         y += 13 * len(sub) + 8
     blocks.append(f'<div class="element" style="left:{LEFT_X}pt;top:{y:.3f}pt;width:190pt;height:17pt;background:#fff04b;'
                   f'color:{GREEN};font:700 8.5pt/17pt Helvetica,Arial,sans-serif;text-align:center">'
-                  f'KI-generierter Rezeptentwurf</div>')
+                  f'{esc(label)}</div>')
     y += 17 + 6
     if warnings:
         wl = [f"Redaktionell freigegeben mit offenen Prüfhinweisen:"]
@@ -265,7 +270,7 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
                     text_el(227.02, ty + 26, 330, 9.4, 13.3, tip_lines)]
 
         out.append('<footer class="page-footer">' + box(34.02, 801, 527.236, 0.6, "#d8ded5") +
-                   text_el(34.02, 810, 427.236, 7.5, 10, ["das schmeckt! · Mit Freude kochen. · KI-generierter Rezeptentwurf"], color=MUTED) +
+                   text_el(34.02, 810, 427.236, 7.5, 10, [f"das schmeckt! · Mit Freude kochen. · {label}"], color=MUTED) +
                    text_el(469.256, 810, 92, 7.5, 10, [f"Seite {p + 1} von {{N}}"], color=MUTED) + "</footer>")
         pages_html.append("".join(out))
 
@@ -275,7 +280,7 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
     return (f'<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
             f'<meta name="recipe-template-version" content="A4-v5"><title>{esc(title)} · das schmeckt!</title>{parts["style"]}</head><body>'
             f'<div class="toolbar"><div><h1>{esc(title)}</h1><p>DIN A4 · {n} Seite{"n" if n > 1 else ""} · Druckfassung A4-v5 · '
-            f'KI-generierter Rezeptentwurf</p></div><button id="print" type="button">Drucken / PDF</button></div>'
+            f'{esc(label)}</p></div><button id="print" type="button">Drucken / PDF</button></div>'
             f'{parts["help"]}<main class="pages" aria-label="Rezept auf DIN-A4-Seiten">{wrapped}</main>'
             f'<noscript><p class="noscript">Die Rezeptseiten sind auch ohne JavaScript sichtbar.</p></noscript>{parts["script"]}</body></html>')
 

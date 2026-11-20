@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Callable
 
 from .agents import Agents
+from .changes import diff_bundles
 from .contract import check_bundle, check_proposals
 from .render import render_cards
 from .review_issues import review_all
@@ -91,6 +92,9 @@ class EditorWorkflow:
         self.stage = "proposals"
         self._log("proposals_ready", n=len(accepted), topics=[p["topic"] for p in accepted])
 
+    def can_reject_all(self) -> bool:
+        return self.stage == "proposals" and getattr(self.agents.propose, "supports_rerun", True) is not False
+
     def start(self):
         self.reset()
         self._load_proposals(set())
@@ -98,6 +102,9 @@ class EditorWorkflow:
     def reject_all(self, note: str = ""):
         """None of the five fit: log the decision and note, then propose other topics."""
         self._need("proposals")
+        if getattr(self.agents.propose, "supports_rerun", True) is False:
+            raise WorkflowError("These pitches are a fixed batch from Person A: no replacement batch or rerun is available. "
+                                "Choose one of them, or load a different batch.")
         self._log("editor_rejected_all", note=note, topics=sorted(self.shown_topics))
         self._load_proposals(set(self.shown_topics))
 
@@ -114,8 +121,9 @@ class EditorWorkflow:
         return new, fixed
 
     def _commit(self, bundle: dict, issues: list[dict], fixed: list[dict]):
+        changes = diff_bundles(self.bundle, bundle)               # what this revision actually changed (empty for the first draft)
         self.bundle, self.issues = bundle, issues
-        self.rounds.append({"round": len(self.rounds) + 1, "issues": [dict(i) for i in issues], "fixed": fixed})
+        self.rounds.append({"round": len(self.rounds) + 1, "issues": [dict(i) for i in issues], "fixed": fixed, "changes": changes})
         self._log("review", round=len(self.rounds), hard_open=len(self._open("hard")),
                   soft_open=len(self._open("soft")), fixed=len(fixed))
 
