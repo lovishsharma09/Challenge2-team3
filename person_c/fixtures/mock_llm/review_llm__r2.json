@@ -1,0 +1,66 @@
+{
+ "criteria": {
+  "title": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "subheadings": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "quantity_plausibility": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "quantity_completeness": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "all_ingredients_used": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "units_consistent": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "tbsp_tsp": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "step_order": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  }
+ },
+ "extras": {
+  "brand_fit": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "differentiation": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "culinary_plausibility": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  },
+  "food_safety": {
+   "pass": true,
+   "issues": [],
+   "fix": null
+  }
+ }
+}

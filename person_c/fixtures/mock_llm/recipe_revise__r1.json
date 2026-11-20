@@ -1,0 +1,184 @@
+{
+ "title": "Grünkohl-Eintopf mit Kassler",
+ "intro": "Ein norddeutscher Klassiker für kalte Tage: Der Grünkohl köchelt mit Kartoffeln, Möhren und mildem Kassler zu einem sättigenden Eintopf, der sich gut vorbereiten lässt.",
+ "servings": {
+  "amount": 4,
+  "unit": "Portionen"
+ },
+ "times": {
+  "prep_min": 20,
+  "cook_min": 35,
+  "rest_min": null
+ },
+ "ingredients": [
+  {
+   "id": "i1",
+   "group": null,
+   "name": "Grünkohl",
+   "quantity": 500,
+   "unit": "g",
+   "note": "geputzt"
+  },
+  {
+   "id": "i2",
+   "group": null,
+   "name": "mehligkochende Kartoffeln",
+   "quantity": 600,
+   "unit": "g",
+   "note": null
+  },
+  {
+   "id": "i3",
+   "group": null,
+   "name": "Zwiebeln",
+   "quantity": 2,
+   "unit": null,
+   "note": null
+  },
+  {
+   "id": "i4",
+   "group": null,
+   "name": "Möhren",
+   "quantity": 200,
+   "unit": "g",
+   "note": null
+  },
+  {
+   "id": "i5",
+   "group": null,
+   "name": "Kassler",
+   "quantity": 400,
+   "unit": "g",
+   "note": "am Stück"
+  },
+  {
+   "id": "i6",
+   "group": null,
+   "name": "Rapsöl",
+   "quantity": 2,
+   "unit": "EL",
+   "note": null
+  },
+  {
+   "id": "i7",
+   "group": null,
+   "name": "Gemüsebrühe",
+   "quantity": 900,
+   "unit": "ml",
+   "note": null
+  },
+  {
+   "id": "i8",
+   "group": null,
+   "name": "mittelscharfer Senf",
+   "quantity": 1,
+   "unit": "EL",
+   "note": null
+  },
+  {
+   "id": "i9",
+   "group": null,
+   "name": "Lorbeerblätter",
+   "quantity": 2,
+   "unit": null,
+   "note": null
+  },
+  {
+   "id": "i10",
+   "group": null,
+   "name": "Pfeffer",
+   "quantity": null,
+   "unit": null,
+   "note": null
+  },
+  {
+   "id": "i11",
+   "group": null,
+   "name": "Salz",
+   "quantity": null,
+   "unit": null,
+   "note": null
+  },
+  {
+   "id": "i12",
+   "group": null,
+   "name": "Butter",
+   "quantity": 20,
+   "unit": "g",
+   "note": null
+  }
+ ],
+ "steps": [
+  {
+   "group": null,
+   "text": "Die Zwiebeln abziehen und würfeln. Kartoffeln und Möhren schälen und in 2 cm große Würfel schneiden. Den Grünkohl waschen, trocken schütteln, die Blätter von den Stielen streifen und grob hacken.",
+   "uses": [
+    "i1",
+    "i2",
+    "i3",
+    "i4"
+   ],
+   "temperature_c": null,
+   "duration_min": null
+  },
+  {
+   "group": null,
+   "text": "Das Rapsöl in einem großen Topf erhitzen. Den Kassler in 2 cm große Würfel schneiden und darin rundherum ca. 5 Min. anbraten. Die Zwiebeln zugeben und glasig dünsten.",
+   "uses": [
+    "i6",
+    "i5",
+    "i3"
+   ],
+   "temperature_c": null,
+   "duration_min": 5
+  },
+  {
+   "group": null,
+   "text": "Kartoffeln, Möhren und Grünkohl zugeben, mit 900 ml Gemüsebrühe aufgießen und die Lorbeerblätter, Senf, Salz und Pfeffer zufügen. Zugedeckt bei kleiner Hitze ca. 25 Min. köcheln lassen.",
+   "uses": [
+    "i2",
+    "i4",
+    "i1",
+    "i7",
+    "i8",
+    "i10",
+    "i11",
+    "i9"
+   ],
+   "temperature_c": null,
+   "duration_min": 25
+  },
+  {
+   "group": null,
+   "text": "Die Lorbeerblätter herausnehmen. Den Eintopf mit dem Kartoffelstampfer grob andrücken, die Butter unterrühren und mit Salz und Pfeffer abschmecken. In tiefen Tellern servieren.",
+   "uses": [
+    "i12",
+    "i11",
+    "i10"
+   ],
+   "temperature_c": null,
+   "duration_min": null
+  }
+ ],
+ "serving_tip": "Dazu passt ein Stück Roggenbrot. Am nächsten Tag aufgewärmt schmeckt der Eintopf noch kräftiger.",
+ "image_prompt": "A deep rustic ceramic bowl of dark green kale stew with soft potato chunks, sliced carrots, translucent onion and cubes of smoked cured pork, steam rising from the bowl. Bare wooden table, nothing beside the bowl.",
+ "image_alt": "Tiefe Schale Grünkohl-Eintopf mit Kassler, Kartoffeln und Möhren",
+ "differentiation": "Langsam gegarter Eintopf aus einem Topf – im Gegensatz zum schnellen Pfannengericht.",
+ "change_log": [
+  {
+   "criterion": "all_ingredients_used",
+   "change": "Lorbeerblätter in Schritt 3 ergänzt und in Schritt 4 wieder entfernt."
+  },
+  {
+   "criterion": "units_consistent",
+   "change": "Butter-Menge im Schritt entfernt, damit Liste (20 g) und Schritt nicht abweichen."
+  }
+ ],
+ "image_components": [
+  "i1",
+  "i2",
+  "i3",
+  "i4",
+  "i5"
+ ]
+}

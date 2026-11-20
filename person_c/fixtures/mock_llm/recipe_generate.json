@@ -1,0 +1,351 @@
+{
+ "recipes": [
+  {
+   "title": "Grünkohl-Eintopf mit Kassler",
+   "intro": "Ein norddeutscher Klassiker für kalte Tage: Der Grünkohl köchelt mit Kartoffeln, Möhren und mildem Kassler zu einem sättigenden Eintopf, der sich gut vorbereiten lässt.",
+   "servings": {
+    "amount": 4,
+    "unit": "Portionen"
+   },
+   "times": {
+    "prep_min": 20,
+    "cook_min": 35,
+    "rest_min": null
+   },
+   "ingredients": [
+    {
+     "id": "i1",
+     "group": null,
+     "name": "Grünkohl",
+     "quantity": 500,
+     "unit": "g",
+     "note": "geputzt"
+    },
+    {
+     "id": "i2",
+     "group": null,
+     "name": "mehligkochende Kartoffeln",
+     "quantity": 600,
+     "unit": "g",
+     "note": null
+    },
+    {
+     "id": "i3",
+     "group": null,
+     "name": "Zwiebeln",
+     "quantity": 2,
+     "unit": null,
+     "note": null
+    },
+    {
+     "id": "i4",
+     "group": null,
+     "name": "Möhren",
+     "quantity": 200,
+     "unit": "g",
+     "note": null
+    },
+    {
+     "id": "i5",
+     "group": null,
+     "name": "Kassler",
+     "quantity": 400,
+     "unit": "g",
+     "note": "am Stück"
+    },
+    {
+     "id": "i6",
+     "group": null,
+     "name": "Rapsöl",
+     "quantity": 2,
+     "unit": "EL",
+     "note": null
+    },
+    {
+     "id": "i7",
+     "group": null,
+     "name": "Gemüsebrühe",
+     "quantity": 900,
+     "unit": "ml",
+     "note": null
+    },
+    {
+     "id": "i8",
+     "group": null,
+     "name": "mittelscharfer Senf",
+     "quantity": 1,
+     "unit": "EL",
+     "note": null
+    },
+    {
+     "id": "i9",
+     "group": null,
+     "name": "Lorbeerblätter",
+     "quantity": 2,
+     "unit": null,
+     "note": null
+    },
+    {
+     "id": "i10",
+     "group": null,
+     "name": "Pfeffer",
+     "quantity": null,
+     "unit": null,
+     "note": null
+    },
+    {
+     "id": "i11",
+     "group": null,
+     "name": "Salz",
+     "quantity": null,
+     "unit": null,
+     "note": null
+    },
+    {
+     "id": "i12",
+     "group": null,
+     "name": "Butter",
+     "quantity": 20,
+     "unit": "g",
+     "note": null
+    }
+   ],
+   "steps": [
+    {
+     "group": null,
+     "text": "Die Zwiebeln abziehen und würfeln. Kartoffeln und Möhren schälen und in 2 cm große Würfel schneiden. Den Grünkohl waschen, trocken schütteln, die Blätter von den Stielen streifen und grob hacken.",
+     "uses": [
+      "i1",
+      "i2",
+      "i3",
+      "i4"
+     ],
+     "temperature_c": null,
+     "duration_min": null
+    },
+    {
+     "group": null,
+     "text": "Das Rapsöl in einem großen Topf erhitzen. Den Kassler in 2 cm große Würfel schneiden und darin rundherum ca. 5 Min. anbraten. Die Zwiebeln zugeben und glasig dünsten.",
+     "uses": [
+      "i6",
+      "i5",
+      "i3"
+     ],
+     "temperature_c": null,
+     "duration_min": 5
+    },
+    {
+     "group": null,
+     "text": "Kartoffeln, Möhren und Grünkohl zugeben, mit 900 ml Gemüsebrühe aufgießen und mit Senf, Salz und Pfeffer würzen. Zugedeckt bei kleiner Hitze ca. 25 Min. köcheln lassen.",
+     "uses": [
+      "i2",
+      "i4",
+      "i1",
+      "i7",
+      "i8",
+      "i10",
+      "i11"
+     ],
+     "temperature_c": null,
+     "duration_min": 25
+    },
+    {
+     "group": null,
+     "text": "Den Eintopf mit dem Kartoffelstampfer grob andrücken, 30 g Butter unterrühren und mit Salz und Pfeffer abschmecken. In tiefen Tellern servieren.",
+     "uses": [
+      "i12",
+      "i11",
+      "i10"
+     ],
+     "temperature_c": null,
+     "duration_min": null
+    }
+   ],
+   "serving_tip": "Dazu passt ein Stück Roggenbrot. Am nächsten Tag aufgewärmt schmeckt der Eintopf noch kräftiger.",
+   "image_prompt": "A deep rustic ceramic bowl of dark green kale stew with soft potato chunks, sliced carrots, translucent onion and cubes of smoked cured pork, steam rising from the bowl. Bare wooden table, nothing beside the bowl.",
+   "image_alt": "Tiefe Schale Grünkohl-Eintopf mit Kassler, Kartoffeln und Möhren",
+   "differentiation": "Langsam gegarter Eintopf aus einem Topf – im Gegensatz zum schnellen Pfannengericht.",
+   "image_components": [
+    "i1",
+    "i2",
+    "i3",
+    "i4",
+    "i5"
+   ]
+  },
+  {
+   "title": "Grünkohl-Gnocchi-Pfanne mit Speck",
+   "intro": "Schnelle Alltagsküche mit Wintergemüse: Knusprig gebratene Gnocchi treffen auf Grünkohl, Speck und eine cremige Käsesauce – in rund 35 Minuten fertig.",
+   "servings": {
+    "amount": 4,
+    "unit": "Portionen"
+   },
+   "times": {
+    "prep_min": 15,
+    "cook_min": 20,
+    "rest_min": null
+   },
+   "ingredients": [
+    {
+     "id": "i1",
+     "group": null,
+     "name": "Grünkohl",
+     "quantity": 300,
+     "unit": "g",
+     "note": null
+    },
+    {
+     "id": "i2",
+     "group": null,
+     "name": "Kartoffelgnocchi",
+     "quantity": 600,
+     "unit": "g",
+     "note": "aus dem Kühlregal"
+    },
+    {
+     "id": "i3",
+     "group": null,
+     "name": "Speckwürfel",
+     "quantity": 100,
+     "unit": "g",
+     "note": null
+    },
+    {
+     "id": "i4",
+     "group": null,
+     "name": "Zwiebel",
+     "quantity": 1,
+     "unit": null,
+     "note": null
+    },
+    {
+     "id": "i5",
+     "group": null,
+     "name": "Knoblauch",
+     "quantity": 2,
+     "unit": "Zehe",
+     "note": null
+    },
+    {
+     "id": "i6",
+     "group": null,
+     "name": "Rapsöl",
+     "quantity": 1,
+     "unit": "EL",
+     "note": null
+    },
+    {
+     "id": "i7",
+     "group": null,
+     "name": "Sahne",
+     "quantity": 150,
+     "unit": "ml",
+     "note": null
+    },
+    {
+     "id": "i8",
+     "group": null,
+     "name": "geriebener Gouda",
+     "quantity": 80,
+     "unit": "g",
+     "note": null
+    },
+    {
+     "id": "i9",
+     "group": null,
+     "name": "geriebene Muskatnuss",
+     "quantity": 1,
+     "unit": "Prise",
+     "note": null
+    },
+    {
+     "id": "i10",
+     "group": null,
+     "name": "Pfeffer",
+     "quantity": null,
+     "unit": null,
+     "note": null
+    },
+    {
+     "id": "i11",
+     "group": null,
+     "name": "Salz",
+     "quantity": null,
+     "unit": null,
+     "note": null
+    },
+    {
+     "id": "i12",
+     "group": null,
+     "name": "Walnusskerne",
+     "quantity": 40,
+     "unit": "g",
+     "note": null
+    }
+   ],
+   "steps": [
+    {
+     "group": null,
+     "text": "Zwiebel und Knoblauch abziehen und fein würfeln. Den Grünkohl waschen, trocken schütteln, die Blätter von den Stielen streifen und in Streifen schneiden. Die Walnusskerne grob hacken.",
+     "uses": [
+      "i4",
+      "i5",
+      "i1",
+      "i12"
+     ],
+     "temperature_c": null,
+     "duration_min": null
+    },
+    {
+     "group": null,
+     "text": "Das Rapsöl in einer großen Pfanne erhitzen. Die Speckwürfel darin ca. 4 Min. knusprig braten und herausnehmen. Die Gnocchi im Bratfett 5–6 Min. goldbraun braten.",
+     "uses": [
+      "i6",
+      "i3",
+      "i2"
+     ],
+     "temperature_c": null,
+     "duration_min": 6
+    },
+    {
+     "group": null,
+     "text": "Zwiebel und Knoblauch zu den Gnocchi geben und kurz mitbraten. Den Grünkohl zufügen und ca. 3 Min. mitbraten. Die Sahne angießen, mit Muskat, Salz und Pfeffer würzen und ca. 3 Min. einköcheln lassen.",
+     "uses": [
+      "i4",
+      "i5",
+      "i1",
+      "i7",
+      "i9",
+      "i11",
+      "i10"
+     ],
+     "temperature_c": null,
+     "duration_min": 3
+    },
+    {
+     "group": null,
+     "text": "Den Speck zurück in die Pfanne geben, den Gouda untermischen und kurz schmelzen lassen. Mit den Walnüssen bestreut servieren.",
+     "uses": [
+      "i3",
+      "i8",
+      "i12"
+     ],
+     "temperature_c": null,
+     "duration_min": null
+    }
+   ],
+   "serving_tip": "Statt Gnocchi passen auch Spätzle aus dem Kühlregal.",
+   "image_prompt": "A large cast-iron skillet of golden pan-fried potato gnocchi tossed with dark green kale strips, crisp bacon cubes and soft onion, covered with melted grated cheese and coarsely chopped walnuts. Bare wooden board, nothing beside the pan.",
+   "image_alt": "Pfanne mit gebratenen Gnocchi, Grünkohl, Speck und Gouda",
+   "differentiation": "Schnelles Pfannengericht in rund 35 Minuten – im Gegensatz zum langsam gegarten Eintopf.",
+   "image_components": [
+    "i1",
+    "i2",
+    "i3",
+    "i4",
+    "i8",
+    "i12"
+   ]
+  }
+ ]
+}

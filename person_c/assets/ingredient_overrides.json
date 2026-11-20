@@ -1,0 +1,36 @@
+{
+  "_comment": "Fixed ingredient -> database assignments. Read BEFORE any LLM matching so a run is reproducible: without this table the LLM picks a 'closest entry' per run and the kcal per portion moves between runs. Key = normalized ingredient name (lower case, umlauts folded, as nutrition_db.normalize writes it). Every entry stays labelled as an assumption on the card.",
+  "database": "Schweizer Nährwertdatenbank – Generische Lebensmittel V 7.1",
+  "overrides": {
+    "kassler": {
+      "db_id": "1118",
+      "db_name": "Kochpökelware (Durchschnitt)",
+      "confidence": 0.5,
+      "why": "nächstliegender Eintrag (Annahme; feste Zuordnung): Kassler ist gepökeltes, geräuchertes Schweinefleisch; die Datenbank V 7.1 führt keinen Kassler-Eintrag. Kochpökelware (Durchschnitt) mit 223 kcal, 15,6 g Fett, 19,8 g Protein pro 100 g liegt am nächsten (Rippli (Nierstück) 156 kcal / 7,5 g Fett ist zu mager für den Kamm, Rohschinken 229 kcal / 31 g Protein ist eine Rohpökelware)."
+    },
+    "kassler kamm": {
+      "db_id": "1118",
+      "db_name": "Kochpökelware (Durchschnitt)",
+      "confidence": 0.5,
+      "why": "nächstliegender Eintrag (Annahme; feste Zuordnung): Kassler Kamm ist gepökeltes, geräuchertes Schweinefleisch aus dem Nacken; die Datenbank V 7.1 führt keinen Kassler-Eintrag. Kochpökelware (Durchschnitt) mit 223 kcal, 15,6 g Fett, 19,8 g Protein pro 100 g liegt am nächsten (Rippli (Nierstück) 156 kcal / 7,5 g Fett ist zu mager für den fetteren Kamm, Rohschinken/Rohpökelwaren sind nicht gegart)."
+    },
+    "kasseler": {
+      "db_id": "1118",
+      "db_name": "Kochpökelware (Durchschnitt)",
+      "confidence": 0.5,
+      "why": "nächstliegender Eintrag (Annahme; feste Zuordnung): Schreibvariante von Kassler, siehe dort."
+    },
+    "kasseler kamm": {
+      "db_id": "1118",
+      "db_name": "Kochpökelware (Durchschnitt)",
+      "confidence": 0.5,
+      "why": "nächstliegender Eintrag (Annahme; feste Zuordnung): Schreibvariante von Kassler Kamm, siehe dort."
+    },
+    "kassler nacken": {
+      "db_id": "1118",
+      "db_name": "Kochpökelware (Durchschnitt)",
+      "confidence": 0.5,
+      "why": "nächstliegender Eintrag (Annahme; feste Zuordnung): Nacken = Kamm, siehe Kassler Kamm."
+    }
+  }
+}
