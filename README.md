@@ -14,3 +14,45 @@ Turn food trends into two recipe drafts for *das schmeckt!*.
 | [`templates/`](templates/) | [A4 recipe card example](templates/Das-schmeckt-Recipe-Preview-A4.html) and [HTML output requirements](templates/Das-schmeckt-Requirements-HTML.txt). |
 
 The recipe export is available on SharePoint, and you can get the Black Forest Labs API key by scanning the QR code in the presentation.
+
+## Runnable implementation
+
+This repository includes a mock-first implementation of Person A, Person B and Person C.
+
+### Setup
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+### Brave Search API
+
+The key is optional for the demo. Local Google Trends data is used as a fallback.
+
+Set the key either in the environment:
+
+```powershell
+$env:BRAVE_SEARCH_API_KEY="YOUR_KEY"
+```
+
+or create `src/challenge2/secrets_local.py` from
+`src/challenge2/secrets_local.py.example` and place the key there.
+
+The key is sent only as the Brave `x-subscription-token` header.
+
+### Run
+
+```powershell
+streamlit run app.py
+```
+
+The test run is:
+
+```powershell
+python -m unittest discover -s tests -v
+```
+
+Generated proposals, review reports and assumptions are written to
+`logs/decisions.jsonl`. Generated HTML is written to `output/recipes.html`.

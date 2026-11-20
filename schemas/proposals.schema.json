@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["proposals", "rejected_topics"],
+  "properties": {
+    "proposals": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "topic", "trend", "brand_fit", "archive", "recipe_ideas", "rank_score", "rank"],
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "topic": {"type": "string"},
+          "trend": {"type": "object"},
+          "brand_fit": {"type": "object"},
+          "archive": {"type": "object"},
+          "recipe_ideas": {"type": "array", "items": {"type": "string"}},
+          "rank_score": {"type": "number"},
+          "rank": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "rejected_topics": {"type": "array"}
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["proposal_id", "steering_notes", "recipes"],
+  "properties": {
+    "proposal_id": {"type": "string"},
+    "steering_notes": {"type": "string"},
+    "recipes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["title", "servings", "ingredients", "steps"],
+        "properties": {
+          "title": {"type": "string"},
+          "servings": {"type": "integer", "minimum": 1},
+          "ingredients": {"type": "array"},
+          "steps": {"type": "array", "items": {"type": "string"}},
+          "image_url": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}
