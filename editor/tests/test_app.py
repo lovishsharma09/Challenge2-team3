@@ -26,6 +26,25 @@ def texts(at):
     return [x.value for x in (list(at.markdown) + list(at.caption) + list(at.warning) + list(at.error) + list(at.info) + list(at.success))]
 
 
+def outside_expanders(at):
+    """Texts on the page that are NOT inside an expander: what the editor sees without opening anything."""
+    from collections import Counter
+    inside = Counter()
+    for e in at.expander:
+        inside.update([m.value for m in e.markdown] + [c.value for c in e.caption] + [w.value for w in e.warning])
+    out = []
+    for text in texts(at):
+        if inside.get(text, 0) > 0:
+            inside[text] -= 1
+        else:
+            out.append(text)
+    return out
+
+
+def inside_expanders(at, label_prefix):
+    return [m.value for e in at.expander if e.label.startswith(label_prefix) for m in e.markdown]
+
+
 @unittest.skipIf(AppTest is None, "streamlit not installed")
 class ScreenTest(unittest.TestCase):
     def setUp(self):
@@ -56,10 +75,16 @@ class ScreenTest(unittest.TestCase):
         self.assertTrue(btn(at, "Generate two recipes").disabled)                           # nothing chosen yet
         self.assertIsNone(btn(at, "None of these fit"))                                    # fixed batch: no rerun
         self.assertTrue(any("a fixed batch, so" in t for t in texts(at)))
-        self.assertTrue(any("shown as supplied; it is not recalculated here" in t or "not recalculated here" in t for t in texts(at)))
-        for label in ("**Recipe angle:**", "**Why now:**", "**Brand fit:**"):
-            self.assertEqual(sum(t.startswith(label) for t in texts(at)), 5, label)
-
+        self.assertTrue(any("not recalculated here" in t for t in texts(at)))
+        # the choices come first: title, one angle, one short why-now, a Choose button; nothing else is visible
+        visible = outside_expanders(at)
+        for label in ("**Recipe angle:**", "**Why now:**"):
+            self.assertEqual(sum(t.startswith(label) for t in visible), 5, label)
+        self.assertFalse(any(t.startswith(("**Brand fit:**", "**Prior coverage", "Prior coverage:", "Original", "Trend score")) for t in visible))
+        self.assertEqual(sum(t.startswith("**Brand fit:**") for t in texts(at)), 5)         # brand reasoning moved under View evidence
+        self.assertEqual(len([e for e in at.expander if e.label == "View evidence"]), 5)
+        self.assertEqual(len(at.warning), 0)                                                # one compact notice, no stack of boxes
+        self.assertEqual(len(at.info), 1)
     def test_prior_coverage_is_honest_on_screen(self):
         at = self.screen(write_batch(self.dir))
         btn(at, "Load the five pitches").click().run()
@@ -68,16 +93,17 @@ class ScreenTest(unittest.TestCase):
         self.assertIn("no credible comparable recipe", every)                               # ... differs from Quitte: no match
         self.assertIn("2 comparable recipe(s)", every)
         self.assertIn("not assessed", every)
+        details = "\n".join(inside_expanders(at, "Batch details"))
+        self.assertIn("Prior coverage could not be checked for 1 of 5 pitches", details)    # the compact notice carries the honest gap
+        self.assertIn("1 note", "\n".join(i.value for i in at.info))
         with_date = [t for t in texts(at) if "2020-08" in t.replace("\\", "")]
         self.assertTrue(with_date)                                                          # traceability: raw dates are still reachable ...
         for t in with_date:                                                                 # ... but only in the labelled evidence line
             self.assertIn("NOT publication dates", t)
         coverage_blocks = [m.value for m in at.markdown if m.value.startswith("**Prior coverage")]
         self.assertEqual(len(coverage_blocks), 5)                                           # the full text of every pitch sits in "View evidence"
-        self.assertEqual(sum(t.startswith("Prior coverage:") for t in texts(at)), 5)       # and one short line per pitch stays visible
         self.assertFalse(any("2020" in b.replace("\\", "") for b in coverage_blocks))
-        self.assertNotIn("repetition risk: **high**", every.casefold())
-
+        self.assertFalse(any(t.startswith(("**Prior coverage", "Prior coverage")) for t in outside_expanders(at)))
     def test_choose_generate_review_approve_exports_two_cards(self):
         at = self.screen(write_batch(self.dir))
         btn(at, "Load the five pitches").click().run()
@@ -105,6 +131,7 @@ class ScreenTest(unittest.TestCase):
         at.text_area[0].set_value("demo-stuck").run()
         btn(at, "Generate two recipes").click().run()
         self.assertTrue(btn(at, "Approve both recipes").disabled)
+        self.assertTrue(at.error[0].value.startswith("**Blocked.**"))
         self.assertIsNone(btn(at, "Acknowledge"))                                          # hard issues offer no dismissal
         self.assertIsNotNone(btn(at, "Discard these recipes"))
 
@@ -117,16 +144,14 @@ class ScreenTest(unittest.TestCase):
             d["proposals"][0]["brand_fit"]["reasoning"] = long_brand
         at = self.screen(write_batch(self.dir, mutated(f)))
         btn(at, "Load the five pitches").click().run()
-        visible_why = next(t for t in texts(at) if t.startswith("**Why now:**"))
-        visible_brand = next(t for t in texts(at) if t.startswith("**Brand fit:**"))
-        self.assertLessEqual(len(visible_why), 180)                                          # one line, not a paragraph
-        self.assertLessEqual(len(visible_brand), 200)
+        visible_why = next(t for t in outside_expanders(at) if t.startswith("**Why now:**"))
+        self.assertLessEqual(len(visible_why), 180)                                          # one short sentence, not a paragraph
         self.assertIn("Erster Satz zum Trend", visible_why)
-        full = "\n".join(t.replace("\\", "") for t in texts(at) if t.startswith(("**Why now (full):**", "**Brand fit (full):**")))
-        self.assertIn("Weitere lange Ausführungen zur Marke", full)                          # nothing is lost, it moved into the expander
+        self.assertFalse(any(t.startswith("**Brand fit:**") for t in outside_expanders(at)))   # brand reasoning is not on the card
+        full = "\n".join(t.replace("\\", "") for t in texts(at) if t.startswith(("**Why now (full):**", "**Brand fit:**")))
+        self.assertIn("Weitere lange Ausführungen zur Marke", full)                          # nothing is lost, it lives in the expander
         self.assertIn("Sehr ausführliche Begründung", full)
         self.assertEqual([e.label for e in at.expander if e.label == "View evidence"], ["View evidence"] * 5)
-
     def test_missing_publication_date_is_not_shown_as_a_value(self):
         def f(d):
             for r in d["proposals"][0]["archive"]["similar_recipes"]:
@@ -145,21 +170,35 @@ class ScreenTest(unittest.TestCase):
         btn(at, "Generate two recipes").click().run()
         self.assertFalse(at.exception, at.exception)
         every = "\n".join(texts(at))
-        self.assertIn("Mock drafts: fixed sample recipes (lentil soup)", every)
+        self.assertIn("Mock drafts: fixed sample recipes (lentil soup)", every)             # mock label stays visible
         self.assertIn("NOT generated from the selected pitch", every)
         labels = [e.label for e in at.expander]
         self.assertTrue(any(l.endswith("· Mock draft") for l in labels), labels)
         self.assertFalse(any("AI-generated draft" in l for l in labels), labels)
-        # the concrete correction, next to the approval controls (before "Your decision")
-        self.assertIn("What changed in the last revision", every)
+        # the status leads the screen
+        order = [(e.type, str(getattr(e, "value", ""))) for e in at.main.children.values()]
+        first_status = next(i for i, (t, v) in enumerate(order) if t in ("success", "error") and ("Ready to approve" in v or "Blocked" in v))
+        pos_selected = next(i for i, (t, v) in enumerate(order) if t == "info" and "Selected" in v)
+        self.assertLess(first_status, pos_selected)
+        self.assertTrue(at.success[0].value.startswith("**Ready to approve.**"))
+        # exactly ONE before/after correction beside the decision controls; the full history is collapsed
+        visible = outside_expanders(at)
+        self.assertEqual(sum(t.startswith("Before:") for t in visible), 1)
+        self.assertEqual(sum(t.startswith("After:") for t in visible), 1)
         plain = every.replace("\\", "")
         self.assertIn("Rote Linsensuppe mit Zitrone · Step 3", plain)
         self.assertIn("Before: Die Suppe aufkochen", plain)
         self.assertIn("2 EL Zitronensaft, Salz und Pfeffer abschmecken", plain)
-        order = [(e.type, getattr(e, "value", "")) for e in at.main.children.values()]
-        pos_changed = next(i for i, (t, v) in enumerate(order) if t == "markdown" and "What changed in the last revision" in str(v))
-        pos_decision = next(i for i, (t, v) in enumerate(order) if t == "subheader" and "Your decision" in str(v))
-        self.assertLess(pos_changed, pos_decision)                                            # right above the approval controls
+        corr = [c for c in at.columns if any("Latest correction" in m.value for m in c.markdown)]
+        self.assertEqual(len(corr), 1)
+        self.assertTrue(any(b.label.startswith("Approve") for c in at.columns for b in c.button))      # the controls live in the sibling column
+        pos_decision = next(i for i, (t, v) in enumerate(order) if t == "subheader" and "Your decision" in v)
+        self.assertGreater(pos_decision, first_status)
+        history = [e for e in at.expander if e.label.startswith("Review history")]
+        self.assertEqual(len(history), 1)
+        self.assertFalse(history[0].proto.expanded)
+        self.assertIn("(2 rounds)", history[0].label)
+        self.assertEqual([e for e in at.expander if e.label.startswith("Round ")], [])             # no per-round expanders on the page
         wf = at.session_state["wf"]
         with mock.patch("editor.workflow.DEFAULT_CARDS", self.dir / "cards"):
             wf.cards_dir = self.dir / "cards"
@@ -169,22 +208,58 @@ class ScreenTest(unittest.TestCase):
             page = card.read_text(encoding="utf-8")
             self.assertIn("MOCK-Entwurf", page)
             self.assertNotIn("KI-generierter Rezeptentwurf", page)
+    def test_blocked_leads_the_review_screen_and_approve_is_disabled(self):
+        at = self.screen(write_batch(self.dir))
+        btn(at, "Load the five pitches").click().run()
+        next(b for b in at.button if b.key == "pick-proposal-pastinake").click().run()
+        at.text_area[0].set_value("demo-stuck").run()
+        btn(at, "Generate two recipes").click().run()
+        self.assertTrue(at.error[0].value.startswith("**Blocked.**"))
+        self.assertIn("2 hard issue(s) open", at.error[0].value)
+        self.assertEqual(len(at.success), 0)                                                # no "ready" banner while blocked
+        self.assertTrue(btn(at, "Approve both recipes").disabled)
+        self.assertTrue(any("open hard issues above remain" in c.value for c in at.caption))
+        self.assertTrue(any("Mock drafts" in w.value for w in at.warning))                  # mock label still visible
+
+    def test_ready_banner_names_soft_warnings_that_do_not_block(self):
+        at = self.screen(write_batch(self.dir))
+        btn(at, "Load the five pitches").click().run()
+        next(b for b in at.button if b.key == "pick-proposal-pastinake").click().run()
+        at.text_area[0].set_value("demo-soft").run()
+        btn(at, "Generate two recipes").click().run()
+        self.assertIn("Ready to approve", at.success[0].value)
+        self.assertIn("1 soft warning(s) stay visible and do not block", at.success[0].value)
+        self.assertFalse(btn(at, "Approve both recipes").disabled)
+
+    def test_notice_details_are_collapsed_until_asked_for(self):
+        at = self.screen(write_batch(self.dir, a_style_batch()))
+        btn(at, "Load the five pitches").click().run()
+        details = [e for e in at.expander if e.label.startswith("Batch details")]
+        self.assertEqual(len(details), 1)
+        self.assertFalse(details[0].proto.expanded)
+        self.assertIn("2 notes", details[0].label)
 
     # ---- the first real batch from Person A (shape reproduced synthetically)
     def test_a_style_batch_loads_with_one_grouped_warning_and_flags_each_card(self):
         at = self.screen(write_batch(self.dir, a_style_batch()))
         btn(at, "Load the five pitches").click().run()
         self.assertFalse(at.exception, at.exception)
-        grouped = [w.value for w in at.warning if "look like templates" in w.value]
-        self.assertEqual(len(grouped), 1)                                                   # one box, not five
+        self.assertEqual(len(at.warning), 0)                                                # one compact notice, nothing stacked
+        notice = [i.value for i in at.info]
+        self.assertEqual(len(notice), 1)
+        self.assertIn("Person A saved batch", notice[0])
+        self.assertIn("2 notes", notice[0])                                                 # templates + unchecked archive
+        details = "\n".join(inside_expanders(at, "Batch details"))
+        grouped = [l for l in details.splitlines() if "look like templates" in l]
+        self.assertEqual(len(grouped), 1)                                                   # grouped, not one line per proposal
         self.assertIn("5 of 5 recipe angles", grouped[0])
-        self.assertEqual(sum("Placeholder angle" in c.value for c in at.caption), 5)        # but every card carries the flag
+        self.assertIn("could not be checked for 5 of 5 pitches", details)
+        self.assertEqual(sum("⚠️ _placeholder_" in m.value for m in at.markdown), 5)       # every angle carries the marker
         self.assertEqual(len([b for b in at.button if b.label == "Choose this pitch"]), 5)
-        self.assertEqual(sum("archive not available" in w.value for w in at.warning), 5)    # unavailable is shown, never "no match"
-        self.assertFalse(any("no credible comparable recipe" in t for t in texts(at)))
+        self.assertFalse(any("no credible comparable recipe" in t for t in texts(at)))      # unavailable is never shown as "no match"
+        self.assertEqual(sum(m.value.startswith("**Prior coverage: archive not available") for m in at.markdown), 5)   # stated for every pitch in its evidence
         heads = [m.value for m in at.markdown if m.value.startswith("### #")]
         self.assertIn("Cookie \\(Food\\)", heads[0])                                        # original labels preserved as supplied
-
     def test_a_style_batch_can_still_go_through_review_and_export(self):
         at = self.screen(write_batch(self.dir, a_style_batch()))
         btn(at, "Load the five pitches").click().run()
@@ -203,7 +278,9 @@ class ScreenTest(unittest.TestCase):
         self.assertIn("Team draft for Deyan's review", banner.replace("\\", ""))
         self.assertIn("Not approved by Person A", banner.replace("\\", ""))
         every = "\n".join(t.replace("\\", "") for t in texts(at))
-        self.assertNotIn("Person A saved batch", every)                                       # must not look like A's own approved batch
+        self.assertNotIn("Person A saved batch", every.replace("not Person A's approved batch", ""))   # must not look like A's own approved batch
+        self.assertIn("This is a team draft, not Person A's approved batch.", "\n".join(inside_expanders(at, "Batch details")))
+        self.assertEqual(len(at.warning), 1)                                                 # one compact notice
         self.assertEqual(len([b for b in at.button if b.label == "Choose this pitch"]), 5)
         self.assertEqual(sum(t.startswith("Team draft: what changed") or "what changed against Person A" in t for t in texts(at)), 5)
         self.assertIn("Title and angle rewritten.", every)
@@ -368,16 +445,16 @@ class ScreenTest(unittest.TestCase):
         btn(at, "Run the offline candidate ranking").click().run()
         self.assertFalse(at.exception, at.exception)
         every = "\n".join(texts(at))
-        self.assertIn("Offline candidate ranking: a fallback, NOT Person A's pitches", every)
+        self.assertTrue(any("Offline candidate ranking" in w.value and "not Person A's pitches" in w.value for w in at.warning))
         self.assertEqual(len([b for b in at.button if b.label == "Choose this topic"]), 5)     # topics, not pitches: no angle exists yet
         self.assertEqual([b for b in at.button if b.label == "Choose this pitch"], [])
-        self.assertIn("No recipe angle and no brand fit yet", every)
+        self.assertIn("No recipe angle yet", every)
+        self.assertIn("not assessed", every)
         self.assertFalse(any(t.startswith("**Recipe angle:**") for t in texts(at)))
         self.assertIsNotNone(btn(at, "None of these fit"))                                  # a real rerun exists here
         for p in at.session_state["wf"].proposals:
             self.assertIsNone(p["brand_fit"]["score"])
             self.assertEqual(p["recipe_ideas"], [])
-
     def test_switching_the_source_starts_a_clean_workflow(self):
         at = self.screen(write_batch(self.dir))
         btn(at, "Load the five pitches").click().run()

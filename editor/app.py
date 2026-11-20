@@ -130,25 +130,20 @@ def show_change(c: dict):
 
 
 def pitch_card(p: dict, picked: str | None, noun: str):
-    """One choice, compact enough to compare five side by side: angle, one-line why now, brand fit, one-line archive summary.
-    Everything longer (full texts, match list, caveats, formulas, original labels) is in 'View evidence'.
-    Every supplied text goes through md() first: it comes from a file and must never format the page or load external images."""
+    """One choice: title, one recipe angle, one short 'Why now' sentence, a Choose button. Brand reasoning, archive matches, scores
+    and original labels are under 'View evidence'. Every supplied text goes through md(): it comes from a file and must never
+    format the page or load external images."""
     f = pitch_fields(p)
     with st.container(border=True):
         left, right = st.columns([5, 1])
         with left:
             st.markdown(f"### #{md(p['rank'])} · {md(p['title'])}")
             if noun == "pitch":
-                st.markdown("**Recipe angle:** " + (md(f["angle"]) if f["angle"] else "_none supplied_"))
-                if is_template_angle(f["angle"]):
-                    st.caption("⚠️ Placeholder angle (a template, not a concrete idea): there is nothing to compare here yet.")
-            st.markdown("**Why now:** " + (md(short(f["why_now"], 180)) if f["why_now"] else "_none supplied_"))
-            if noun == "pitch":
-                st.markdown("**Brand fit:** " + (md(short(f["brand_reason"], 180)) if f["brand_reason"] else "_not assessed_"))
+                st.markdown("**Recipe angle:** " + (md(f["angle"]) if f["angle"] else "_none supplied_")
+                            + (" ⚠️ _placeholder_" if is_template_angle(f["angle"]) else ""))
             else:
-                st.caption("No recipe angle and no brand fit yet: the offline ranking does not invent them.")
-            level, line = coverage_short(p)
-            (st.warning if level == "warn" else st.caption)(line)
+                st.caption("No recipe angle yet: the offline ranking does not invent one.")
+            st.markdown("**Why now:** " + (md(short(f["why_now"], 180)) if f["why_now"] else "_none supplied_"))
         with right:
             if picked == p["id"]:
                 st.success("Selected")
@@ -157,10 +152,12 @@ def pitch_card(p: dict, picked: str | None, noun: str):
                 st.rerun()
         with st.expander("View evidence"):
             e = evidence_details(p)
+            if noun == "pitch":
+                st.markdown("**Brand fit:** " + (md(e["brand_full"]) if e["brand_full"] else "_not assessed_"))
+            else:
+                st.markdown("**Brand fit:** _not assessed: the offline ranking does not apply the brand guidelines._")
             if e["why_full"] and short(e["why_full"], 180) != e["why_full"]:
                 st.markdown("**Why now (full):** " + md(e["why_full"]))
-            if noun == "pitch" and e["brand_full"] and short(e["brand_full"], 180) != e["brand_full"]:
-                st.markdown("**Brand fit (full):** " + md(e["brand_full"]))
             for extra in e["more_angles"]:
                 st.markdown("**Further recipe idea:** " + md(extra))
             st.markdown(e["coverage_full"])
@@ -189,29 +186,47 @@ def pitch_card(p: dict, picked: str | None, noun: str):
                 st.caption(e["dates_line"])
 
 
+def batch_notice(proposals: list[dict]):
+    """ONE compact notice for everything worth knowing about the batch; the details are one click away."""
+    notes: list[str] = []
+    if source == SOURCE_BATCH and batch is not None:
+        notes += batch.warnings
+        unchecked = sum(coverage_short(p)[0] == "warn" for p in proposals)
+        if unchecked:
+            notes.append(f"Prior coverage could not be checked for {unchecked} of {len(proposals)} pitches (archive not available), "
+                         "so 'no match' cannot be told apart from 'not checked' there.")
+        extra = f" · {len(notes)} note{'s' if len(notes) != 1 else ''}" if notes else ""
+        if batch.draft_label:
+            st.warning(f"**{md(batch.draft_label)}** · {md(batch.draft_status)}{extra}")
+        else:
+            st.info(f"**Person A saved batch** · {len(proposals)} pitches in A's order{extra}")
+        with st.expander("Batch details" + (f" and {len(notes)} note{'s' if len(notes) != 1 else ''}" if notes else "")):
+            st.caption(md(batch.source_label))
+            if batch.draft_label:
+                st.markdown("This is a team draft, not Person A's approved batch."
+                            + (f" Based on Person A's {md(batch.based_on)}." if batch.based_on else "")
+                            + " The changes against the original are listed under 'View evidence' on every pitch.")
+            st.markdown("The ranking is shown as supplied; it is not recalculated here.")
+            for n_ in notes:
+                st.markdown(f"- {md(n_)}")
+    else:
+        extra = f" · {len(data_notes)} note{'s' if len(data_notes) != 1 else ''}" if data_notes else ""
+        st.warning(f"**Offline candidate ranking** (a fallback, not Person A's pitches){extra}")
+        with st.expander("Details" + (f" and {len(data_notes)} note{'s' if len(data_notes) != 1 else ''}" if data_notes else "")):
+            st.markdown("Brand fit and recipe angles are not assessed or invented here.")
+            for n_ in data_notes:
+                st.markdown(f"- {md(n_)}")
+
+
 if wf.stage == "proposals":
     fixed = not wf.can_reject_all()
-    if source == SOURCE_BATCH and batch is not None and batch.draft_label:
-        st.warning(f"**{md(batch.draft_label)}.** {md(batch.draft_status)}. " + (f"Based on Person A's {md(batch.based_on)}. " if batch.based_on else "")
-                   + "The changes against the original are listed under 'View evidence' on every pitch. "
-                   + "The ranking is shown as supplied; it is not recalculated here.")
-        st.caption(md(batch.source_label))
-    elif source == SOURCE_BATCH and batch is not None:
-        st.info(batch.source_label + ". The ranking is shown as supplied; it is not recalculated here.")
-        for w in batch.warnings:
-            st.warning(w)
-    else:
-        st.warning("Offline candidate ranking: a fallback, NOT Person A's pitches. Brand fit and recipe angles are not assessed or invented. "
-                   + " ".join(data_notes))
     noun = "pitch" if source == SOURCE_BATCH else "topic"
     picked = st.session_state.get("pick")
     if picked not in {p["id"] for p in wf.proposals}:
         picked = None
+    batch_notice(wf.proposals)
     for p in wf.proposals:
         pitch_card(p, picked, noun)
-    with st.expander("Considered and rejected topics"):
-        for r in wf.rejected:
-            st.markdown(f"- **{md(r['topic'])}**: {md(r['reason'])}")
     notes = st.text_area("Steering notes (optional)", placeholder="e.g. weeknight-friendly, less dairy")
     c1, c2 = st.columns(2)
     if c1.button("Generate two recipes", type="primary", disabled=picked is None,
@@ -224,14 +239,42 @@ if wf.stage == "proposals":
         reject_note = c2.text_input("None fit? Optional note", key="reject_note")
         if c2.button("None of these fit: propose other topics"):
             act(wf.reject_all, reject_note)
+    with st.expander("Considered and rejected topics"):
+        for r in wf.rejected:
+            st.markdown(f"- **{md(r['topic'])}**: {md(r['reason'])}")
+
+
+def review_history():
+    """The full history in ONE collapsed expander (Streamlit cannot nest expanders, so rounds are headed sections)."""
+    with st.expander(f"Review history ({len(wf.rounds)} round{'s' if len(wf.rounds) != 1 else ''})"):
+        for rnd in wf.rounds:
+            n_open = sum(1 for i in rnd["issues"] if i["status"] == "open")
+            st.markdown(f"**Round {rnd['round']}** · {n_open} open issue(s), {len(rnd['fixed'])} fixed since last round")
+            for i in rnd["issues"]:
+                st.write(f"{i['kind'].upper()} · {i['criterion']} · {i['message']}")
+            for i in rnd["fixed"]:
+                st.write(f"🟢 fixed: {i['message']}")
+            if rnd.get("changes"):
+                st.markdown("Changes made in this round:")
+                for c in rnd["changes"]:
+                    show_change(c)
+            st.divider()
+
 
 if wf.stage in ("review", "approved"):
+    if wf.stage == "review":
+        ok, why = wf.can_approve()
+        soft_open = [i for i in wf.issues if i["status"] == "open" and i["kind"] == "soft"]
+        if ok:
+            st.success("**Ready to approve.** No blocking issues" + (f"; {len(soft_open)} soft warning(s) stay visible and do not block." if soft_open else "."))
+        else:
+            st.error("**Blocked.** " + why)
     st.info(f"Selected: **{wf.selected['title']}** · steering notes: {wf.notes or 'none'}")
-    st.subheader("Recipes")
     mock = any(r.get("mock") for r in wf.bundle["recipes"])
     if mock:
         st.warning("Mock drafts: fixed sample recipes (lentil soup) used to rehearse the review and export flow. "
                    "They are NOT generated from the selected pitch and are not real results.")
+    st.subheader("Recipes")
     for r in wf.bundle["recipes"]:
         with st.expander(f"{r['title']} · {'Mock draft' if r.get('mock') else 'AI-generated draft'}", expanded=wf.stage == "review"):
             st.markdown(md(r.get("subtitle", "")))
@@ -239,24 +282,10 @@ if wf.stage in ("review", "approved"):
             left.markdown("**Ingredients**\n\n" + "\n".join(f"- {md(ingredient_text(i))}" for i in r["ingredients"]))
             right.markdown("**Steps**\n\n" + "\n".join(f"{n}. {md(step)}" for n, step in enumerate(r["steps"], 1)))
 
-    st.subheader("Review")
-    for rnd in wf.rounds:
-        n_open = sum(1 for i in rnd["issues"] if i["status"] == "open")
-        with st.expander(f"Round {rnd['round']}: {n_open} open issue(s), {len(rnd['fixed'])} fixed since last round"):
-            for i in rnd["issues"]:
-                st.write(f"**{i['kind'].upper()}** · {i['criterion']} · {i['message']}")
-            for i in rnd["fixed"]:
-                st.write(f"🟢 fixed: {i['message']}")
-            if rnd.get("changes"):
-                st.markdown("**Changes made in this round**")
-                for c in rnd["changes"]:
-                    show_change(c)
-
     if wf.stage == "review":
         for notice in wf.notices:
             st.warning(notice)
         open_issues = [i for i in wf.issues if i["status"] == "open"]
-        st.markdown("**Open issues**" if open_issues else "**No open issues.**")
         for n, i in enumerate(open_issues):
             with st.container(border=True):
                 if i["kind"] == "hard":
@@ -271,25 +300,27 @@ if wf.stage in ("review", "approved"):
         for i in (x for x in wf.issues if x["status"] == "dismissed"):
             st.caption(f"⚪ acknowledged: {i['message']} — {i['dismiss_reason']}")
 
-        last = wf.rounds[-1] if wf.rounds else None
-        if last and last["round"] > 1:
-            st.markdown("#### What changed in the last revision")
-            if not last.get("changes"):
-                st.caption("The last revision did not change the recipe text.")
-            for c in last.get("changes", [])[:4]:
-                show_change(c)
-            if len(last.get("changes", [])) > 4:
-                st.caption(f"+{len(last['changes']) - 4} more changes: see the review rounds above.")
         st.subheader("Your decision")
-        comment = st.text_area("Comment for the recipe agent (needed to send back)")
-        ok, why = wf.can_approve()
-        c1, c2, _spacer = st.columns([1, 1, 2])
-        if c1.button("Approve both recipes", type="primary", disabled=not ok, help=why or None):
-            act(wf.approve)
-        if c2.button(f"Send back ({wf.editor_rounds_left()} left)", disabled=wf.editor_rounds_left() <= 0):
-            act(wf.send_back, comment)
-        if not ok:
-            c1.caption(why)
+        last = wf.rounds[-1] if wf.rounds else None
+        correction, controls = st.columns([3, 2])
+        with correction:                                   # one concrete before/after, right next to the decision controls
+            st.markdown("**Latest correction**")
+            changes = (last or {}).get("changes") or []
+            if last and last["round"] > 1 and changes:
+                show_change(changes[0])
+                if len(changes) > 1:
+                    st.caption(f"+{len(changes) - 1} more change(s) in the review history below.")
+            elif last and last["round"] > 1:
+                st.caption("The last revision did not change the recipe text" + (", so the open hard issues above remain." if not ok else "."))
+            else:
+                st.caption("No revision yet: the drafts are shown as first generated.")
+        with controls:
+            comment = st.text_area("Comment for the recipe agent (needed to send back)")
+            b1, b2 = st.columns(2)
+            if b1.button("Approve both recipes", type="primary", disabled=not ok, help=why or None):
+                act(wf.approve)
+            if b2.button(f"Send back ({wf.editor_rounds_left()} left)", disabled=wf.editor_rounds_left() <= 0):
+                act(wf.send_back, comment)
         with st.expander("Not happy with these recipes at all?"):
             why_discard = st.text_input("Reason (optional)", key="discard_reason")
             if st.button("Discard these recipes and choose another proposal"):
@@ -312,3 +343,4 @@ if wf.stage in ("review", "approved"):
             n = item["nutrition"]
             st.write(f"**{item['recipe_title']}**: " + ("nutrition pending (Person C)" if n["status"] == "pending"
                                                        else str(n["per_serving"])))
+    review_history()
