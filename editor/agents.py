@@ -18,6 +18,27 @@ TOPICS = [
 ]
 
 
+def archive_for(topic: str, risk: str) -> dict:
+    """MOCK archive block incl. the unavailable / no-match states of the handoff contract."""
+    if topic == "Haferflocken":
+        return {"status": "unavailable", "available": False, "match_status": "archive_unavailable",
+                "similar_recipes": [], "repetition_risk": "unknown", "content_gap": "", "assumption": "MOCK: export not loaded."}
+    if topic == "Quitte":
+        return {"status": "ok", "available": True, "match_status": "no_match_found", "similar_recipes": [],
+                "repetition_risk": "low", "content_gap": "MOCK: untouched topic.", "assumption": ""}
+    return {"status": "ok", "available": True, "match_status": "matches_found",
+            "similar_recipes": [{"title": f"{topic}-Klassiker"}], "repetition_risk": risk,
+            "content_gap": f"MOCK: no modern {topic} main course.", "assumption": ""}
+
+
+def wikimedia_for(topic: str, score: int) -> dict:
+    if topic == "Quitte":
+        return {"status": "no_article_found", "article": None, "score": None, "points": [], "error": None}
+    if topic == "Rosenkohl":
+        return {"status": "unavailable", "article": None, "score": None, "points": [], "error": "HTTP 503"}
+    return {"status": "available", "article": topic, "score": score - 10, "points": [], "error": None}
+
+
 def propose(exclude: set[str], limit: int = 5):
     pool = [t for t in TOPICS if t[0] not in exclude]
     accepted = []
@@ -25,10 +46,10 @@ def propose(exclude: set[str], limit: int = 5):
         accepted.append({
             "id": f"p-{topic.lower()}", "topic": topic, "rank": rank,
             "title": f"{topic}: ein modernes das schmeckt! Rezept",
-            "trend": {"score": score, "why_relevant": f"MOCK: rising interest in {topic}."},
+            "trend": {"score": score, "why_relevant": f"MOCK: rising interest in {topic}.",
+                      "wikimedia": wikimedia_for(topic, score)},
             "brand_fit": {"score": 90 - rank * 3, "reasoning": "MOCK: seasonal and everyday-practical."},
-            "archive": {"similar_recipes": [{"title": f"{topic}-Klassiker"}], "repetition_risk": risk,
-                        "content_gap": f"MOCK: no modern {topic} main course."},
+            "archive": archive_for(topic, risk),
             "recipe_ideas": [f"{topic} aus dem Ofen", f"{topic}-Bowl"],
         })
     rejected = [{"topic": t[0], "reason": "MOCK: not in the top five."} for t in pool[limit:limit + 2]]

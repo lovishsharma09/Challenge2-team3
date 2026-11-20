@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from editor.agents import Agents
+from editor.display import archive_summary, wikimedia_summary
 from editor.review_issues import hard_checks
 from editor.workflow import AUTO_ROUNDS, EDITOR_ROUNDS, EditorWorkflow, WorkflowError
 
@@ -24,6 +25,37 @@ class HardCheckTest(unittest.TestCase):
         recipe = {"title": "T", "steps": ["Sirup einrühren."],
                   "ingredients": [{"name": "Agavensirup", "amount": 80, "unit": "g"}]}
         self.assertEqual(hard_checks(recipe, 0), [])
+
+
+class DisplayTest(unittest.TestCase):
+    def test_archive_unavailable_is_never_shown_as_no_match(self):
+        level, text = archive_summary({"archive": {"match_status": "archive_unavailable", "available": False,
+                                                    "similar_recipes": [], "repetition_risk": "unknown"}})
+        self.assertEqual(level, "warn")
+        self.assertIn("could NOT be checked", text)
+
+    def test_no_match_and_matches_and_legacy_shape(self):
+        self.assertIn("No similar recipe", archive_summary({"archive": {"match_status": "no_match_found",
+                                                                         "similar_recipes": [], "repetition_risk": "low"}})[1])
+        self.assertIn("Pasta", archive_summary({"archive": {"match_status": "matches_found", "repetition_risk": "high",
+                                                             "similar_recipes": [{"title": "Pasta"}]}})[1])
+        self.assertIn("No similar recipe", archive_summary({"archive": {"similar_recipes": [], "repetition_risk": "low"}})[1])
+        self.assertEqual(archive_summary({})[0], "warn")          # missing block: unknown risk, warn
+
+    def test_wikimedia_states(self):
+        ok = wikimedia_summary({"trend": {"wikimedia": {"status": "available", "article": "Kürbis", "score": 55}}})
+        self.assertEqual(ok[0], "ok")
+        for st in ("no_article_found", "no_data", "unavailable"):
+            level, text = wikimedia_summary({"trend": {"wikimedia": {"status": st, "error": "HTTP 503"}}})
+            self.assertEqual(level, "warn")
+            self.assertIn("could NOT be checked", text)
+        self.assertEqual(wikimedia_summary({"trend": {}})[0], "warn")
+
+    def test_stub_proposals_exercise_the_unavailable_states(self):
+        accepted, _ = Agents().propose(set(), 12)
+        by = {p["topic"]: p for p in accepted}
+        self.assertEqual(archive_summary(by["Haferflocken"])[0], "warn")
+        self.assertEqual(wikimedia_summary(by["Rosenkohl"])[0], "warn")
 
 
 class WorkflowTest(unittest.TestCase):

@@ -2,7 +2,10 @@
 
 Proposal:  id, topic, title, rank,
            trend {score, why_relevant}, brand_fit {score, reasoning},
-           archive {similar_recipes: [{title}], repetition_risk, content_gap}, recipe_ideas [str]
+           archive {similar_recipes: [{title}], repetition_risk, content_gap,
+                    optional: status, available, match_status, assumption},
+           trend.wikimedia (optional): {status, article, score, error}, recipe_ideas [str]
+           (superset-compatible with schemas/proposals.schema.json on main; see editor/display.py)
 Bundle:    proposal_id, steering_notes, recipes [Recipe, Recipe]
 Recipe:    title, subtitle, servings, prep_time_minutes, cook_time_minutes,
            ingredients [{name, amount|None, unit}], steps [str], image_url|None

@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import streamlit as st
 
+from editor.display import archive_summary, wikimedia_summary
 from editor.workflow import EditorWorkflow, WorkflowError
 
 st.set_page_config(page_title="Editor Desk · das schmeckt!", layout="wide")
@@ -62,8 +63,8 @@ if wf.stage == "proposals":
                 st.markdown(f"### #{p['rank']} · {p['title']}")
                 st.write(p["trend"]["why_relevant"])
                 st.caption(p["brand_fit"]["reasoning"])
-                st.markdown(f"**Archive:** {', '.join(r['title'] for r in p['archive']['similar_recipes']) or 'none'}  \n"
-                            f"**Repetition risk:** {p['archive']['repetition_risk']} · **Gap:** {p['archive']['content_gap']}")
+                for level, text in (wikimedia_summary(p), archive_summary(p)):
+                    (st.warning if level == "warn" else st.write)(text)
             with right:
                 st.metric("Trend", p["trend"]["score"])
                 st.metric("Brand fit", p["brand_fit"]["score"])
