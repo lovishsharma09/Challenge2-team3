@@ -1,0 +1,10 @@
+{
+ "visible_foods": [
+  "kale",
+  "potatoes",
+  "smoked pork"
+ ],
+ "matches_recipe_score": 9,
+ "foods_not_in_recipe": [],
+ "missing_components": []
+}

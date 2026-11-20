@@ -1,0 +1,34 @@
+{
+  "source": "MarkenCI 'das schmeckt!' (Marken-Steckbrief + Cover-Checkliste, Stand 2/25), Challenge briefing step 2, official A4 template A4-v5. Replace/extend with Person A's distilled rule set (BRAND_RULES_JSON) when available.",
+  "claim": "Der Alltagsbegleiter mit gehobenem Anspruch.",
+  "tagline": "Gut einkaufen. Mit Freude kochen.",
+  "audience": "90 % female, average age 56, above-average share of 2-person households and households without children under 14, high education and income, no special diet. Cooks mainly for themselves and possibly one more person, less for special occasions. Self-assessed cooking level high; cooks daily or several times a week (97 %).",
+  "interest_high": ["seasonal topics (fruit/vegetables, local), regional", "everyday dishes ('für jeden Tag')", "meat dishes", "classic dishes"],
+  "interest_medium": ["fish", "baking", "weekend cooking"],
+  "no_interest": ["health pieces with complicated recipes", "ingredients that are hard to get or exotic"],
+  "nice_to_have": ["vegetarian options", "convenience products supporting the cooking"],
+  "expectations": ["many recipes, wide variety", "cookable and everyday-suitable for readers with a higher cooking level", "no long ingredient lists", "high-quality food photography and layout"],
+  "cover_performance_hypotheses": ["baking / sweets perform worse (exception: strawberry cake 2024)", "salads perform worse", "too much green performs worse", "meat dishes perform well", "classic dishes perform well"],
+  "must": [
+    "Seasonal or regionally relevant for Germany; accessible ingredients from a normal supermarket",
+    "Enjoyable and practical for everyday cooking; clear steps; realistic times; satisfying, not too simple",
+    "Interesting for experienced home cooks without being unnecessarily complicated",
+    "Short ingredient list (archive median: 12 ingredients; stay at or below about 14 lines)",
+    "German language; metric units; 'EL' and 'TL' abbreviations; temperatures as '180 Grad (Umluft 160 Grad)'; times as 'ca. 20 Min.'",
+    "Instruction style (archive and template): short infinitive sentences with article, e.g. 'Den Backofen auf 180 Grad vorheizen. Die Lauchzwiebeln waschen und putzen.'",
+    "One short serving tip headed 'Unser Tipp'",
+    "Tone: warm, practical, no hype (tagline: 'Gut einkaufen. Mit Freude kochen.')"
+  ],
+  "avoid": [
+    "Exotic or hard-to-find ingredients without a common substitute",
+    "Health claims, diet promises, 'superfood', unverifiable origin stories",
+    "English words in the recipe text unless they are common German food terms",
+    "Overly long intros; marketing language; emojis"
+  ],
+  "image_style": "Editorial food photography: appetizing hero dish in focus, calm but atmospheric background (not sterile), ingredients clearly recognizable, natural light, no text or logos, no people; avoid a dominant green colour cast.",
+  "structure": {
+    "intro": "2-3 sentences, concrete (what it is, why now/season), no health claims",
+    "ingredients": "grouped with sub-headings only when the dish has components (e.g. 'Für den Teig')",
+    "steps": "numbered, each step self-contained; name every ingredient with its amount at first use"
+  }
+}

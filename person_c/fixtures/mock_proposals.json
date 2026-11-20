@@ -1,0 +1,28 @@
+{
+ "recommended": [
+  {
+   "id": "p1",
+   "title": "Grünkohl neu gedacht (MOCK-Vorschlag für Tests)",
+   "trend_ids": [
+    "t_gruenkohl"
+   ],
+   "why_now": "MOCK: Grünkohlsaison; Suchinteresse und Wikipedia-Aufrufe steigen.",
+   "brand_fit_summary": "MOCK: saisonal, regional, alltagstauglich, Fleisch möglich.",
+   "archive_findings": "MOCK",
+   "repetition_risk": "medium",
+   "content_gap": "MOCK: schnelle Alltagsvariante neben dem Klassiker",
+   "recipe_ideas": [
+    "Klassischer Eintopf, aber schlanker und vorbereitbar",
+    "Schnelle Pfanne unter 35 Minuten"
+   ],
+   "risks": [
+    "MOCK"
+   ],
+   "validate_next": [
+    "MOCK"
+   ],
+   "confidence": "medium"
+  }
+ ],
+ "rejected": []
+}
