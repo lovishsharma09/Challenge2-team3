@@ -48,6 +48,20 @@ def archive_summary(proposal: dict) -> tuple[str, str]:
     return ("warn" if risk == "unknown" else "ok"), head + tail
 
 
+def trend_summary(proposal: dict) -> str | None:
+    """How the trend score was computed (only for proposals built from the real trend data)."""
+    c = (proposal.get("trend") or {}).get("components")
+    if not c:
+        return None
+    parts = [f"Google {c['google']:.0f} (strongest rising row '{c['best_term']}': +{c['rising_increase_pct']}%, "
+             f"search-interest index {c['search_interest_index']}/100, damping factor {c['interest_factor_google']})"]
+    if c.get("wikipedia") is not None:
+        parts.append(f"Wikipedia {c['wikipedia']:.0f} (page-views factor {c['views_factor_wikipedia']})")
+    formula = "0.5×Google + 0.5×Wikipedia" if not c.get("single_source") else "0.5×Google only (single source)"
+    return (f"Score {c['score']:.0f} = {formula}. " + "; ".join(parts) +
+            ". The search-interest index is relative within Google's export, not a search volume. Heuristic, not a forecast.")
+
+
 def wikimedia_summary(proposal: dict) -> tuple[str, str]:
     w = (proposal.get("trend") or {}).get("wikimedia")
     if not w:
@@ -55,7 +69,11 @@ def wikimedia_summary(proposal: dict) -> tuple[str, str]:
     status = w.get("status")
     if status == "available":
         score = w.get("score")
-        return "ok", f"Wikipedia pageviews ({w.get('article')}): change score {score if score is not None else 'n/a'}/100."
-    reasons = {"no_article_found": "no matching article found", "no_data": "no data for the period",
+        extra = ""
+        if w.get("views_latest_7d") is not None:
+            extra = f" 7-day views {w.get('views_previous_7d')} → {w.get('views_latest_7d')} ({w.get('change_pct'):+.0f}%)."
+        return "ok", f"Wikipedia pageviews ({w.get('article')}): change score {score if score is not None else 'n/a'}/100.{extra}"
+    reasons = {"no_article_found": "no usable article", "no_data": "no data for the period",
                "unavailable": f"source unavailable ({w.get('error') or 'unknown error'})"}
-    return "warn", f"Wikipedia pageviews: {reasons.get(status, 'status unknown')}: this signal could NOT be checked."
+    detail = w.get("reason") or reasons.get(status, "status unknown")
+    return "warn", f"Wikipedia pageviews: {detail}. This signal could NOT be checked."

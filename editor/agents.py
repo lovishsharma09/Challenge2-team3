@@ -69,6 +69,34 @@ def propose_with_archive(archive, base=None):
     return propose_real_archive
 
 
+def propose_with_trends(trends_dir, archive=None):
+    """propose() built from the PROVIDED Google Trends + Wikimedia data and the real archive lookup.
+    Not yet real: brand fit (not assessed) and recipe ideas (empty until the generation step exists)."""
+    from . import trends
+    from .archive import lookup, load_archive
+    data = trends.load_trends(trends_dir)             # raises with a clear message if inputs are missing/malformed
+    archive = archive if archive is not None else load_archive(None)
+
+    def propose_from_trends(exclude: set[str], limit: int = 5):
+        picked, rejected = trends.select(data, limit, exclude)
+        accepted = []
+        for rank, (group, comp) in enumerate(picked, start=1):
+            accepted.append({
+                "id": "p-" + trends_slug(group.topic), "topic": group.topic, "rank": rank,
+                "title": f"{group.topic}: neue Rezeptidee", "trend": trends.trend_block(group, comp),
+                "brand_fit": {"score": None, "reasoning": "Not assessed yet: the brand guidelines are not applied in this version."},
+                "archive": lookup(archive, group.topic), "recipe_ideas": [],
+            })
+        return accepted, rejected
+    propose_from_trends.notes = data.notes
+    return propose_from_trends
+
+
+def trends_slug(text: str) -> str:
+    import re
+    return re.sub(r"[^a-z0-9]+", "-", text.casefold().translate(str.maketrans("äöüß", "aous"))).strip("-") or "topic"
+
+
 def generate(proposal: dict, notes: str = "") -> dict:
     topic = proposal["topic"]
     base = lambda title, sub, extra: {  # noqa: E731

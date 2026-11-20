@@ -9,20 +9,28 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import streamlit as st
 
 from editor import llm
-from editor.agents import Agents, propose_with_archive
+from editor.agents import Agents, propose, propose_with_archive, propose_with_trends
 from editor.archive import configured_archive
-from editor.display import archive_summary, wikimedia_summary
+from editor.display import archive_summary, trend_summary, wikimedia_summary
 from editor.llm_agents import with_llm
 from editor.workflow import EditorWorkflow, WorkflowError
 
 st.set_page_config(page_title="Editor Desk · das schmeckt!", layout="wide")
-@st.cache_resource(show_spinner="Reading the local recipe archive…")
-def archive_agents() -> Agents:
-    return Agents(propose=propose_with_archive(configured_archive()))
+@st.cache_resource(show_spinner="Reading the local trend data and recipe archive…")
+def build_agents() -> tuple[Agents, list[str]]:
+    """Real trend signals + real archive when the provided data is found; otherwise clearly labelled mock proposals."""
+    from editor.llm import _env
+    trends_dir = _env("EDITOR_TRENDS_DIR") or str(Path(__file__).resolve().parent.parent / "data" / "trends")
+    try:
+        real = propose_with_trends(trends_dir, configured_archive())
+        return Agents(propose=real), list(real.notes)
+    except (OSError, ValueError, KeyError) as exc:
+        return Agents(propose=propose_with_archive(configured_archive())), [f"Trend data not usable ({exc}); proposals are MOCK."]
 
 
+AGENTS, DATA_NOTES = build_agents()
 if "wf" not in st.session_state:
-    st.session_state.wf = EditorWorkflow(archive_agents())
+    st.session_state.wf = EditorWorkflow(AGENTS)
 wf: EditorWorkflow = st.session_state.wf
 
 
@@ -44,7 +52,10 @@ def act(fn, *args):
 
 
 st.title("Editor Desk · das schmeckt!")
-st.caption("The system prepares the decision. The editor decides. Still mock: trends, brand fit, recipe generation, nutrition. Real: archive lookup.")
+st.caption("The system prepares the decision. The editor decides. Real: trend signals (provided Google Trends + Wikimedia snapshot) and archive lookup. "
+           "Not real yet: brand fit, recipe ideas, recipe generation, nutrition.")
+for note in DATA_NOTES:
+    st.caption(f"Data: {note}")
 current = {"idle": "start", "proposals": "proposals", "review": "review", "approved": "approved"}[wf.stage]
 st.markdown(" → ".join(f"**{s}**" if s == current else s for s in ("start", "proposals", "review", "approved")))
 if "error" in st.session_state:
@@ -78,12 +89,14 @@ if wf.stage == "proposals":
             with left:
                 st.markdown(f"### #{p['rank']} · {p['title']}")
                 st.write(p["trend"]["why_relevant"])
-                st.caption(p["brand_fit"]["reasoning"])
+                if trend_summary(p):
+                    st.caption(trend_summary(p))
+                st.caption("Brand fit: " + str(p["brand_fit"]["reasoning"]))
                 for level, text in (wikimedia_summary(p), archive_summary(p)):
                     (st.warning if level == "warn" else st.write)(text)
             with right:
                 st.metric("Trend", p["trend"]["score"])
-                st.metric("Brand fit", p["brand_fit"]["score"])
+                st.metric("Brand fit", p["brand_fit"]["score"] if p["brand_fit"]["score"] is not None else "n/a")
     with st.expander("Considered and rejected topics"):
         for r in wf.rejected:
             st.write(f"- **{r['topic']}**: {r['reason']}")
