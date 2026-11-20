@@ -222,9 +222,9 @@ matches_found
 Archive repetition risk is:
 
 - `unknown` when the archive export is unavailable.
-- `low` when no close match is found.
-- `medium` when a nearby match exists.
-- `high` when two or more close matches exist.
+- `low` when overlap is limited or weak.
+- `medium` when comparable recipes exist but the topic can still be differentiated.
+- `high` when several strong or recent overlaps exist.
 
 ### 6. Combined proposal rank
 The final rank is a weighted evidence score:
@@ -236,13 +236,42 @@ rank_score =
   + archive novelty score x 0.20
 ```
 
-Archive novelty is derived from repetition risk:
+Archive novelty is now a continuous score from `0` to `100`, rather than a
+fixed penalty for the first match. The matcher separates two evidence levels:
+
+1. **Whole-level matches:** all meaningful topic words occur in the recipe
+   title. These are treated as the strongest repetition evidence.
+2. **Word-level matches:** only part of a multi-word topic occurs in a title or
+   ingredient list. These still matter—for example, many `Schokolade` recipes
+   affect `Dubai Schokolade`—but they cannot masquerade as exact duplicates.
+3. Stronger title matches receive more weight than ingredient-only matches.
+4. Repetition pressure increases gradually with whole-level and word-level
+   match counts.
+5. A small recency signal is applied to recent comparable publications.
+
+The score is calculated conceptually as:
+
+```text
+novelty =
+  100
+  - 15 x strongest_whole_match
+  - 38 x (1 - exp(-whole_matches / 3))
+  - 8 x strongest_word_match
+  - 28 x (1 - exp(-word_matches / 30))
+  - 6 x recent_match_pressure
+```
+
+The result is clamped to `0..100`. The output includes
+`whole_match_count`, `word_match_count`, and the evidence level on each
+displayed archive match. A single weak or old match therefore does not receive
+the same penalty as many strong matches. The UI still shows the derived risk
+label for readability:
 
 | Archive risk | Novelty score |
 |---|---:|
-| low | 100 |
-| medium | 60 |
-| high | 20 |
+| low | 75-100 |
+| medium | 45-74.9 |
+| high | 0-44.9 |
 | unknown | 50 |
 
 Wikimedia is kept as corroborating trend evidence. It is not added to this

@@ -53,13 +53,10 @@ class ProposalAgent:
             trend_score = signal["trend_score"]
             brand_score = brand["score"]
 
-            archive_scores = {
-                "low": 100,
-                "medium": 60,
-                "high": 20,
-                "unknown": 50,
-            }
-            archive_score = archive_scores[archive["repetition_risk"]]
+            archive_score = archive.get(
+                "novelty_score",
+                50 if archive["repetition_risk"] == "unknown" else 0,
+            )
             rank_score = (
                 trend_score * 0.50
                 + brand_score * 0.30
@@ -90,7 +87,8 @@ class ProposalAgent:
             }
             proposal["rank_method"] = (
                 "50% Google Trends + 30% brand fit + 20% archive novelty "
-                "(high risk=20, medium=60, low=100, unknown=50). "
+                "(continuous score from title/ingredient overlap, match volume, and recency; "
+                "unknown archive=50). "
                 "Wikimedia is corroborating evidence and is not added to this numeric rank."
             )
             proposal["rank_score"] = round(rank_score, 1)

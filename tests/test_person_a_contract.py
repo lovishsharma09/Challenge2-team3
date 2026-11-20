@@ -54,7 +54,7 @@ class PersonAContractTest(unittest.TestCase):
         self.assertFalse(
             proposal["rank_components"]["wikimedia"]["used_in_numeric_rank"]
         )
-        self.assertEqual(proposal["rank_score"], 75.2)
+        self.assertEqual(proposal["rank_score"], 78.5)
     def test_proposals_have_stable_handoff_fields(self):
         payload = ChallengeOrchestrator().generate_proposals(limit=5)
 

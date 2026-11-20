@@ -46,6 +46,11 @@ for proposal in payload["proposals"]:
             "**Archiv:** "
             + ", ".join(recipe["title"] for recipe in proposal["archive"]["similar_recipes"])
         )
+        st.caption(
+            f"Archiv-Novelty {proposal['archive'].get('novelty_score', 50):.1f} · "
+            f"Whole-Level {proposal['archive'].get('whole_match_count', 0)} · "
+            f"Word-Level {proposal['archive'].get('word_match_count', 0)}"
+        )
         st.markdown(
             f"**Risiko:** {proposal['archive']['repetition_risk']}  \n"
             f"**Gap:** {proposal['archive']['content_gap']}"
