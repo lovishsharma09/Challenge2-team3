@@ -56,6 +56,7 @@ class TrendAgent:
                 "source": "Google Trends Rising Topics",
                 "period_start": period_start,
                 "period_end": period_end,
+                "increase_percent": row.get("increase percent", ""),
             }]
         return proposals
 

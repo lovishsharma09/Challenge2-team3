@@ -1,0 +1,134 @@
+{
+  "generated_at": "2026-11-20T15:43:34+00:00",
+  "models": {
+    "recipe": "claude-tesseracted-auto",
+    "review": "claude-tesseracted-auto",
+    "image": "flux-2-pro"
+  },
+  "offline": false,
+  "proposal_id": "proposal-curly-kale-vegetable",
+  "steering_notes": [
+    "alltagstauglich, keine exotischen Zutaten"
+  ],
+  "events": [
+    {
+      "t": 0.0,
+      "stage": "selection",
+      "event": "editor selected proposal-curly-kale-vegetable: Grünkohl klassisch für jeden Tag",
+      "steering": [
+        "alltagstauglich, keine exotischen Zutaten"
+      ],
+      "picks": 1
+    },
+    {
+      "t": 3.9,
+      "stage": "archive",
+      "event": "archive loaded",
+      "recipes": 5000,
+      "topicmap": true
+    },
+    {
+      "t": 3.9,
+      "stage": "nutrition",
+      "event": "database loaded",
+      "entries": 1216,
+      "version": "7.1",
+      "synthetic": false
+    },
+    {
+      "t": 12.2,
+      "stage": "recipe",
+      "event": "generated 2 recipes",
+      "titles": [
+        "Klassischer Grünkohleintopf mit Kassler",
+        "Grünkohl-Pfanne mit Kartoffeln und Spiegelei"
+      ],
+      "differentiation": [
+        "Geschmorter Eintopf mit Fleisch als klassisches Schmorgericht, während das zweite Rezept eine schnelle Pfannenvariante mit Spiegelei als leichtes Alltagsgericht ist.",
+        "Schnelle Pfannenvariante mit Spiegelei in ca. 35 Minuten, während der Eintopf ein langsam geschmortes klassisches Gericht mit Kassler ist."
+      ]
+    },
+    {
+      "t": 14.7,
+      "stage": "review",
+      "event": "r1 v1 iteration 1: pass",
+      "failing": 0,
+      "llm": true
+    },
+    {
+      "t": 22.3,
+      "stage": "review",
+      "event": "r2 v1 iteration 1: revise",
+      "failing": 2,
+      "llm": true
+    },
+    {
+      "t": 27.5,
+      "stage": "recipe",
+      "event": "r2 revised to v2",
+      "changes": 2
+    },
+    {
+      "t": 29.6,
+      "stage": "review",
+      "event": "r2 v2 iteration 2: pass",
+      "failing": 0,
+      "llm": true
+    },
+    {
+      "t": 40.4,
+      "stage": "image",
+      "event": "r1: generated",
+      "note": null
+    },
+    {
+      "t": 45.1,
+      "stage": "image",
+      "event": "r1: verification score 9/10",
+      "model": "(configured model)",
+      "foods_not_in_recipe": [],
+      "missing": []
+    },
+    {
+      "t": 56.0,
+      "stage": "nutrition",
+      "event": "r1: per serving 571 kcal",
+      "quality": "mittel",
+      "unmatched": 0
+    },
+    {
+      "t": 69.0,
+      "stage": "image",
+      "event": "r2: generated",
+      "note": null
+    },
+    {
+      "t": 76.2,
+      "stage": "image",
+      "event": "r2: verification score 10/10",
+      "model": "(configured model)",
+      "foods_not_in_recipe": [],
+      "missing": []
+    },
+    {
+      "t": 82.5,
+      "stage": "nutrition",
+      "event": "r2: per serving 365 kcal",
+      "quality": "hoch",
+      "unmatched": 0
+    },
+    {
+      "t": 82.6,
+      "stage": "render",
+      "event": "cards written",
+      "files": [
+        "<run>/c/cards/r1.html",
+        "<run>/c/cards/r2.html"
+      ],
+      "pages": [
+        1,
+        1
+      ]
+    }
+  ]
+}

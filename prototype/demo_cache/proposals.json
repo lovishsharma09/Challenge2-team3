@@ -1,0 +1,3456 @@
+{
+  "proposals": [
+    {
+      "id": "proposal-cookie-food",
+      "title": "Klassische Butterplätzchen zum Ausstechen",
+      "topic": "Cookie (Food)",
+      "trend": {
+        "score": 98,
+        "points": [
+          {
+            "date": "2026-11-18",
+            "value": 98,
+            "source": "Google Trends Rising Topics",
+            "period_start": "2026-10-18",
+            "period_end": "2026-11-18",
+            "increase_percent": "90 %"
+          }
+        ],
+        "sparkline": [
+          98
+        ],
+        "wikimedia": {
+          "status": "available",
+          "article": "Cookie",
+          "score": 28,
+          "points": [
+            {
+              "date": "2026-10-20",
+              "value": 334,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-21",
+              "value": 318,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-22",
+              "value": 329,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-23",
+              "value": 358,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-24",
+              "value": 347,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-25",
+              "value": 357,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-26",
+              "value": 318,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-27",
+              "value": 332,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-28",
+              "value": 309,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-29",
+              "value": 255,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-30",
+              "value": 258,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-10-31",
+              "value": 206,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-01",
+              "value": 253,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-02",
+              "value": 251,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-03",
+              "value": 266,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-04",
+              "value": 215,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-05",
+              "value": 239,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-06",
+              "value": 288,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-07",
+              "value": 253,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-08",
+              "value": 256,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-09",
+              "value": 280,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-10",
+              "value": 224,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-11",
+              "value": 218,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-12",
+              "value": 239,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-13",
+              "value": 223,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-14",
+              "value": 189,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-15",
+              "value": 227,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-16",
+              "value": 232,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-17",
+              "value": 229,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            },
+            {
+              "date": "2026-11-18",
+              "value": 197,
+              "source": "Wikimedia Pageviews",
+              "article": "Cookie"
+            }
+          ],
+          "error": null,
+          "period_start": "2026-10-20",
+          "period_end": "2026-11-18",
+          "method": "Available series: compare average daily pageviews of the first half with the second half, normalized to a 0-100 score."
+        },
+        "why_relevant": "Die Suchanfragen zu Weihnachtsplätzchen, Butterplätzchen und Ausstechplätzchen steigen laut Belegen in der Zeit vom 18.10. bis 18.11.2026 stark an, während das Archiv zwar viele Cookie-Rezepte, aber keine klassischen Butterplätzchen zeigt.",
+        "sources": [
+          "Google Trends supplied data"
+        ]
+      },
+      "brand_fit": {
+        "score": 74,
+        "fit": "medium",
+        "rules": [
+          "Alltagstauglich und nachkochbar",
+          "Saisonaler oder regionaler Bezug",
+          "Fleisch und klassische Gerichte werden bevorzugt",
+          "Hoher Kochanspruch passend zur Marke",
+          "Kurze Zutatenlisten und klare Zubereitung",
+          "Veggie-Angebot optional"
+        ],
+        "reasoning": "Cookie (Food) kann zum Claim 'Der Alltagsbegleiter mit gehobenem Anspruch' passen. Bewertung: alltagstauglich, klar formuliert und ohne unnötig lange Zutatenliste.",
+        "positive_signals": [],
+        "negative_signals": []
+      },
+      "archive": {
+        "status": "available",
+        "available": true,
+        "match_status": "matches_found",
+        "similar_recipes": [
+          {
+            "id": "doc7ojkindoqx41b081n5b2",
+            "title": "Chocolate-Cookie-Sahne-Kuchen",
+            "subtitle": "",
+            "published": "2023-01-18",
+            "publication_date": "2023-01-18",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Sahne",
+                "amount": "600",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9721",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Sahnesteif",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "Packung",
+                "topic": "tmt82su5xu2lky1gko8m14jk",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Puderzucker",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_8946",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Sirup",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_10156",
+                "prefix": "Kokosnuss-",
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Espresso",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_5821",
+                "prefix": "kalter",
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Kokoschip",
+                "amount": "40",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7296",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Cookie",
+                "amount": "250",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7kg34etqli01n4l28eq",
+                "prefix": "Chocolate",
+                "suffix": "Ø 5 cm",
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Kakaopulver",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_6966",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Schokoriegel",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11801",
+                "prefix": "Kokos-",
+                "suffix": null,
+                "position": "9",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Sahne mit Festiger steif aufschlagen, dabei den Puderzucker löffelweise zugeben. Sirup sowie Espresso untermischen.",
+              "Die Kokoschips in einer Pfanne ohne Fett nach Sicht vorsichtig anrösten, bis sie zu duften beginnen. Dann auskühlen lassen.",
+              "Eine Kastenform (ca. 30 x 12 cm) überlappend mit Frischhaltefolie auslegen. Den Boden und die Seiten der Form dünn mit etwas von der Sahnemischung bestreichen. Die Form auf eine Längsseite kippen und 1 Lage Kekse bündig zum Boden auflegen. Nun dünn eine Lage Sahnemischung aufstreichen und den Vorgang wiederholen, bis die Kekse und ein Großteil der Sahne aufgebraucht sind. Form aufrecht stellen, mit übriger Sahne mindestens 1 Std. kühlen.",
+              "Zum Servieren den Kuchen auf eine Platte stürzen und die Folie abziehen. Kuchen mit übriger Sahne umhüllen und den Kakao aufstäuben. Schokoriegel grob hacken, mit Kokoschips darauf verteilen und servieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc7ojkindoqx41b081n5b2.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "764d6d21d409d5a320ac13bb47132ee18393c7e877206bda09f8b0542ebb5484",
+              "zutaten_anzahl": 9,
+              "zubereitungsschritte_anzahl": 4
+            },
+            "archive_match_score": 1.0,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc82wepen64761dlvgeybx",
+            "title": "Milchreis mit Mango und Cookies",
+            "subtitle": "",
+            "published": "2025-10-20",
+            "publication_date": "2025-10-20",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Mangos",
+                "amount": "300",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7991",
+                "prefix": "tiefgekühlte",
+                "suffix": "-würfel",
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Milchreis",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "Päckchen",
+                "topic": "tmt_ingredient_food_multisite_8176",
+                "prefix": null,
+                "suffix": "Mischung (à 125 g, Fertigprodukt z. B. von Dr. Oetker)",
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Kokosmilch",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "ml",
+                "topic": "tmt_ingredient_food_multisite_7326",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Milch",
+                "amount": "250",
+                "amount_max": null,
+                "unit": "ml",
+                "topic": "tmt_ingredient_food_multisite_8171",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Butter",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_5216",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Agavendicksaft",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_4456",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Minze",
+                "amount": "4",
+                "amount_max": null,
+                "unit": "Stiel",
+                "topic": "tmt_ingredient_food_multisite_8201",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Cookies",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7kg34etqli01n4l28eq",
+                "prefix": "Schoko-",
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": null,
+                "amount_max": null,
+                "unit": null,
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Milchreis nach Packungsangabe mit Kokosmilch und Milch aufkochen, beiseitestellen und 10 Minuten ziehen lassen.",
+              "Mango antauen lassen, 1/3 der Mango kleiner würfeln und zum Garnieren beiseitestellen. Butter in einer Pfanne erhitzen. Übrige Mango darin mit Agavendicksaft und 1 Prise Salz köcheln lassen. Minze in Streifen schneiden, ins Mangokompott rühren.",
+              "Kekse zerbröseln, die Hälfte auf die Gläser verteilen. Milchreis und etwas Mangokompott abwechselnd darauf schichten. Mit den übrigen Keksbröseln und beiseitegelegten Mangowürfeln garnieren. Restliches Mangokompott dazustellen."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc82wepen64761dlvgeybx.xml",
+            "manifest": {
+              "hauptkategorie": "Desserts und Süßspeisen",
+              "sha256": "26f33443cc2185da07ac0e34356406dd4ead0399008ac1737faddaac11c7142d",
+              "zutaten_anzahl": 9,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 1.0,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc7c2k4eb377psqglzhp9",
+            "title": "Schnelle Schoko-Pekannuss-Cookies mit Kirschen zu Weihnachten",
+            "subtitle": "",
+            "published": "2020-02-28",
+            "publication_date": "2020-02-28",
+            "date_source": "DateCreated",
+            "ingredients": [
+              {
+                "name": "Zartbitterschokolade",
+                "amount": "80",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt796njw494cl50oaaffr",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Pekannusskerne",
+                "amount": "80",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt782q7rlhyix6j9rz8gz",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Ei",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt794qfqipwpd1aq7vre46",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "brauner Zucker",
+                "amount": "130",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt782lpzvcmc4141jwo8gz",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Vanillezucker",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "Packung",
+                "topic": "tmt794qf93y1bmymulge46",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "weiche Butter",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt782lpuwpdwy1fs3538gz",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Mehl",
+                "amount": "125",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt794qf4eqk8p1leafne46",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Kakao",
+                "amount": "25",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt796nd67w3e8irwz4ffr",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Backpulver",
+                "amount": "0.5",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt794qf8z9oe1127xcve46",
+                "prefix": null,
+                "suffix": null,
+                "position": "9",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt794qf1b11uc89kp5e46",
+                "prefix": null,
+                "suffix": null,
+                "position": "10",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Den Backofen auf 180 Grad (Umluft 160 Grad) vorheizen. Zartbitterschokolade mit einem langen Messer in grobe Stücke hacken oder schneiden. Pekannusskerne etwas kleiner schneiden oder hacken.",
+              "Ei, Zucker und Vanillezucker verrühren. Butter unterrühren. Mehl, Kakao, Backpulver und Salz in eine Schüssel füllen und mit einem Schneebesen gut vermischen. Mehl-Mix mit den Schneebesen des Handrührgeräts unter die Buttermischung rühren. Gehackte Schokolade unterheben.",
+              "Teig esslöffelweise auf 2 mit Backpapier ausgelegten Backblechen verteilen, dabei zwischen den Teighäufchen ausreichend Abstand lassen. Pekannüsse auf dem Teig verteilen. Cookies blechweise ca. 15 Min. im Ofen backen. Herausnehmen und auf einem Kuchengitter auskühlen lassen."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc7c2k4eb377psqglzhp9.xml",
+            "manifest": {
+              "hauptkategorie": "Weihnachten",
+              "sha256": "5204ce64665d4e05a805876295d5fec941a63293a741e88fa9ede7ac5212bb25",
+              "zutaten_anzahl": 10,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc786tdfm89rk5bqgfllp",
+            "title": "Weihnachtsbrezel-Cookies",
+            "subtitle": "",
+            "published": "2019-12-08",
+            "publication_date": "2019-12-08",
+            "date_source": "DateImported",
+            "ingredients": [],
+            "steps": [
+              "Ein Ei hart kochen: Legen Sie ein rohes Ei in einen Topf, mit kaltem Wasser bedeckt. Zum Kochen bringen; sobald das Wasser kocht, den Topf zudecken, vom Herd nehmen und 17 Minuten stehen lassen. Ei mit kaltem Wasser abschrecken. Nun haben Sie ein wunderbar gelbes, hart gekochtes Eigelb!",
+              "Mehl, Nüsse und Salz verrühren. Mit Küchenmaschine oder Handmixer Butter und 80 g Zucker cremig schlagen. Eigelb und Vanilleextrakt dazugeben.",
+              "Mehl-Nuss-Mischung dazugeben und grob vermischen, bis der Teig gerade so zusammenkommt. In Frischhaltefolie einwickeln und in den Kühlschrank legen, bis der Teig fest ist (mindestens eine Stunde, maximal einige Tage).",
+              "Ofen auf 180 Grad (Umluft oder Unterhitze) vorheizen. Backblech(e) mit Backpapier auslegen. In einem Schälchen Zimt und Zucker verrühren.",
+              "Ein kleines Stück Teig (ca. 15–20 g, je nach gewünschter Größe der Brezeln) abstechen. Zu einer dünnen Schnur formen und zur Brezel zusammenfügen. Die Brezel darf nicht zu fest zusammengezurrt werden, sonst verliert sie beim Backen ihre Form. Brezeln im Abstand von ca. 4 cm auf das vorbereitete Blech legen.",
+              "Brezeln vor dem Backen 30 Minuten auf dem Blech in den Kühlschrank stellen, damit sie beim Backen ihre Form behalten. Direkt vor dem Backen mit dem verquirlten Eiweiß bestreichen und mit dem Zimtzucker bestreuen.",
+              "In 12–13 Minuten goldbelb backen. 10 Minuten auf dem Blech abkühlen lassen, dann auf einem Kuchengitter vollständig abkühlen lassen."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc786tdfm89rk5bqgfllp.xml",
+            "manifest": {
+              "hauptkategorie": "Weihnachten",
+              "sha256": "c9dd37db0b40c4aa18ac64bcc277cfb1a1f50bc86bad8350a33ab13f57b2c772",
+              "zutaten_anzahl": 10,
+              "zubereitungsschritte_anzahl": 7
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc80qdhsnp63kuolsgap7",
+            "title": "No bake Cookies",
+            "subtitle": "",
+            "published": "2025-05-21",
+            "publication_date": "2025-05-21",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Zartbitter-Kuvertüre",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11281",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Milch",
+                "amount": "120",
+                "amount_max": null,
+                "unit": "ml",
+                "topic": "tmt_ingredient_food_multisite_8171",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Backkakao",
+                "amount": "25",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_4686",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Vanilleextrakt",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_10786",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Butter",
+                "amount": "110",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5216",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Erdnussbutter",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5801",
+                "prefix": "cremige",
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Erdnüsse",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5796",
+                "prefix": null,
+                "suffix": " geröstet ohne Salz",
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Kokosraspeln",
+                "amount": "60",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7346",
+                "prefix": null,
+                "suffix": null,
+                "position": "9",
+                "error": null
+              },
+              {
+                "name": "gehackte Mandeln",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt80inyfux19f1jp8o3ofv",
+                "prefix": null,
+                "suffix": null,
+                "position": "10",
+                "error": null
+              },
+              {
+                "name": "kernige Haferkekse",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt808b1bhjvief718dvbp",
+                "prefix": null,
+                "suffix": null,
+                "position": "11",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Ein Backblech 30x40cm mit Backpapier auslegen.",
+              "Zunächst Zartbitter-Kuvertüre fein hacken. Diese zusammen mit Milch, Backkakao, Zucker und Vanilleextrakt in einen kleinen Topf geben. Auf mittlerer Stufe schmelzen lassen, dabei gut umrühren. Butter und Erdnussbutter hinzufügen und in der Schokoladenmasse schmelzen lassen.",
+              "Die gerösteten Erdnüsse grob hacken und mit den Kokosraspeln, gehackten Mandeln und den kernigen Haferkeksen unter die flüssige Schokoladenmischung rühren. Mithilfe von Teelöffeln kleine Häufchen auf das Backblech setzen. Die No bake Cookies im Kühlschrank für 30 Minuten fest werden lassen und anschließend genießen!"
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc80qdhsnp63kuolsgap7.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "02cbd57b2547389f22558c20fb908b5b0c1f0df355c3354d86de10cf419280a8",
+              "zutaten_anzahl": 11,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc810ub3vgil53l1f69yq",
+            "title": "Mini Cookies",
+            "subtitle": "",
+            "published": "2025-06-10",
+            "publication_date": "2025-06-10",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "weiche Butter",
+                "amount": "125",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zfs3lryhcn1bbsaelr0",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "60",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": "brauner",
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "40",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": "weißer",
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Vanillezucker",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Packung",
+                "topic": "tmt_ingredient_food_multisite_10841",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Eier",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_5656",
+                "prefix": null,
+                "suffix": "(Größe M)",
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Mehl",
+                "amount": "175",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8121",
+                "prefix": null,
+                "suffix": "(Type 405)",
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Natron",
+                "amount": "1/2",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_8331",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Schokotropfen",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9851",
+                "prefix": null,
+                "suffix": "(Zartbitter, fein gehackt)",
+                "position": "9",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Backofen auf 190 Grad Ober-/Unterhitze (Umluft 170 Grad) vorheizen. Ein Backblech (30x20 cm) mit Backpapier auslegen.",
+              "Die weiche Butter mit dem braunen Zucker, weißen Zucker und Vanillezucker cremig rühren. Das Ei nach und nach unterrühren. Das Mehl mit dem Natron und Salz in einer separaten Schüssel vermischen und zur Butter-Zucker-Ei Mischung hinzugeben. Nur kurz vermischen bis der Teig sich kombiniert hat.",
+              "Die Schokotröpfchen auf einem Brett fein hacken und zuletzt zu dem Teig hinzugeben.",
+              "Den Mini-Cookie Teig zu einer langen Teigrolle formen und mit einem Messer zu kleinen Portionen einteilen. Die Teigportion sollte nicht größer als eine 20 Cent Münze sein. Die Teigportionen jeweils zu einer kleinen Kugel formen und zwischen dem Zeigefinger und dem Daumen flach drücken. Die Mini-Cookies mit etwas Abstand zueinander auf das Backblech setzen und im vorgeheizten Backofen für 5-7 Minuten (je nach Größe) goldbraun backen. Die Mini-Cookies nach dem Backen komplett auskühlen lassen."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc810ub3vgil53l1f69yq.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "904d1d0ab48757901d7d817f0bb13f18b1219b1bfe9b361b63d6de0b78337700",
+              "zutaten_anzahl": 9,
+              "zubereitungsschritte_anzahl": 4
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc7cfripmhxcncrojahrk",
+            "title": "Cookies & Cream",
+            "subtitle": "",
+            "published": "2020-09-22",
+            "publication_date": "2020-09-22",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Mehl",
+                "amount": "70",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8121",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Stärke",
+                "amount": "60",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_10356",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Backpulver",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_4721",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Butter",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5216",
+                "prefix": "weiche",
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Eier",
+                "amount": "3",
+                "amount_max": null,
+                "unit": null,
+                "topic": "tmt_ingredient_food_multisite_5656",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Sahne",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9721",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "110",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Joghurt",
+                "amount": "80",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_6876",
+                "prefix": null,
+                "suffix": null,
+                "position": "9",
+                "error": null
+              },
+              {
+                "name": "Schokolade",
+                "amount": "30",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9796",
+                "prefix": null,
+                "suffix": "(Stracciatella-Schokolade)",
+                "position": "10",
+                "error": null
+              },
+              {
+                "name": "Milch",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_8171",
+                "prefix": null,
+                "suffix": null,
+                "position": "11",
+                "error": null
+              },
+              {
+                "name": "Vanilleextrakt",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_10786",
+                "prefix": null,
+                "suffix": null,
+                "position": "12",
+                "error": null
+              },
+              {
+                "name": "Puderzucker",
+                "amount": "120",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8946",
+                "prefix": null,
+                "suffix": null,
+                "position": "13",
+                "error": null
+              },
+              {
+                "name": "Kekse",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7151",
+                "prefix": "kleine",
+                "suffix": "(Schoko-Doppelkekse)",
+                "position": "14",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Backofen auf 180 Grad (Umluft 160 Grad) vorheizen. Ein Muffinblech mit 12 Mulden mit Papierförmchen auslegen. Mehl, Stärke, Backpulver und 1 Prise Salz in einer Schüssel mischen. 80 g Butter, Eier, Sahne, Zucker und Joghurt zu der Mehlmischung geben. Gut verrühren. Den Teig gleich-mäßig auf die Papierförmchen verteilen. Muffins im Ofen ca. 15 Min. gold-braun backen. Herausnehmen und abkühlen lassen.",
+              "Stracciatella-Schokolade sehr fein hacken. 120 g Butter cremig rühren. Milch, Vanilleextrakt und 60 g Puderzucker dazugeben. Weitere 4 – 5 Min. aufschlagen. 60 g Puderzucker hinzufügen und schaumig schlagen.  Gehackte Schokolade zufügen. In einen Spritzbeutel mit Lochtülle füllen. Auf die Muffins spritzen. Mit Keksen und evtl. Strohhalmen garnieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc7cfripmhxcncrojahrk.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "e07989c0d70dfef68ee69c8e1c2c71291b6ba9f50c1ae9a226707dbac1c75dcc",
+              "zutaten_anzahl": 14,
+              "zubereitungsschritte_anzahl": 2
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc87ya27aj3oh1176nebft",
+            "title": "Haferflocken-Cookies mit Rosinen",
+            "subtitle": "",
+            "published": "2026-10-09",
+            "publication_date": "2026-10-09",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Butter",
+                "amount": "75",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5216",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "kernige Haferflocken",
+                "amount": "180",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt808b1a1of5x7cj9cvbq",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Eier",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_5656",
+                "prefix": null,
+                "suffix": "(M)",
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "brauner Zucker",
+                "amount": "70",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zg51d7hndz16b5ocq09",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Vanillezucker",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_10841",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Mehl",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_8121",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Backpulver",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_4721",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Zimt",
+                "amount": "1/4",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_11306",
+                "prefix": null,
+                "suffix": null,
+                "position": "9",
+                "error": null
+              },
+              {
+                "name": "Rosinen",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9326",
+                "prefix": null,
+                "suffix": null,
+                "position": "10",
+                "error": null
+              },
+              {
+                "name": "Schokoladenkuvertüre",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt85ub54l257ss5l9zql7",
+                "prefix": null,
+                "suffix": null,
+                "position": "11",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Airfryer auf 180 Grad einstellen. Butter in Stücke schneiden. In einem ofenfesten Schälchen in den Frittierkorb stellen, ca. 5 Minuten schmelzen.",
+              "Haferflocken in einer Schüssel mit der flüssigen Butter übergießen, alles gut vermischen und abkühlen lassen.",
+              "Das Ei auf höchster Stufe schaumig schlagen, dann nach und nach Zucker, Vanillezucker und Salz zugeben und weiterrühren, bis eine cremige Masse entstanden ist. Mehl, Backpulver und Zimt mischen, zügig unterrühren. Rosinen und die Butter-Haferflocken-Mischung dazugeben, alles mit einem Kochlöffel zu einem Teig verrühren. Aus der Masse mit angefeuchteten Händen ca. 20 Bällchen formen, diese leicht flach drücken.",
+              "Den Frittierkorb mit Backpapier auslegen. Die Teigbällchen mit Abstand zueinander einlegen und portionsweise in 13–15 Minuten bei 160 Grad knusprig und goldbraun backen. Cookies auskühlen lassen. Schokokuvertüre über dem Wasserbad schmelzen und Cookies damit verzieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc87ya27aj3oh1176nebft.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "136bc8ed59eb38c4eb88c8617dc3882d4b165ea72ebabe2bf8665ef191bb6b76",
+              "zutaten_anzahl": 11,
+              "zubereitungsschritte_anzahl": 4
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc854kipl4crt1e7jjeg1t",
+            "title": "Carrot-Cake-Cookies",
+            "subtitle": "",
+            "published": "2026-03-25",
+            "publication_date": "2026-03-25",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Möhren",
+                "amount": "250",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8226",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Äpfel",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_4551",
+                "prefix": "großer",
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Ingwer",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Stück",
+                "topic": "tmt_ingredient_food_multisite_6826",
+                "prefix": null,
+                "suffix": "(daumengroß)",
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Datteln",
+                "amount": "80",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5551",
+                "prefix": null,
+                "suffix": "(entsteint)",
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Haferflocken",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_6496",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Dinkelmehl",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5591",
+                "prefix": null,
+                "suffix": "(Typ 1050)",
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Haselnüsse",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_6591",
+                "prefix": "gemahlene",
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Backpulver",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_4721",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Zimt",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_11306",
+                "prefix": null,
+                "suffix": null,
+                "position": "9",
+                "error": null
+              },
+              {
+                "name": "Jodsalz",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_6871",
+                "prefix": null,
+                "suffix": "mit Fluorid",
+                "position": "10",
+                "error": null
+              },
+              {
+                "name": "Kokosöl",
+                "amount": "3",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_7341",
+                "prefix": null,
+                "suffix": null,
+                "position": "11",
+                "error": null
+              },
+              {
+                "name": "Ahornsirup",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_4461",
+                "prefix": null,
+                "suffix": null,
+                "position": "12",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Möhren putzen, schälen und grob raspeln, Apfel schälen, vom Kerngehäuse befreien und ebenfalls raspeln. Ingwer schälen und fein hacken, Datteln in kleine Stücke schneiden.",
+              "Backofen auf 180 Grad (Ober-/Unterhitze) vorheizen. Ein Backblech mit Backpapier auslegen. Haferflocken, Dinkelmehl, gemahlene Haselnüsse, Backpulver, Zimt und Salz in einer Schüssel verrühren. Kokosöl in einen Topf geben und bei kleiner Hitze verflüssigen.",
+              "Geraspeltes Gemüse, Ingwer und Datteln zu den trockenen Zutaten geben, Kokosöl und Ahornsirup dazugeben und gut verkneten, sodass ein Teig entsteht. Aus dem Teig 16 Cookies formen (geht am besten mit feuchten Händen), auf das Backblech geben und flach drücken. Etwa 35 Minuten auf mittlerer Schiene backen und anschließend gut auskühlen lassen. Die Kekse bleiben nach dem Backen recht weich."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc854kipl4crt1e7jjeg1t.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "e364706b639ae60fb17df3947c408aa49c41d1a1c89db7031f770b1a6ed67590",
+              "zutaten_anzahl": 12,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc823noajyoep16k3v3ee9",
+            "title": "Cheesecake Cookies",
+            "subtitle": "",
+            "published": "2025-08-25",
+            "publication_date": "2025-08-25",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Schokolade",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9796",
+                "prefix": "grob gehackte",
+                "suffix": "Nach Belieben",
+                "position": "9",
+                "error": null
+              },
+              {
+                "name": "weiche Butter",
+                "amount": "70",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zfs3lryhcn1bbsaelr0",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "120",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Vanillinzucker",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Packung",
+                "topic": "tmt_ingredient_food_multisite_10846",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Doppelrahmfrischkäse",
+                "amount": "130",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5616",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Zitronenabrieb",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt82cww4esueqarrbpa4t",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Mehl",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8121",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Backpulver",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_4721",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Weiche Butter, Zucker und Vanillinzucker schaumig schlagen. Salz, Frischkäse und Zitronenabrieb zugeben und weiterrühren. Mehl mit Backpulver vermischen und in den Teig einrühren. Nach Belieben gehackte Schokolade in den Teig einrühren. Teig 15 Minuten zum Verarbeiten kühlstellen.",
+              "Backbleche mit Backpapier belegen. Backofen auf 180 Grad (Umluft: 160 Grad) vorheizen. Teig mit Hilfe von 2 Teelöffeln oder einem Eisportionierer in walnussgroße Portionen teilen. Zügig zu Kugeln formen, mit Abstand auf die Bleche geben und etwas platt drücken.",
+              "Die Cookies im Backofen etwa 12-14 Minuten backen. Man erkennt, ob sie fertig sind, wenn die Unterseite des Cookies eine leichte Bräunung hat, die Oberfläche bräunt nur sehr leicht. Die Cheesecake Kekse kannst du luftdicht verpackt bei Raumtemperatur mindestens 3 Tage aufbewahren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc823noajyoep16k3v3ee9.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "ecc948dfbd70c0e29a1fcc7fde1bed73c565de393b29576bab1553e231e86aac",
+              "zutaten_anzahl": 9,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc7zg51d7g39e1huxtyq09",
+            "title": "Cookies ohne Ei",
+            "subtitle": "",
+            "published": "2025-02-20",
+            "publication_date": "2025-02-20",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Butter",
+                "amount": "125",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5216",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "brauner Zucker",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zg51d7hndz16b5ocq09",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Vanilleextrakt",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_10786",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Natron",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_8331",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Wasser",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_11021",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Mehl",
+                "amount": "225",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8121",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Backpulver",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_4721",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Schokochunks",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zg4iw6zj2rwb3pubqf",
+                "prefix": null,
+                "suffix": null,
+                "position": "9",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Backofen auf 180 Grad Ober- Unterhitze (Umluft 160 Grad) vorheizen. Ein Backblech mit Backpapier auslegen.",
+              "Die Butter mit dem braunen Zucker mischen. Vanilleextrakt, Natron und Wasser zugeben und vermengen. Die trockenen Zutaten vermischen und sieben. Zu dem Teig geben und kneten. Die Schokochunks von Hand unter den Teig mischen.",
+              "Kleine Kugeln aus dem Teig abstechen und erst rund dann flach formen. Mit etwas Abstand zueinander auf ein Blech geben, die Cookies für 7 Min. backen lassen."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc7zg51d7g39e1huxtyq09.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "9938aaac3732c60faa5f6f892b471786c1964bd5d2b3affff301ce7ecff88580",
+              "zutaten_anzahl": 9,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc86yb8mb49oywi62b6v",
+            "title": "Gewürz-Sesam-Cookies",
+            "subtitle": "",
+            "published": "2026-07-31",
+            "publication_date": "2026-07-31",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "glutenfreie Mehlmischung",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zien51faybmf34wifb",
+                "prefix": null,
+                "suffix": "(siehe Tipp, ersatzweise Hafermehl)",
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "brauner Zucker",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zg51d7hndz16b5ocq09",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Kardamom",
+                "amount": "0.5",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_7071",
+                "prefix": "gemahlener",
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Nelkenpulver",
+                "amount": "0.25",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt83i5mreuwqao58z11zfv",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Tahini",
+                "amount": "70",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt80i7h2lvqebgv4l910bp",
+                "prefix": null,
+                "suffix": "(Sesampaste)",
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "kalte Butter",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zi4hhc7o0ldwlvgifb",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Eigelb",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_5691",
+                "prefix": null,
+                "suffix": "(Größe M)",
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Sesamsamen",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_10126",
+                "prefix": "weiße und schwarze",
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Milch",
+                "amount": "2",
+                "amount_max": "3",
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_8171",
+                "prefix": null,
+                "suffix": "zum Bestreichen",
+                "position": "2",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Mehl, Zucker, Salz und Gewürze in einer Rührschüssel mischen. Sesampaste, kalte Butter und Eigelb zugeben. Mit den Händen zügig zu einem Teig kneten. Teig in eine Frischhaltedose geben, verschließen und 1 Stunde kalt stellen.",
+              "Ofen auf 180 Grad (Umluft 160 Grad) vorheizen. Backbleche mit Backpapier belegen. Teig aus dem Kühlschrank nehmen, in 50 walnussgroße Portionen teilen und zu Kugeln rollen. Sesam in eine Schüssel füllen. Jede Kugel hineingeben und in der Sesam-Mischung mit einem Schnapsglas flach drücken. Mit Abstand auf das Blech legen, Oberfläche mit Milch bestreichen. Im Ofen 8–10 Minuten backen. Komplett auskühlen lassen."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc86yb8mb49oywi62b6v.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "9d33c58f5e1ca1e83bac4f4a3be96b2e34ad70e4c00c05e8fdccb0b9525288ce",
+              "zutaten_anzahl": 10,
+              "zubereitungsschritte_anzahl": 2
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc85weezyxx788b0cz1mjp",
+            "title": "Chocolate-Cookies",
+            "subtitle": "",
+            "published": "2026-05-18",
+            "publication_date": "2026-05-18",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Schokostückchen",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7iti1k42wuaqr3i7aud",
+                "prefix": "backfeste",
+                "suffix": "(z. B. Chocolate Chunks von Dr. Oetker)",
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Mehl",
+                "amount": "250",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8121",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Backpulver",
+                "amount": "0.5",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_4721",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "brauner Zucker",
+                "amount": "120",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zg51d7hndz16b5ocq09",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Bourbon-Vanillezucker",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Päckchen",
+                "topic": "tmt_ingredient_food_multisite_5051",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "0.5",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Eier",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_5656",
+                "prefix": null,
+                "suffix": "(Größe M)",
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "weiche Butter",
+                "amount": "175",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zfs3lryhcn1bbsaelr0",
+                "prefix": null,
+                "suffix": "oder Margarine",
+                "position": "7",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Mehl mit Backpulver mischen. Zucker, Vanillezucker, Salz, Ei und Butter oder Margarine hinzufügen und alles mit den Knethaken des Handrührgeräts erst auf niedrigster, dann auf höchster Stufe zu einem glatten Teig verkneten. 2 EL der Schokostücke beiseitestellen, die übrigen unterkneten. Teig 30 Minuten kalt stellen.",
+              "4 Stücke Backpapier in der Größe des Frittierkorbs des Airfryers zurechtschneiden. Von dem Cookie-Teig esslöffelgroße Portionen abstechen und jeweils zu einer Kugel formen. 4 Kugeln auf je ein Stück Backpapier setzen, flach drücken, einige Schokostücke andrücken und im Airfryer bei 160 Grad 12–14 Minuten backen.",
+              "Cookies vorsichtig aus dem Airfryer nehmen und auf einem Kuchenrost auskühlen lassen. Übrigen Teig ebenso backen."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc85weezyxx788b0cz1mjp.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "348e8452aa78d194960b17cd0d982e6c5e8a596a27cf262f3a5e625c3fa0fb46",
+              "zutaten_anzahl": 8,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc81tumbfdmpw1a7a7h1k7v",
+            "title": "Subway Cookies",
+            "subtitle": "",
+            "published": "2025-08-06",
+            "publication_date": "2025-08-06",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Butter",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5216",
+                "prefix": "zimmerwarme",
+                "suffix": "(nicht zu weich)",
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "brauner Zucker",
+                "amount": "120",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zg51d7hndz16b5ocq09",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "80",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Salz",
+                "amount": "3",
+                "amount_max": null,
+                "unit": "Prise",
+                "topic": "tmt_ingredient_food_multisite_9556",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Eier",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_5656",
+                "prefix": null,
+                "suffix": "(Größe M)",
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Mehl",
+                "amount": "250",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_8121",
+                "prefix": null,
+                "suffix": "und Mehl zum Arbeiten",
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Natron",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "TL",
+                "topic": "tmt_ingredient_food_multisite_8331",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Schokostückchen",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7iti1k42wuaqr3i7aud",
+                "prefix": null,
+                "suffix": "(Zartbitter-Chunks oder -tröpfchen)",
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "weiße Kuvertüre",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7zixv533a83hn81p9ws",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Macadamianüsse",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7831",
+                "prefix": "gesalzene",
+                "suffix": null,
+                "position": "2",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Backofen auf 180 Grad Ober-/Unterhitze (Umluft: 160 Grad) vorheizen. Backbleche mit Backpapier belegen.",
+              "Für den Grundteig Butter ca. 20 Minuten vor der Nutzung in Stücken in eine Rührschüssel geben, damit sie Zimmertemperatur annimmt. Backofen auf 180 Grad Ober-/Unterhitze (Umluft: 160 Grad) vorheizen. Backbleche mit Backpapier auslegen.",
+              "Zimmerwarme Butter, brauner Zucker, Zucker und Salz mit den Schneebesen eines Handrührgeräts maximal 1 Minute verrühren. Die Butter soll nicht so weich sein, dass die durch das Schlagen schaumig weiß wird. Ist das der Fall, die Rührschüssel einfach für 10 Minuten in den Kühlschrank stellen. Ei hinzugeben und kurz verrühren. Mehl und Natron mischen und in den Teig rühren",
+              "Für die Chocolate Chip-Variante die Schokoladenstückchen einrühren. Für die Macadamia-Variante die weiße Kuvertüre in kleine Stücke hacken und unter den Teig rühren. Mit Hilfe eines Eisportionierers oder leicht bemehlten Händen insgesamt 12 Kugeln formen und versetzt je sechs Cookies auf das Blech geben.",
+              "Cookies im vorgeheizten Backofen ca. 10-12 Minuten backen. Die Cookies sollen nur am Rand einen leicht gebräunten Rand haben, der Rest des Cookies soll hell bleiben, damit das Innere schön chewy und soft ist. Die Cookies halten sich luftdicht verpackt bei Zimmertemperatur für mindestens 5 Tage."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc81tumbfdmpw1a7a7h1k7v.xml",
+            "manifest": {
+              "hauptkategorie": "Kuchen, Torten und süßes Gebäck",
+              "sha256": "5151b0c7f2c30843bd69a41367cb8d868d637da68f491bfeb2f1349eae50939e",
+              "zutaten_anzahl": 10,
+              "zubereitungsschritte_anzahl": 5
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc82glw64q03k9xbt2bpn",
+            "title": "Beeren-Vanilleeis mit Cookies",
+            "subtitle": "Vanille-Beeren-Eis mit Cookies 11302761",
+            "published": "2025-09-19",
+            "publication_date": "2025-09-19",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Brombeeren",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5146",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Erdbeeren",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5766",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Gelierzucker",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_6221",
+                "prefix": null,
+                "suffix": "3:1",
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Vanilleeis",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "l",
+                "topic": "tmt_ingredient_food_multisite_10781",
+                "prefix": "leicht angetautes",
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Mürbeteigkekse",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7p4nducqj9z1bmv5n3y6",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Brombeeren und Erdbeeren putzen, vierteln. Mit Gelierzucker in einem Topf verrühren, aufkochen und 3–4 Minuten köcheln. Grob pürieren, abkühlen lassen.",
+              "Vanilleeis abwechselnd mit Beerensauce in eine Form füllen, leicht marmorieren. Eis 15 Minuten einfrieren. Kekse zerbrechen, auf dem Eis verteilen und servieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc82glw64q03k9xbt2bpn.xml",
+            "manifest": {
+              "hauptkategorie": "Desserts und Süßspeisen",
+              "sha256": "df8c2ac3901ce0acc050cec1207a313d7469f9063ace71e69fd75710401e6bb1",
+              "zutaten_anzahl": 5,
+              "zubereitungsschritte_anzahl": 2
+            },
+            "archive_match_score": 0.75,
+            "match_level": "whole"
+          },
+          {
+            "id": "doc7lwxtmc19ae8atq1igx",
+            "title": "MFI_Skandi_Gastl_8_21_Schwedische Apfelgrütze",
+            "subtitle": "",
+            "published": "2022-07-18",
+            "publication_date": "2022-07-18",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Zitronen",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(keine Einheit)",
+                "topic": "tmt7t7myu4eagn18pbarfb9",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Äpfel",
+                "amount": "1,5",
+                "amount_max": null,
+                "unit": "kg",
+                "topic": "tmt_ingredient_food_multisite_4551",
+                "prefix": "säuerliche",
+                "suffix": "(z.B. Boskop, Braeburn, Elster)",
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "150",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Zimtstangen",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "(keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_11331",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Cookies",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7kg34etqli01n4l28eq",
+                "prefix": "Hafer-",
+                "suffix": "oder Gewürzkekse",
+                "position": "0",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Butter",
+                "amount": "80",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_5216",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Schlagsahne",
+                "amount": "250",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9721",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Bourbon-Vanillezucker",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Packung",
+                "topic": "tmt_ingredient_food_multisite_5051",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Zitronenmelissenblätter",
+                "amount": null,
+                "amount_max": null,
+                "unit": null,
+                "topic": "tmt_ingredient_food_multisite_11376",
+                "prefix": "nach Belieben",
+                "suffix": "zum Garnieren",
+                "position": "5",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Am Vortag: Zitrone auspressen. Äpfel schälen, vierteln und Kerngehäuse entfernen. Fruchtfleisch in feine Blättchen schneiden. Mit Zitronensaft, Zucker, Zimt und 200 ml Wasser in einem großen Topf aufkochen. Apfelkompott zugedeckt 10–15 Minuten bei kleiner Hitze weich köcheln lassen. Abkühlen lassen.",
+              "Kekse in einen Gefrierbeutel geben, zum Beispiel mit einer Teigrolle darüberrollen und die Kekse so zerbröseln. Ersatzweise die Kekse in einem Alleszerkleiner grob hacken. Zucker und Butter in einer großen weiten Pfanne zerlassen. Keksbrösel dazugeben und unter Rühren 5–10 Minuten bei mittlerer Hitze rösten. Alles zugedeckt kalt stellen.",
+              "1 Stunde vor dem Servieren: Sahne steif schlagen, dabei Vanillezucker einrieseln lassen. Kompott und Keksbrösel in 8 Gläser (oder Schälchen) einschichten. Sahne locker darauf verteilen. Gläser nach Belieben mit Zitronenmelisseblättchen garnieren und bis zum Servieren kalt stellen.",
+              "Zum Servieren: Gläser mit der schwedischen Apfelgrütze servieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc7lwxtmc19ae8atq1igx.xml",
+            "manifest": {
+              "hauptkategorie": "Desserts und Süßspeisen",
+              "sha256": "e847d4226020f0bc1da4c1c7da50bfde0876aa1539dcd8a6e181cdcfb5a4072b",
+              "zutaten_anzahl": 10,
+              "zubereitungsschritte_anzahl": 4
+            },
+            "archive_match_score": 0.15,
+            "match_level": "word"
+          },
+          {
+            "id": "doc7mz0gqsmchk1i6ki3f9e",
+            "title": "MFI-1/22_SDJ-Dessert_Himbeer-Topfen-Trifle",
+            "subtitle": "",
+            "published": "2022-09-30",
+            "publication_date": "2022-09-30",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "Himbeeren",
+                "amount": "300",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_6656",
+                "prefix": "tiefgekühlte",
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Milch",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "ml",
+                "topic": "tmt_ingredient_food_multisite_8171",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Schlagsahne",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9721",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Eigelbe",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "(keine Einheit)",
+                "topic": "tmt_ingredient_food_multisite_5691",
+                "prefix": null,
+                "suffix": "(Größe M)",
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_11426",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Gelatine",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "Blatt",
+                "topic": "tmt_ingredient_food_multisite_6211",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Zitronensaft",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt_ingredient_food_multisite_11386",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Magerquark",
+                "amount": "125",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7856",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Cookies",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7kg34etqli01n4l28eq",
+                "prefix": "kleine",
+                "suffix": null,
+                "position": "0",
+                "error": null
+              },
+              {
+                "name": "Himbeeren",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_6656",
+                "prefix": "frische",
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Kresse",
+                "amount": null,
+                "amount_max": null,
+                "unit": null,
+                "topic": "tmt_ingredient_food_multisite_7486",
+                "prefix": "Honey-",
+                "suffix": "zum Garnieren",
+                "position": "2",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Himbeeren in einem Rührbecher auftauen lassen. Milch und 50 g Schlagsahne in einem Topf aufkochen. Eigelbe mit Zucker glatt rühren und mit einem Schneebesen in die kochende Flüssigkeit rühren. Mischung bei niedriger Hitze und unter ständigem Rühren 1 Min. köcheln lassen. In eine Rührschüssel umfüllen. Gelatine nach Packungsangabe einweichen, ausdrücken und in der noch heißen Flüssigkeit auflösen.",
+              "Aufgetaute Beeren mit Zitronensaft pürieren und durch ein Sieb streichen. Püree in den warmen Milch-Mix rühren. Himbeermasse 30 Minuten kalt stellen.",
+              "Quark unter die abgekühlte Himbeermasse heben. Übrige Schlagsahne (150 g) steif schlagen und ebenfalls unterheben. Hälfte der Mousse in die vorbereiteten Gläser füllen. Hälfte der Kekse grob bröseln und daraufstreuen. Übrige Creme darauf verteilen und mind. 1½ Stunden kalt stellen. Himbeer-Topfen-Trifle mit den übrigen Keksen, frischen Himbeeren und Kresse garnieren und servieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc7mz0gqsmchk1i6ki3f9e.xml",
+            "manifest": {
+              "hauptkategorie": "Desserts und Süßspeisen",
+              "sha256": "fe4738c7772f86e3e29d81d84af11931c80c246828d7cea89b14e70287fbce8e",
+              "zutaten_anzahl": 11,
+              "zubereitungsschritte_anzahl": 3
+            },
+            "archive_match_score": 0.15,
+            "match_level": "word"
+          },
+          {
+            "id": "doc853jxxvqobtv04v81b7f",
+            "title": "Beschwipstes Schichtdessert",
+            "subtitle": "Silvester-Buffet mit Hackbraten, Pilz-Cappuccino, Räucherlachssalat und Karamellcreme",
+            "published": "2026-03-23",
+            "publication_date": "2026-03-23",
+            "date_source": "DateImported",
+            "ingredients": [
+              {
+                "name": "geraspelte Zartbitterschokolade",
+                "amount": "1.5",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt80lom2c8vk9f57c0rvm",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "flüssiger Honig",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "EL",
+                "topic": "tmt80gmyt8a6fq1bu7bpgzt",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Cookies",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7kg34etqli01n4l28eq",
+                "prefix": "Schokoladen-Waffelkekse oder ",
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Likör",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7736",
+                "prefix": "Karamell",
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Schlagsahne",
+                "amount": "400",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_9721",
+                "prefix": "kalte",
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Vanillezucker",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "Päckchen",
+                "topic": "tmt_ingredient_food_multisite_10841",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "Sahnefestiger",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "Päckchen",
+                "topic": "tmt82su5xu2lky1gko8m14jk",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Magerquark",
+                "amount": "300",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_7856",
+                "prefix": "gut gekühlter",
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Himbeeren",
+                "amount": "120",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt_ingredient_food_multisite_6656",
+                "prefix": null,
+                "suffix": "(ersatzweise TK-Beeren)",
+                "position": "9",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Geraspelte Schokolade auf einem kleinen Tellerchen verteilen. Honig kreisförmig auf ein Tellerchen geben. Die Gläser mit dem Rand zuerst in den Honigkreis tauchen, dann so in die Schokoladenraspel drücken, dass diese am Honig kleben bleiben. Schokoladen-Waffelkekse in ca. 1 cm große Stücke brechen oder schneiden. Mit dem Likör beträufeln, sodass dieser einziehen kann.",
+              "Die Sahne steif schlagen, dabei Vanillezucker und Sahnefestiger einrieseln lassen. Quark glatt rühren. Sahne vorsichtig unterheben. Den Boden von 6 Gläsern mit der Hälfte der Schokoplätzchen bedecken. 1/3 der Creme daraufgeben. Himbeeren – bis auf 12 Stück – auf die Creme an die Wände der Gläser setzen. 1/3 der Creme daraufgeben. Die übrigen Waffelkekse – bis auf 4 Stückchen – und evtl. entstandene Krümel aufstreuen. Übrige Creme daraufgeben. Mit übrigen Waffelkeksstücken, übrigen Himbeeren und evtl. mit Minze garnieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc853jxxvqobtv04v81b7f.xml",
+            "manifest": {
+              "hauptkategorie": "Desserts und Süßspeisen",
+              "sha256": "346e70fc3504c87765ecff3ede0e91df209c150a001139011739b38cd24919a5",
+              "zutaten_anzahl": 9,
+              "zubereitungsschritte_anzahl": 2
+            },
+            "archive_match_score": 0.15,
+            "match_level": "word"
+          },
+          {
+            "id": "doc7c2jpx0vyjk1j7ra8c4m",
+            "title": "Mandelpudding mit Litschikompott",
+            "subtitle": "",
+            "published": "2018-06-13",
+            "publication_date": "2018-06-13",
+            "date_source": "DateCreated",
+            "ingredients": [
+              {
+                "name": "geriebene Mandeln ohne Haut",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt7c0zql671uc178889e43",
+                "prefix": null,
+                "suffix": null,
+                "position": "1",
+                "error": null
+              },
+              {
+                "name": "Reismehl",
+                "amount": "50",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt796pxn04mfp1lm4pzffs",
+                "prefix": null,
+                "suffix": null,
+                "position": "2",
+                "error": null
+              },
+              {
+                "name": "Milch",
+                "amount": "550",
+                "amount_max": null,
+                "unit": "ml",
+                "topic": "tmt794qf60u3gl1lnoaie45",
+                "prefix": null,
+                "suffix": null,
+                "position": "3",
+                "error": null
+              },
+              {
+                "name": "Eigelb",
+                "amount": "1",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt794qf60mxxknyadce45",
+                "prefix": null,
+                "suffix": null,
+                "position": "4",
+                "error": null
+              },
+              {
+                "name": "Zucker",
+                "amount": "100",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt794qf1fic0625kghe46",
+                "prefix": null,
+                "suffix": null,
+                "position": "5",
+                "error": null
+              },
+              {
+                "name": "Litschis",
+                "amount": "8",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt7866o1dwzxj12oit7avd",
+                "prefix": null,
+                "suffix": null,
+                "position": "6",
+                "error": null
+              },
+              {
+                "name": "roter Johannisbeersaft",
+                "amount": "200",
+                "amount_max": null,
+                "unit": "ml",
+                "topic": "tmt786clzv9m2fvze043h3",
+                "prefix": null,
+                "suffix": null,
+                "position": "7",
+                "error": null
+              },
+              {
+                "name": "Stärke",
+                "amount": "8",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt796op4p25jl134v4tffr",
+                "prefix": null,
+                "suffix": null,
+                "position": "8",
+                "error": null
+              },
+              {
+                "name": "Sahne",
+                "amount": "160",
+                "amount_max": null,
+                "unit": "g",
+                "topic": "tmt796nnqe88601jyohhffs",
+                "prefix": null,
+                "suffix": null,
+                "position": "9",
+                "error": null
+              },
+              {
+                "name": "Chocolate-Chip-Cookies",
+                "amount": "2",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt7c0zql6ido2pzmwse43",
+                "prefix": null,
+                "suffix": null,
+                "position": "10",
+                "error": null
+              },
+              {
+                "name": "Schoko-Sticks (Mikado)",
+                "amount": "4",
+                "amount_max": null,
+                "unit": "(Keine Einheit)",
+                "topic": "tmt7c0zql6plkz1j5eqme43",
+                "prefix": null,
+                "suffix": null,
+                "position": "11",
+                "error": null
+              }
+            ],
+            "steps": [
+              "Die Mandeln, das Reismehl und 150 ml Milch verrühren. Das Eigelb unterrühren. Die restliche Milch und 80 Zucker in einem Topf aufkochen lassen. Topf kurz vom Herd ziehen und auf ein Holzbrett stellen. Die Milch-Mandel-Mischung mit einem Schneebesen unterrühren.",
+              "Topf wieder auf den Herd stellen und die Masse 4–5 Min. erhitzen, bis sie dickflüssig wird. Die Masse dabei ständig umrühren. Den Pudding auf 4 Gläser verteilen, abkühlen lassen. Pudding zugedeckt ca. 2 Std. kühlen.",
+              "Die Litschis schälen. Die Kerne entfernen und das Fruchtfleisch in kleine Stücke schneiden. 25 ml Johannisbeersaft, die Stärke und 15 g Zucker mit einem Schneebesen glatt verrühren. Den übrigen Saft in einem Topf aufkochen lassen.",
+              "Topf vom Herd nehmen und angerührte Stärke einrühren. Mix unter Rühren aufkochen und etwa 1 Min. köcheln. Litschis unterheben. Etwas abkühlen lassen. Litschikompott auf dem Mandelpudding in den Gläsern verteilen und abkühlen lassen. Dessert zugedeckt ca. 1 Std. kalt stellen.",
+              "Sahne und übrigen Zucker steif schlagen. Sahne in einen Spritzbeutel mit Sterntülle füllen und aufspritzen. Cookies zerbröseln, darauf verteilen. Dessert mit Mikado-Sticks verzieren."
+            ],
+            "source_path": "/Users/lovish/Downloads/team-repo/person_c/data/rezepte_export/doc7c2jpx0vyjk1j7ra8c4m.xml",
+            "manifest": {
+              "hauptkategorie": "Desserts und Süßspeisen",
+              "sha256": "6bff70728df825980ec5b19a764ac08857abccb2cd5cf4979d67c7d68e510e20",
+              "zutaten_anzahl": 11,
+              "zubereitungsschritte_anzahl": 5
+            },
+            "archive_match_score": 0.15,
+            "match_level": "word"
+          }
+        ],
+        "whole_match_count": 15,
+        "word_match_count": 4,
+        "most_recent_comparable_publication": "2026-10-09",
+        "recurring_ingredients": [
+          "agavendicksaft",
+          "ahornsirup",
+          "backkakao",
+          "backpulver",
+          "bourbon-vanillezucker",
+          "brauner zucker",
+          "brombeeren",
+          "butter",
+          "chocolate-chip-cookies",
+          "cookie",
+          "cookies",
+          "datteln",
+          "dinkelmehl",
+          "doppelrahmfrischkäse",
+          "ei",
+          "eier",
+          "eigelb",
+          "eigelbe",
+          "erdbeeren",
+          "erdnussbutter",
+          "erdnüsse",
+          "espresso",
+          "flüssiger honig",
+          "gehackte mandeln",
+          "gelatine",
+          "gelierzucker",
+          "geraspelte zartbitterschokolade",
+          "geriebene mandeln ohne haut",
+          "glutenfreie mehlmischung",
+          "haferflocken",
+          "haselnüsse",
+          "himbeeren",
+          "ingwer",
+          "jodsalz",
+          "joghurt",
+          "kakao",
+          "kakaopulver",
+          "kalte butter",
+          "kardamom",
+          "kekse",
+          "kernige haferflocken",
+          "kernige haferkekse",
+          "kokoschip",
+          "kokosmilch",
+          "kokosraspeln",
+          "kokosöl",
+          "kresse",
+          "likör",
+          "litschis",
+          "macadamianüsse",
+          "magerquark",
+          "mangos",
+          "mehl",
+          "milch",
+          "milchreis",
+          "minze",
+          "möhren",
+          "mürbeteigkekse",
+          "natron",
+          "nelkenpulver",
+          "pekannusskerne",
+          "puderzucker",
+          "reismehl",
+          "rosinen",
+          "roter johannisbeersaft",
+          "sahne",
+          "sahnefestiger",
+          "sahnesteif",
+          "salz",
+          "schlagsahne",
+          "schoko-sticks (mikado)",
+          "schokochunks",
+          "schokolade",
+          "schokoladenkuvertüre",
+          "schokoriegel",
+          "schokostückchen",
+          "schokotropfen",
+          "sesamsamen",
+          "sirup",
+          "stärke",
+          "tahini",
+          "vanilleeis",
+          "vanilleextrakt",
+          "vanillezucker",
+          "vanillinzucker",
+          "wasser",
+          "weiche butter",
+          "weiße kuvertüre",
+          "zartbitter-kuvertüre",
+          "zartbitterschokolade",
+          "zimt",
+          "zimtstangen",
+          "zitronen",
+          "zitronenabrieb",
+          "zitronenmelissenblätter",
+          "zitronensaft",
+          "zucker",
+          "äpfel"
+        ],
+        "recurring_methods": [],
+        "repetition_risk": "high",
+        "novelty_score": 36.7,
+        "content_gap": "Several strong or recent overlaps exist; a clearly differentiated format is required.",
+        "assumption": "Matched against the supplied archive export."
+      },
+      "recipe_ideas": [
+        "Butterplätzchen aus kurzem Mürbeteig mit Butter, Zucker und Vanillezucker: Teig kalt stellen, ausstechen und backen, dann nach Belieben verzieren.",
+        "Gefüllte Plätzchen: zwei ausgestochene Mürbeteig-Plätzchen mit Marmelade zusammensetzen und mit Puderzucker bestreuen – ohne Schokolade im Teig."
+      ],
+      "rank_components": {
+        "google_trends": {
+          "score": 98,
+          "weight": 0.5,
+          "contribution": 49.0
+        },
+        "brand_fit": {
+          "score": 74,
+          "weight": 0.3,
+          "contribution": 22.2
+        },
+        "archive_novelty": {
+          "score": 36.7,
+          "risk": "high",
+          "weight": 0.2,
+          "contribution": 7.3
+        },
+        "wikimedia": {
+          "score": 28,
+          "status": "available",
+          "used_in_numeric_rank": false
+        }
+      },
+      "rank_method": "50% Google Trends + 30% brand fit + 20% archive novelty (continuous score from title/ingredient overlap, match volume, and recency; unknown archive=50). Wikimedia is corroborating evidence and is not added to this numeric rank.",
+      "rank_score": 78.5,
+      "rank": 1,
+      "risks": [
+        "Wiederholungsrisiko high: 19 vergleichbare Archivrezepte, zuletzt 2026-10-09."
+      ],
+      "text_original": {
+        "title": "Cookie (Food): ein modernes das schmeckt! Rezept",
+        "recipe_ideas": [
+          "Einfache Cookie (Food)-Variante in einem 30-Minuten-Format",
+          "Saisonale Cookie (Food)-Version zum Vorbereiten",
+          "Klassische Cookie (Food)-Version mit klarer Wochenendoption"
+        ],
+        "why_relevant": "Cookie (Food) shows rising search interest in the supplied Google Trends signal."
+      },
+      "text_source": "llm"
+    },
+    {
+      "id": "proposal-biscuit-food",
+      "title": "Kekse selbst backen für jeden Tag",
+      "topic": "Biscuit (Food)",
+      "trend": {
+        "score": 30,
+        "points": [
+          {
+            "date": "2026-11-18",
+            "value": 30,
+            "source": "Google Trends Rising Topics",
+            "period_start": "2026-10-18",
+            "period_end": "2026-11-18",
+            "increase_percent": "60 %"
+          }
+        ],
+        "sparkline": [
+          30
+        ],
+        "wikimedia": {
+          "status": "available",
+          "article": "Biscuit",
+          "score": 59,
+          "points": [
+            {
+              "date": "2026-10-20",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-21",
+              "value": 3,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-22",
+              "value": 1,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-23",
+              "value": 3,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-24",
+              "value": 4,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-25",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-26",
+              "value": 3,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-27",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-29",
+              "value": 4,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-30",
+              "value": 1,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-10-31",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-01",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-02",
+              "value": 3,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-03",
+              "value": 4,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-04",
+              "value": 3,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-05",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-06",
+              "value": 1,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-07",
+              "value": 1,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-08",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-09",
+              "value": 6,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-10",
+              "value": 4,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-11",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-12",
+              "value": 1,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-13",
+              "value": 2,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-14",
+              "value": 4,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-15",
+              "value": 1,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-16",
+              "value": 4,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-17",
+              "value": 5,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            },
+            {
+              "date": "2026-11-18",
+              "value": 4,
+              "source": "Wikimedia Pageviews",
+              "article": "Biscuit"
+            }
+          ],
+          "error": null,
+          "period_start": "2026-10-20",
+          "period_end": "2026-11-18",
+          "method": "Available series: compare average daily pageviews of the first half with the second half, normalized to a 0-100 score."
+        },
+        "why_relevant": "Das Interesse am Thema Kekse ist im Zeitraum 2026-10-18 bis 2026-11-18 um 60 % gestiegen, vor allem nach 'kekse rezept' (+90 %), und das Archiv zeigt keine vergleichbare Veröffentlichung.",
+        "sources": [
+          "Google Trends supplied data"
+        ]
+      },
+      "brand_fit": {
+        "score": 78,
+        "fit": "medium",
+        "rules": [
+          "Alltagstauglich und nachkochbar",
+          "Saisonaler oder regionaler Bezug",
+          "Fleisch und klassische Gerichte werden bevorzugt",
+          "Hoher Kochanspruch passend zur Marke",
+          "Kurze Zutatenlisten und klare Zubereitung",
+          "Veggie-Angebot optional"
+        ],
+        "reasoning": "Biscuit (Food) kann zum Claim 'Der Alltagsbegleiter mit gehobenem Anspruch' passen. Bewertung: alltagstauglich, klar formuliert und ohne unnötig lange Zutatenliste.",
+        "positive_signals": [],
+        "negative_signals": []
+      },
+      "archive": {
+        "status": "available",
+        "available": true,
+        "match_status": "no_match_found",
+        "similar_recipes": [],
+        "whole_match_count": 0,
+        "word_match_count": 0,
+        "most_recent_comparable_publication": null,
+        "recurring_ingredients": [],
+        "recurring_methods": [],
+        "repetition_risk": "low",
+        "novelty_score": 100.0,
+        "content_gap": "No close archived match was found.",
+        "assumption": "Matched against the supplied archive export."
+      },
+      "recipe_ideas": [
+        "Klassische Butterkekse: einfacher Teig aus Butter, Mehl und Zucker, ausgerollt und gebacken – alltagstauglich mit kurzer Zutatenliste.",
+        "Kekse zum Aufbewahren: haltbarer Keksdose-Klassiker aus dem Supermarkt-Regal, in ca. 20 Min. vorbereitet und portionierbar für 2-Personen-Haushalte."
+      ],
+      "rank_components": {
+        "google_trends": {
+          "score": 30,
+          "weight": 0.5,
+          "contribution": 15.0
+        },
+        "brand_fit": {
+          "score": 78,
+          "weight": 0.3,
+          "contribution": 23.4
+        },
+        "archive_novelty": {
+          "score": 100.0,
+          "risk": "low",
+          "weight": 0.2,
+          "contribution": 20.0
+        },
+        "wikimedia": {
+          "score": 59,
+          "status": "available",
+          "used_in_numeric_rank": false
+        }
+      },
+      "rank_method": "50% Google Trends + 30% brand fit + 20% archive novelty (continuous score from title/ingredient overlap, match volume, and recency; unknown archive=50). Wikimedia is corroborating evidence and is not added to this numeric rank.",
+      "rank_score": 58.4,
+      "rank": 2,
+      "risks": [],
+      "text_original": {
+        "title": "Biscuit (Food): ein modernes das schmeckt! Rezept",
+        "recipe_ideas": [
+          "Einfache Biscuit (Food)-Variante in einem 30-Minuten-Format",
+          "Saisonale Biscuit (Food)-Version zum Vorbereiten",
+          "Klassische Biscuit (Food)-Version mit klarer Wochenendoption"
+        ],
+        "why_relevant": "Biscuit (Food) shows rising search interest in the supplied Google Trends signal."
+      },
+      "text_source": "llm"
+    },
+    {
+      "id": "proposal-brussels-sprout",
+      "title": "Rosenkohl in Senfrahm aus dem Ofen",
+      "topic": "Brussels sprout",
+      "trend": {
+        "score": 28,
+        "points": [
+          {
+            "date": "2026-11-18",
+            "value": 28,
+            "source": "Google Trends Rising Topics",
+            "period_start": "2026-10-18",
+            "period_end": "2026-11-18",
+            "increase_percent": "70 %"
+          }
+        ],
+        "sparkline": [
+          28
+        ],
+        "wikimedia": {
+          "status": "no_article_found",
+          "article": "Brussels sprout",
+          "score": null,
+          "points": [],
+          "error": "No German Wikipedia article/pageview series found.",
+          "period_start": "2026-10-20",
+          "period_end": "2026-11-18",
+          "method": "Available series: compare average daily pageviews of the first half with the second half, normalized to a 0-100 score."
+        },
+        "why_relevant": "Das Suchinteresse für Rosenkohl-Rezepte ist im Zeitraum 2026-10-18 bis 2026-11-18 um 70 % gestiegen, und im Archiv fehlt ein vergleichbares Rezept.",
+        "sources": [
+          "Google Trends supplied data"
+        ]
+      },
+      "brand_fit": {
+        "score": 78,
+        "fit": "medium",
+        "rules": [
+          "Alltagstauglich und nachkochbar",
+          "Saisonaler oder regionaler Bezug",
+          "Fleisch und klassische Gerichte werden bevorzugt",
+          "Hoher Kochanspruch passend zur Marke",
+          "Kurze Zutatenlisten und klare Zubereitung",
+          "Veggie-Angebot optional"
+        ],
+        "reasoning": "Brussels sprout kann zum Claim 'Der Alltagsbegleiter mit gehobenem Anspruch' passen. Bewertung: alltagstauglich, klar formuliert und ohne unnötig lange Zutatenliste.",
+        "positive_signals": [],
+        "negative_signals": []
+      },
+      "archive": {
+        "status": "available",
+        "available": true,
+        "match_status": "no_match_found",
+        "similar_recipes": [],
+        "whole_match_count": 0,
+        "word_match_count": 0,
+        "most_recent_comparable_publication": null,
+        "recurring_ingredients": [],
+        "recurring_methods": [],
+        "repetition_risk": "low",
+        "novelty_score": 100.0,
+        "content_gap": "No close archived match was found.",
+        "assumption": "Matched against the supplied archive export."
+      },
+      "recipe_ideas": [
+        "Überbackener Rosenkohl in Senfrahm: Rosenkohl mit einer Sahne-Senf-Soße im Backofen gegart, als einfaches Ofengericht für zwei Personen.",
+        "Bratrosenkohl mit Kartoffeln: Rosenkohl in der Pfanne mit Kartoffeln gebraten als unkompliziertes Gericht für jeden Tag."
+      ],
+      "rank_components": {
+        "google_trends": {
+          "score": 28,
+          "weight": 0.5,
+          "contribution": 14.0
+        },
+        "brand_fit": {
+          "score": 78,
+          "weight": 0.3,
+          "contribution": 23.4
+        },
+        "archive_novelty": {
+          "score": 100.0,
+          "risk": "low",
+          "weight": 0.2,
+          "contribution": 20.0
+        },
+        "wikimedia": {
+          "score": null,
+          "status": "no_article_found",
+          "used_in_numeric_rank": false
+        }
+      },
+      "rank_method": "50% Google Trends + 30% brand fit + 20% archive novelty (continuous score from title/ingredient overlap, match volume, and recency; unknown archive=50). Wikimedia is corroborating evidence and is not added to this numeric rank.",
+      "rank_score": 57.4,
+      "rank": 3,
+      "risks": [
+        "Google-Suchinteresse nur 28/100 (relativer Index, kleine Basis).",
+        "Kein Wikipedia-Seitenaufruf-Beleg (kein Artikel gefunden)."
+      ],
+      "text_original": {
+        "title": "Brussels sprout: ein modernes das schmeckt! Rezept",
+        "recipe_ideas": [
+          "Einfache Brussels sprout-Variante in einem 30-Minuten-Format",
+          "Saisonale Brussels sprout-Version zum Vorbereiten",
+          "Klassische Brussels sprout-Version mit klarer Wochenendoption"
+        ],
+        "why_relevant": "Brussels sprout shows rising search interest in the supplied Google Trends signal."
+      },
+      "text_source": "llm"
+    },
+    {
+      "id": "proposal-curly-kale-vegetable",
+      "title": "Grünkohl klassisch für jeden Tag",
+      "topic": "Curly kale (Vegetable)",
+      "trend": {
+        "score": 23,
+        "points": [
+          {
+            "date": "2026-11-18",
+            "value": 23,
+            "source": "Google Trends Rising Topics",
+            "period_start": "2026-10-18",
+            "period_end": "2026-11-18",
+            "increase_percent": "190 %"
+          }
+        ],
+        "sparkline": [
+          23
+        ],
+        "wikimedia": {
+          "status": "no_article_found",
+          "article": "Curly kale",
+          "score": null,
+          "points": [],
+          "error": "No German Wikipedia article/pageview series found.",
+          "period_start": "2026-10-20",
+          "period_end": "2026-11-18",
+          "method": "Available series: compare average daily pageviews of the first half with the second half, normalized to a 0-100 score."
+        },
+        "why_relevant": "Die Suchnachfrage nach 'grünkohl rezept klassisch' ist laut Google-Trenddaten im Zeitraum 2026-10-18 bis 2026-11-18 um 650 % gestiegen, das Archiv weist keine vergleichbaren Rezepte auf.",
+        "sources": [
+          "Google Trends supplied data"
+        ]
+      },
+      "brand_fit": {
+        "score": 78,
+        "fit": "medium",
+        "rules": [
+          "Alltagstauglich und nachkochbar",
+          "Saisonaler oder regionaler Bezug",
+          "Fleisch und klassische Gerichte werden bevorzugt",
+          "Hoher Kochanspruch passend zur Marke",
+          "Kurze Zutatenlisten und klare Zubereitung",
+          "Veggie-Angebot optional"
+        ],
+        "reasoning": "Curly kale (Vegetable) kann zum Claim 'Der Alltagsbegleiter mit gehobenem Anspruch' passen. Bewertung: alltagstauglich, klar formuliert und ohne unnötig lange Zutatenliste.",
+        "positive_signals": [],
+        "negative_signals": []
+      },
+      "archive": {
+        "status": "available",
+        "available": true,
+        "match_status": "no_match_found",
+        "similar_recipes": [],
+        "whole_match_count": 0,
+        "word_match_count": 0,
+        "most_recent_comparable_publication": null,
+        "recurring_ingredients": [],
+        "recurring_methods": [],
+        "repetition_risk": "low",
+        "novelty_score": 100.0,
+        "content_gap": "No close archived match was found.",
+        "assumption": "Matched against the supplied archive export."
+      },
+      "recipe_ideas": [
+        "Klassischer Grünkohleintopf mit Grünkohl als Hauptzutat, langsam geschmort als wärmendes Gericht für zwei Personen",
+        "Grünkohl-Pfanne: Grünkohl kurz in der Pfanne zubereitet als schnelle Alltagsvariante, klar anders als der geschmorte Eintopf"
+      ],
+      "rank_components": {
+        "google_trends": {
+          "score": 23,
+          "weight": 0.5,
+          "contribution": 11.5
+        },
+        "brand_fit": {
+          "score": 78,
+          "weight": 0.3,
+          "contribution": 23.4
+        },
+        "archive_novelty": {
+          "score": 100.0,
+          "risk": "low",
+          "weight": 0.2,
+          "contribution": 20.0
+        },
+        "wikimedia": {
+          "score": null,
+          "status": "no_article_found",
+          "used_in_numeric_rank": false
+        }
+      },
+      "rank_method": "50% Google Trends + 30% brand fit + 20% archive novelty (continuous score from title/ingredient overlap, match volume, and recency; unknown archive=50). Wikimedia is corroborating evidence and is not added to this numeric rank.",
+      "rank_score": 54.9,
+      "rank": 4,
+      "risks": [
+        "Google-Suchinteresse nur 23/100 (relativer Index, kleine Basis).",
+        "Kein Wikipedia-Seitenaufruf-Beleg (kein Artikel gefunden)."
+      ],
+      "text_original": {
+        "title": "Curly kale (Vegetable): ein modernes das schmeckt! Rezept",
+        "recipe_ideas": [
+          "Einfache Curly kale (Vegetable)-Variante in einem 30-Minuten-Format",
+          "Saisonale Curly kale (Vegetable)-Version zum Vorbereiten",
+          "Klassische Curly kale (Vegetable)-Version mit klarer Wochenendoption"
+        ],
+        "why_relevant": "Curly kale (Vegetable) shows rising search interest in the supplied Google Trends signal."
+      },
+      "text_source": "llm"
+    },
+    {
+      "id": "proposal-savoy-cabbage-cabbage",
+      "title": "Wirsing klassisch: zwei Ideen für jeden Tag",
+      "topic": "Savoy cabbage (Cabbage)",
+      "trend": {
+        "score": 16,
+        "points": [
+          {
+            "date": "2026-11-18",
+            "value": 16,
+            "source": "Google Trends Rising Topics",
+            "period_start": "2026-10-18",
+            "period_end": "2026-11-18",
+            "increase_percent": "30 %"
+          }
+        ],
+        "sparkline": [
+          16
+        ],
+        "wikimedia": {
+          "status": "no_article_found",
+          "article": "Savoy cabbage (Cabbage)",
+          "score": null,
+          "points": [],
+          "error": "No German Wikipedia article/pageview series found.",
+          "period_start": "2026-10-20",
+          "period_end": "2026-11-18",
+          "method": "Available series: compare average daily pageviews of the first half with the second half, normalized to a 0-100 score."
+        },
+        "why_relevant": "Die Suchanfragen zu 'wirsing rezepte' und 'wirsing rezept' sind laut Google-Trenddaten im Zeitraum 18.10. bis 18.11.2026 um 30 % bzw. 40 % gestiegen, und das Archiv enthält bisher kein vergleichbares Wirsing-Rezept.",
+        "sources": [
+          "Google Trends supplied data"
+        ]
+      },
+      "brand_fit": {
+        "score": 78,
+        "fit": "medium",
+        "rules": [
+          "Alltagstauglich und nachkochbar",
+          "Saisonaler oder regionaler Bezug",
+          "Fleisch und klassische Gerichte werden bevorzugt",
+          "Hoher Kochanspruch passend zur Marke",
+          "Kurze Zutatenlisten und klare Zubereitung",
+          "Veggie-Angebot optional"
+        ],
+        "reasoning": "Savoy cabbage (Cabbage) kann zum Claim 'Der Alltagsbegleiter mit gehobenem Anspruch' passen. Bewertung: alltagstauglich, klar formuliert und ohne unnötig lange Zutatenliste.",
+        "positive_signals": [],
+        "negative_signals": []
+      },
+      "archive": {
+        "status": "available",
+        "available": true,
+        "match_status": "no_match_found",
+        "similar_recipes": [],
+        "whole_match_count": 0,
+        "word_match_count": 0,
+        "most_recent_comparable_publication": null,
+        "recurring_ingredients": [],
+        "recurring_methods": [],
+        "repetition_risk": "low",
+        "novelty_score": 100.0,
+        "content_gap": "No close archived match was found.",
+        "assumption": "Matched against the supplied archive export."
+      },
+      "recipe_ideas": [
+        "Geschmorter Wirsing als einfaches Alltagsgericht mit wenigen Zutaten aus dem Supermarkt, in kurzen Schritten zubereitet",
+        "Wirsingröllchen: Wirsingblätter gefüllt und geschmort, eine Alternative zum klassischen Kohlgericht"
+      ],
+      "rank_components": {
+        "google_trends": {
+          "score": 16,
+          "weight": 0.5,
+          "contribution": 8.0
+        },
+        "brand_fit": {
+          "score": 78,
+          "weight": 0.3,
+          "contribution": 23.4
+        },
+        "archive_novelty": {
+          "score": 100.0,
+          "risk": "low",
+          "weight": 0.2,
+          "contribution": 20.0
+        },
+        "wikimedia": {
+          "score": null,
+          "status": "no_article_found",
+          "used_in_numeric_rank": false
+        }
+      },
+      "rank_method": "50% Google Trends + 30% brand fit + 20% archive novelty (continuous score from title/ingredient overlap, match volume, and recency; unknown archive=50). Wikimedia is corroborating evidence and is not added to this numeric rank.",
+      "rank_score": 51.4,
+      "rank": 5,
+      "risks": [
+        "Google-Suchinteresse nur 16/100 (relativer Index, kleine Basis).",
+        "Kein Wikipedia-Seitenaufruf-Beleg (kein Artikel gefunden)."
+      ],
+      "text_original": {
+        "title": "Savoy cabbage (Cabbage): ein modernes das schmeckt! Rezept",
+        "recipe_ideas": [
+          "Einfache Savoy cabbage (Cabbage)-Variante in einem 30-Minuten-Format",
+          "Saisonale Savoy cabbage (Cabbage)-Version zum Vorbereiten",
+          "Klassische Savoy cabbage (Cabbage)-Version mit klarer Wochenendoption"
+        ],
+        "why_relevant": "Savoy cabbage (Cabbage) shows rising search interest in the supplied Google Trends signal."
+      },
+      "text_source": "llm"
+    }
+  ],
+  "rejected_topics": [
+    {
+      "id": "proposal-gingerbread-food",
+      "topic": "Gingerbread (Food)",
+      "reason": "Not included in the top five after combined trend and brand ranking.",
+      "rank_score": 51.2
+    },
+    {
+      "id": "proposal-almond-food",
+      "topic": "Almond (Food)",
+      "reason": "Not included in the top five after combined trend and brand ranking.",
+      "rank_score": 50.4
+    },
+    {
+      "id": "proposal-chocolate-cake-cake",
+      "topic": "Chocolate cake (Cake)",
+      "reason": "Not included in the top five after combined trend and brand ranking.",
+      "rank_score": 46.6
+    },
+    {
+      "id": "proposal-rinderroulade-dish",
+      "topic": "Rinderroulade (Dish)",
+      "reason": "Not included in the top five after combined trend and brand ranking.",
+      "rank_score": 44.8
+    },
+    {
+      "id": "proposal-red-cabbage-cabbage",
+      "topic": "Red cabbage (Cabbage)",
+      "reason": "High repetition risk against comparable archive recipes.",
+      "rank_score": 40.9
+    },
+    {
+      "id": "proposal-vanillekipferl",
+      "topic": "Vanillekipferl",
+      "reason": "High repetition risk against comparable archive recipes.",
+      "rank_score": 40.3
+    },
+    {
+      "id": "proposal-stollen-food",
+      "topic": "Stollen (Food)",
+      "reason": "Not included in the top five after combined trend and brand ranking.",
+      "rank_score": 38.3
+    }
+  ],
+  "_schema": "valid"
+}

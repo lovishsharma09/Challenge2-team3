@@ -1,0 +1,511 @@
+[
+  {
+    "title": "Klassischer Grünkohleintopf mit Kassler",
+    "intro": "Grünkohl ist in der kalten Jahreszeit fester Bestandteil der norddeutschen Küche – hier in einer klaren, klassischen Variante mit Kassler. Der Eintopf schmort langsam und schmeckt am nächsten Tag noch besser.",
+    "servings": {
+      "amount": 4.0,
+      "unit": "Portionen"
+    },
+    "times": {
+      "prep_min": 25.0,
+      "cook_min": 90.0,
+      "rest_min": null
+    },
+    "ingredients": [
+      {
+        "id": "i1",
+        "group": null,
+        "name": "Grünkohl",
+        "quantity": 750.0,
+        "unit": "g",
+        "note": "frisch, ohne Strünke"
+      },
+      {
+        "id": "i2",
+        "group": null,
+        "name": "Kassler Kamm",
+        "quantity": 500.0,
+        "unit": "g",
+        "note": null
+      },
+      {
+        "id": "i3",
+        "group": null,
+        "name": "Kartoffeln",
+        "quantity": 600.0,
+        "unit": "g",
+        "note": "mehligkochend"
+      },
+      {
+        "id": "i4",
+        "group": null,
+        "name": "Zwiebeln",
+        "quantity": 2.0,
+        "unit": null,
+        "note": null
+      },
+      {
+        "id": "i5",
+        "group": null,
+        "name": "Butterschmalz",
+        "quantity": 2.0,
+        "unit": "EL",
+        "note": null
+      },
+      {
+        "id": "i6",
+        "group": null,
+        "name": "Gemüsebrühe",
+        "quantity": 1.0,
+        "unit": "l",
+        "note": null
+      },
+      {
+        "id": "i7",
+        "group": null,
+        "name": "Lorbeerblätter",
+        "quantity": 2.0,
+        "unit": "Blatt",
+        "note": null
+      },
+      {
+        "id": "i8",
+        "group": null,
+        "name": "Schwarzer Pfeffer",
+        "quantity": null,
+        "unit": null,
+        "note": "frisch gemahlen"
+      },
+      {
+        "id": "i9",
+        "group": null,
+        "name": "Salz",
+        "quantity": null,
+        "unit": null,
+        "note": null
+      },
+      {
+        "id": "i10",
+        "group": null,
+        "name": "Senf",
+        "quantity": 2.0,
+        "unit": "EL",
+        "note": "mittelscharf"
+      }
+    ],
+    "steps": [
+      {
+        "group": null,
+        "text": "Den Grünkohl waschen, die harten Strünke entfernen und die Blätter klein schneiden.",
+        "uses": [
+          "i1"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      },
+      {
+        "group": null,
+        "text": "Die Zwiebeln schälen und fein würfeln. Die Kartoffeln schälen und in ca. 2 cm große Würfel schneiden.",
+        "uses": [
+          "i4",
+          "i3"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      },
+      {
+        "group": null,
+        "text": "Das Butterschmalz in einem großen Topf erhitzen. Die Zwiebelwürfel darin glasig dünsten.",
+        "uses": [
+          "i5",
+          "i4"
+        ],
+        "temperature_c": null,
+        "duration_min": 5.0
+      },
+      {
+        "group": null,
+        "text": "Den Kassler Kamm zugeben und rundherum kurz anbraten.",
+        "uses": [
+          "i2"
+        ],
+        "temperature_c": null,
+        "duration_min": 5.0
+      },
+      {
+        "group": null,
+        "text": "Den Grünkohl portionsweise in den Topf geben, dabei zwischendurch umrühren, bis alles zusammenfällt.",
+        "uses": [
+          "i1"
+        ],
+        "temperature_c": null,
+        "duration_min": 5.0
+      },
+      {
+        "group": null,
+        "text": "Die Gemüsebrühe angießen, die Lorbeerblätter zufügen und alles aufkochen. Den Eintopf zugedeckt bei kleiner Hitze ca. 60 Min. schmoren lassen.",
+        "uses": [
+          "i6",
+          "i7"
+        ],
+        "temperature_c": null,
+        "duration_min": 60.0
+      },
+      {
+        "group": null,
+        "text": "Die Kartoffelwürfel in den Eintopf geben und weitere ca. 25 Min. mitkochen, bis sie weich sind.",
+        "uses": [
+          "i3"
+        ],
+        "temperature_c": null,
+        "duration_min": 25.0
+      },
+      {
+        "group": null,
+        "text": "Das Kassler aus dem Topf nehmen, in mundgerechte Stücke schneiden und wieder in den Eintopf geben. Die Lorbeerblätter entfernen.",
+        "uses": [
+          "i2",
+          "i7"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      },
+      {
+        "group": null,
+        "text": "Den Eintopf mit Salz und Pfeffer abschmecken, den Senf einrühren und den Eintopf heiß servieren.",
+        "uses": [
+          "i9",
+          "i8",
+          "i10"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      }
+    ],
+    "serving_tip": "Der Eintopf lässt sich gut einen Tag im Voraus kochen – beim erneuten Aufwärmen entwickelt er noch mehr Aroma.",
+    "image_components": [
+      "i1",
+      "i2",
+      "i3",
+      "i4"
+    ],
+    "image_prompt": "A hearty kale stew served in a deep rustic bowl on a wooden surface with a linen cloth. Dark green braised curly kale with tender diced potatoes, sliced pink smoked pork and softened onion pieces, loosely plated with a ladle beside the bowl.",
+    "image_alt": "Eine tiefe Schale mit klassischem Grünkohleintopf, Kasslerscheiben und Kartoffelwürfeln auf Holzuntergrund.",
+    "differentiation": "Geschmorter Eintopf mit Fleisch als klassisches Schmorgericht, während das zweite Rezept eine schnelle Pfannenvariante mit Spiegelei als leichtes Alltagsgericht ist.",
+    "id": "r1",
+    "proposal_id": "proposal-curly-kale-vegetable",
+    "variant": "A",
+    "version": 1,
+    "ai_generated": true,
+    "review_status": "pass",
+    "image": {
+      "model": "flux-2-pro",
+      "prompt": "A hearty kale stew served in a deep rustic bowl on a wooden surface with a linen cloth. Dark green braised curly kale with tender diced potatoes, sliced pink smoked pork and softened onion pieces, loosely plated with a ladle beside the bowl. Medium close-up, camera about 35-45 cm from the dish, 45-degree angle, the dish fills about 70% of the frame, the rim of the vessel partly cropped, shallow depth of field, visible texture of the food, warm natural daylight, calm but atmospheric background (not sterile), appetizing, avoid a dominant green colour cast, no text, no logos, no people or hands, no extra food items. Do not go extreme macro: the whole composition must still read as the dish.",
+      "path": "c/img/r1.jpg",
+      "status": "generated",
+      "generated_at": "2026-11-20T15:42:41+00:00",
+      "note": null,
+      "request_id": "1647cf76-7cc8-431e-90b7-bd6eacd4da8b",
+      "cost": 3.0,
+      "prompt_source": "A hearty kale stew served in a deep rustic bowl on a wooden surface with a linen cloth. Dark green braised curly kale with tender diced potatoes, sliced pink smoked pork and softened onion pieces, loosely plated with a ladle beside the bowl.",
+      "verification": {
+        "status": "geprüft",
+        "model": "(configured model)",
+        "min_score": 7,
+        "score": 9,
+        "foods_not_in_recipe": [],
+        "missing_components": [],
+        "components": [
+          "Grünkohl",
+          "Kassler Kamm",
+          "Kartoffeln",
+          "Zwiebeln"
+        ],
+        "retried": false,
+        "kept_attempt": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "prompt": "A hearty kale stew served in a deep rustic bowl on a wooden surface with a linen cloth. Dark green braised curly kale with tender diced potatoes, sliced pink smoked pork and softened onion pieces, loosely plated with a ladle beside the bowl.",
+            "note": null,
+            "model": "(configured model)",
+            "score": 9,
+            "visible_foods": [
+              "Grünkohl",
+              "Kassler",
+              "Kartoffeln",
+              "Zwiebeln"
+            ],
+            "foods_not_in_recipe": [],
+            "missing_components": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "title": "Grünkohl-Pfanne mit Kartoffeln und Spiegelei",
+    "intro": "Diese Pfanne bringt Grünkohl in ca. 35 Minuten auf den Tisch: junge Blätter werden nur kurz geschmort und mit knusprigen Bratkartoffeln kombiniert. Ein Spiegelei obendrauf macht das Gericht zu einem kompletten Feierabendessen.",
+    "servings": {
+      "amount": 4.0,
+      "unit": "Portionen"
+    },
+    "times": {
+      "prep_min": 15.0,
+      "cook_min": 20.0,
+      "rest_min": null
+    },
+    "ingredients": [
+      {
+        "id": "i1",
+        "group": null,
+        "name": "Grünkohl",
+        "quantity": 400.0,
+        "unit": "g",
+        "note": "junge, zarte Blätter"
+      },
+      {
+        "id": "i2",
+        "group": null,
+        "name": "Kartoffeln",
+        "quantity": 600.0,
+        "unit": "g",
+        "note": "festkochend"
+      },
+      {
+        "id": "i3",
+        "group": null,
+        "name": "Zwiebeln",
+        "quantity": 2.0,
+        "unit": null,
+        "note": null
+      },
+      {
+        "id": "i4",
+        "group": null,
+        "name": "Knoblauchzehe",
+        "quantity": 1.0,
+        "unit": "Zehe",
+        "note": null
+      },
+      {
+        "id": "i5",
+        "group": null,
+        "name": "Butter",
+        "quantity": 4.0,
+        "unit": "EL",
+        "note": null
+      },
+      {
+        "id": "i6",
+        "group": null,
+        "name": "Gemüsebrühe",
+        "quantity": 100.0,
+        "unit": "ml",
+        "note": null
+      },
+      {
+        "id": "i7",
+        "group": null,
+        "name": "Eier",
+        "quantity": 4.0,
+        "unit": null,
+        "note": null
+      },
+      {
+        "id": "i8",
+        "group": null,
+        "name": "Schwarzer Pfeffer",
+        "quantity": null,
+        "unit": null,
+        "note": "frisch gemahlen"
+      },
+      {
+        "id": "i9",
+        "group": null,
+        "name": "Salz",
+        "quantity": null,
+        "unit": null,
+        "note": null
+      },
+      {
+        "id": "i10",
+        "group": null,
+        "name": "Muskat",
+        "quantity": 1.0,
+        "unit": "Msp.",
+        "note": "frisch gerieben"
+      }
+    ],
+    "steps": [
+      {
+        "group": null,
+        "text": "600 g Kartoffeln waschen und in ca. 1 cm dicke Scheiben schneiden.",
+        "uses": [
+          "i2"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      },
+      {
+        "group": null,
+        "text": "2 Zwiebeln schälen und in Ringe schneiden. 1 Knoblauchzehe schälen und fein hacken.",
+        "uses": [
+          "i3",
+          "i4"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      },
+      {
+        "group": null,
+        "text": "400 g Grünkohl waschen, trocken schütteln und die Blätter in Streifen schneiden.",
+        "uses": [
+          "i1"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      },
+      {
+        "group": null,
+        "text": "2 EL Butter in einer großen Pfanne erhitzen. Die Kartoffelscheiben darin bei mittlerer Hitze ca. 12 Min. goldbraun braten, dabei wenden. Mit Salz und Pfeffer würzen und aus der Pfanne nehmen.",
+        "uses": [
+          "i5",
+          "i2",
+          "i9",
+          "i8"
+        ],
+        "temperature_c": null,
+        "duration_min": 12.0
+      },
+      {
+        "group": null,
+        "text": "1 EL Butter in derselben Pfanne erhitzen. Die Zwiebelringe und den Knoblauch darin ca. 3 Min. anschwitzen.",
+        "uses": [
+          "i5",
+          "i3",
+          "i4"
+        ],
+        "temperature_c": null,
+        "duration_min": 3.0
+      },
+      {
+        "group": null,
+        "text": "Den Grünkohl zugeben und kurz mitbraten. 100 ml Gemüsebrühe angießen und den Grünkohl zugedeckt ca. 6 Min. bissfest garen. Mit Salz, Pfeffer und Muskat abschmecken.",
+        "uses": [
+          "i1",
+          "i6",
+          "i9",
+          "i8",
+          "i10"
+        ],
+        "temperature_c": null,
+        "duration_min": 6.0
+      },
+      {
+        "group": null,
+        "text": "Die Kartoffelscheiben zurück in die Pfanne geben und ca. 2 Min. vorsichtig untermischen.",
+        "uses": [
+          "i2"
+        ],
+        "temperature_c": null,
+        "duration_min": 2.0
+      },
+      {
+        "group": null,
+        "text": "In einer zweiten Pfanne 1 EL Butter erhitzen und die Eier darin zu Spiegeleiern braten, bis das Eiweiß gestockt ist.",
+        "uses": [
+          "i5",
+          "i7"
+        ],
+        "temperature_c": null,
+        "duration_min": 4.0
+      },
+      {
+        "group": null,
+        "text": "Die Grünkohl-Pfanne auf Teller verteilen und mit den Spiegeleiern servieren.",
+        "uses": [
+          "i7"
+        ],
+        "temperature_c": null,
+        "duration_min": null
+      }
+    ],
+    "serving_tip": "Unser Tipp: Wer mag, brät das Spiegelei direkt in vier Vertiefungen der großen Pfanne – so bleibt nur eine Pfanne zu spülen.",
+    "image_components": [
+      "i1",
+      "i2",
+      "i3",
+      "i7"
+    ],
+    "image_prompt": "A large frying pan on a wooden surface with a linen cloth. Golden fried potato slices mixed with dark green quickly braised curly kale strips, softened onion rings on top, and a fried egg with a set white and intact yolk placed in the center of the pan.",
+    "image_alt": "Eine Pfanne mit gebratenen Kartoffelscheiben, kurz geschmortem Grünkohl, Zwiebelringen und einem Spiegelei.",
+    "id": "r2",
+    "proposal_id": "proposal-curly-kale-vegetable",
+    "variant": "B",
+    "version": 2,
+    "ai_generated": true,
+    "differentiation": "Schnelle Pfannenvariante mit Spiegelei in ca. 35 Minuten, während der Eintopf ein langsam geschmortes klassisches Gericht mit Kassler ist.",
+    "history": [
+      {
+        "version": 2,
+        "reason": "1. [units_consistent] [LLM] Für die Spiegeleier (Schritt 7) wird zusätzlich 'wenig Butter' verwendet, die in der Zutatenmenge (3 EL) nicht enthalten ist – die Butter ist mit 2 EL (Schritt 3) und 1 EL (Schritt 4) bereits vollständig verplant. → Korrektur: Entweder die Butter-Menge auf 4 EL erhöhen und Schritt 7 präzisieren ('1 EL Butter erhitzen') oder in Schritt 7 auf Öl bzw. die Restpfanne verweisen.\n2. [brand_fit] [LLM] Die Einleitung verspricht 'in unter 30 Minuten', die Zeitangaben ergeben aber 15 Min. Vorbereitung + 20 Min. Garzeit = 35 Min. | [LLM] Der Serviertipp ist nicht mit der vorgeschriebenen Überschrift 'Unser Tipp' betitelt. | [LLM] Tippfehler im Serviertipp: 'bracht' statt 'brät'. | [LLM] Schritt 1 und 2 bündeln mehrere Zutaten; nach Stilvorgabe sollten Schritte kleinschrittiger formuliert sein (Zutat mit Menge bei erster Verwendung nennen). → Korrektur: Einleitung auf 'in ca. 35 Minuten' korrigieren oder Zeiten anpassen; Tipp als 'Unser Tipp' auszeichnen und Tippfehler beheben.",
+        "changes": [
+          {
+            "criterion": "units_consistent",
+            "change": "Butter auf 4 EL erhöht und in Schritt 8 '1 EL Butter erhitzen' ergänzt, sodass alle Butter-Mengen (2+1+1 EL) vollständig verplant sind."
+          },
+          {
+            "criterion": "brand_fit",
+            "change": "Einleitung auf 'in ca. 35 Minuten' korrigiert, den Serviertipp als 'Unser Tipp' ausgezeichnet, den Tippfehler 'bracht' zu 'brät' behoben und die Schritte 1–2 kleinschrittiger mit Mengenangaben formuliert."
+          }
+        ]
+      }
+    ],
+    "review_status": "pass",
+    "image": {
+      "model": "flux-2-pro",
+      "prompt": "A large frying pan on a wooden surface with a linen cloth. Golden fried potato slices mixed with dark green quickly braised curly kale strips, softened onion rings on top, and a fried egg with a set white and intact yolk placed in the center of the pan. Medium close-up, camera about 35-45 cm from the dish, 45-degree angle, the dish fills about 70% of the frame, the rim of the vessel partly cropped, shallow depth of field, visible texture of the food, warm natural daylight, calm but atmospheric background (not sterile), appetizing, avoid a dominant green colour cast, no text, no logos, no people or hands, no extra food items. Do not go extreme macro: the whole composition must still read as the dish.",
+      "path": "c/img/r2.jpg",
+      "status": "generated",
+      "generated_at": "2026-11-20T15:43:07+00:00",
+      "note": null,
+      "request_id": "3cd7228e-d520-44f4-837a-11f907f3add0",
+      "cost": 3.0,
+      "prompt_source": "A large frying pan on a wooden surface with a linen cloth. Golden fried potato slices mixed with dark green quickly braised curly kale strips, softened onion rings on top, and a fried egg with a set white and intact yolk placed in the center of the pan.",
+      "verification": {
+        "status": "geprüft",
+        "model": "(configured model)",
+        "min_score": 7,
+        "score": 10,
+        "foods_not_in_recipe": [],
+        "missing_components": [],
+        "components": [
+          "Grünkohl",
+          "Kartoffeln",
+          "Zwiebeln",
+          "Eier"
+        ],
+        "retried": false,
+        "kept_attempt": 1,
+        "attempts": [
+          {
+            "attempt": 1,
+            "prompt": "A large frying pan on a wooden surface with a linen cloth. Golden fried potato slices mixed with dark green quickly braised curly kale strips, softened onion rings on top, and a fried egg with a set white and intact yolk placed in the center of the pan.",
+            "note": null,
+            "model": "(configured model)",
+            "score": 10,
+            "visible_foods": [
+              "Grünkohl",
+              "Kartoffeln",
+              "Zwiebeln",
+              "Spiegelei"
+            ],
+            "foods_not_in_recipe": [],
+            "missing_components": []
+          }
+        ]
+      }
+    }
+  }
+]

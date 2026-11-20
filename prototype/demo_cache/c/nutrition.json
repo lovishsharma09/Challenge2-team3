@@ -1,0 +1,317 @@
+[
+  {
+    "recipe_id": "r1",
+    "reference": "per_serving",
+    "servings": 4.0,
+    "ingredients": [
+      {
+        "original": "750 g Grünkohl, frisch, ohne Strünke",
+        "ingredient_id": "i1",
+        "db_id": "13400",
+        "db_name": "Federkohl, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 750.0,
+        "basis_unit": "g",
+        "grams": 750.0,
+        "conversion": "direkte Grammangabe",
+        "assumption": false,
+        "match": "exact",
+        "match_reason": "exakter Treffer (Synonym)",
+        "confidence": 0.95,
+        "kcal": 330.0
+      },
+      {
+        "original": "500 g Kassler Kamm",
+        "ingredient_id": "i2",
+        "db_id": "1118",
+        "db_name": "Kochpökelware (Durchschnitt)",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 500.0,
+        "basis_unit": "g",
+        "grams": 500.0,
+        "conversion": "direkte Grammangabe",
+        "assumption": false,
+        "match": "closest_category",
+        "match_reason": "nächstliegender Eintrag (Annahme; feste Zuordnung): Kassler Kamm ist gepökeltes, geräuchertes Schweinefleisch aus dem Nacken; die Datenbank V 7.1 führt keinen Kassler-Eintrag. Kochpökelware (Durchschnitt) mit 223 kcal, 15,6 g Fett, 19,8 g Protein pro 100 g liegt am nächsten (Rippli (Nierstück) 156 kcal / 7,5 g Fett ist zu mager für den fetteren Kamm, Rohschinken/Rohpökelwaren sind nicht gegart).",
+        "confidence": 0.5,
+        "kcal": 1115.0
+      },
+      {
+        "original": "600 g Kartoffeln, mehligkochend",
+        "ingredient_id": "i3",
+        "db_id": "813",
+        "db_name": "Kartoffel, geschält, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 600.0,
+        "basis_unit": "g",
+        "grams": 600.0,
+        "conversion": "direkte Grammangabe",
+        "assumption": false,
+        "match": "exact",
+        "match_reason": "exakter Treffer (Synonym)",
+        "confidence": 0.95,
+        "kcal": 456.0
+      },
+      {
+        "original": "2 Zwiebeln",
+        "ingredient_id": "i4",
+        "db_id": "368",
+        "db_name": "Zwiebel, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 160.0,
+        "basis_unit": "g",
+        "grams": 160.0,
+        "conversion": "2 Stück × 80 g (Durchschnittsgewicht, Annahme)",
+        "assumption": true,
+        "match": "llm",
+        "match_reason": "LLM-Auswahl unter DB-Kandidaten: Zwiebeln roh entspricht direkt dem Eintrag 'Zwiebel, roh'.",
+        "confidence": 0.53,
+        "kcal": 62.4
+      },
+      {
+        "original": "2 EL Butterschmalz",
+        "ingredient_id": "i5",
+        "db_id": "49",
+        "db_name": "Vorzugsbutter",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 30.0,
+        "basis_unit": "g",
+        "grams": 30.0,
+        "conversion": "2 EL Butterschmalz ≈ 30 g (Küchenumrechnung, Annahme)",
+        "assumption": true,
+        "match": "llm",
+        "match_reason": "LLM-Auswahl unter DB-Kandidaten: Butterschmalz ist geklärte Butter; Vorzugsbutter ist der nächstliegende Fett-Eintrag, wenn auch nicht identisch.",
+        "confidence": 0.48,
+        "kcal": 223.8
+      },
+      {
+        "original": "1 l Gemüsebrühe",
+        "ingredient_id": "i6",
+        "db_id": "664",
+        "db_name": "Bouillon, Gemüse, zubereitet",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 1010.0,
+        "basis_unit": "g",
+        "grams": 1010.0,
+        "conversion": "1 l = 1000 ml; ml→g mit Dichte 1.01 (Datenbank)",
+        "assumption": false,
+        "match": "llm",
+        "match_reason": "LLM-Auswahl unter DB-Kandidaten: Gemüsebrühe entspricht zubereiteter Gemüsebouillon; alle anderen Kandidaten sind Gemüse oder Fleischbrühen.",
+        "confidence": 0.86,
+        "kcal": 60.6
+      },
+      {
+        "original": "2 EL Senf, mittelscharf",
+        "ingredient_id": "i10",
+        "db_id": "13464",
+        "db_name": "Senf",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 30.0,
+        "basis_unit": "g",
+        "grams": 30.0,
+        "conversion": "2 EL Senf ≈ 30 g (Küchenumrechnung, Annahme)",
+        "assumption": true,
+        "match": "exact",
+        "match_reason": "exakter Treffer",
+        "confidence": 0.75,
+        "kcal": 37.2
+      }
+    ],
+    "unmatched": [],
+    "negligible": [
+      {
+        "original": "2 Blatt Lorbeerblätter",
+        "ingredient_id": "i7",
+        "estimated_grams": 0.6,
+        "reason": "Gewürzmenge ≤ 2 g, kein Datenbanktreffer – vernachlässigt"
+      }
+    ],
+    "per_serving": {
+      "kcal": 571,
+      "kj": 2380,
+      "fat_g": 29,
+      "sat_fat_g": 12,
+      "carbs_g": 33,
+      "sugar_g": 9.0,
+      "fiber_g": null,
+      "protein_g": 38,
+      "salt_g": 6.6
+    },
+    "incomplete": false,
+    "coverage": {
+      "ingredients_calculated": 7,
+      "ingredients_needing_calc": 7,
+      "share": 1.0,
+      "mean_confidence": 0.82,
+      "quality": "mittel"
+    },
+    "notes": [
+      "2 Blatt Lorbeerblätter: ca. 0.6 g Gewürz, nicht eingerechnet (vernachlässigbar, dokumentierte Annahme)",
+      "Schwarzer Pfeffer, frisch gemahlen: Salz/Pfeffer ohne Menge (nach Geschmack) nicht eingerechnet",
+      "Salz: Salz/Pfeffer ohne Menge (nach Geschmack) nicht eingerechnet",
+      "500 g Kassler Kamm: nächstliegender Eintrag (Annahme) – 'Kochpökelware (Durchschnitt)', Konfidenz 0.5"
+    ],
+    "db": {
+      "source": "Schweizer_Nahrwertdatenbank(Generische Lebensmittel).csv",
+      "version": "7.1",
+      "synthetic_fixture": false
+    }
+  },
+  {
+    "recipe_id": "r2",
+    "reference": "per_serving",
+    "servings": 4.0,
+    "ingredients": [
+      {
+        "original": "400 g Grünkohl, junge, zarte Blätter",
+        "ingredient_id": "i1",
+        "db_id": "13400",
+        "db_name": "Federkohl, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 400.0,
+        "basis_unit": "g",
+        "grams": 400.0,
+        "conversion": "direkte Grammangabe",
+        "assumption": false,
+        "match": "exact",
+        "match_reason": "exakter Treffer (Synonym)",
+        "confidence": 0.95,
+        "kcal": 176.0
+      },
+      {
+        "original": "600 g Kartoffeln, festkochend",
+        "ingredient_id": "i2",
+        "db_id": "813",
+        "db_name": "Kartoffel, geschält, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 600.0,
+        "basis_unit": "g",
+        "grams": 600.0,
+        "conversion": "direkte Grammangabe",
+        "assumption": false,
+        "match": "exact",
+        "match_reason": "exakter Treffer (Synonym)",
+        "confidence": 0.95,
+        "kcal": 456.0
+      },
+      {
+        "original": "2 Zwiebeln",
+        "ingredient_id": "i3",
+        "db_id": "368",
+        "db_name": "Zwiebel, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 160.0,
+        "basis_unit": "g",
+        "grams": 160.0,
+        "conversion": "2 Stück × 80 g (Durchschnittsgewicht, Annahme)",
+        "assumption": true,
+        "match": "llm",
+        "match_reason": "LLM-Auswahl unter DB-Kandidaten: Zwiebeln roh entspricht direkt dem Eintrag 'Zwiebel, roh'.",
+        "confidence": 0.53,
+        "kcal": 62.4
+      },
+      {
+        "original": "1 Zehe Knoblauchzehe",
+        "ingredient_id": "i4",
+        "db_id": "356",
+        "db_name": "Knoblauch, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 4.0,
+        "basis_unit": "g",
+        "grams": 4.0,
+        "conversion": "1 × Knoblauchzehe ≈ 4 g (Annahme)",
+        "assumption": true,
+        "match": "llm",
+        "match_reason": "LLM-Auswahl unter DB-Kandidaten: Knoblauchzehe entspricht eindeutig 'Knoblauch, roh'.",
+        "confidence": 0.42,
+        "kcal": 4.3
+      },
+      {
+        "original": "4 EL Butter",
+        "ingredient_id": "i5",
+        "db_id": "51",
+        "db_name": "Kochbutter",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 60.0,
+        "basis_unit": "g",
+        "grams": 60.0,
+        "conversion": "4 EL Butter ≈ 60 g (Küchenumrechnung, Annahme)",
+        "assumption": true,
+        "match": "exact",
+        "match_reason": "exakter Treffer via Alias 'kochbutter'",
+        "confidence": 0.73,
+        "kcal": 447.0
+      },
+      {
+        "original": "100 ml Gemüsebrühe",
+        "ingredient_id": "i6",
+        "db_id": "664",
+        "db_name": "Bouillon, Gemüse, zubereitet",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 101.0,
+        "basis_unit": "g",
+        "grams": 101.0,
+        "conversion": "100 ml = 100 ml; ml→g mit Dichte 1.01 (Datenbank)",
+        "assumption": false,
+        "match": "llm",
+        "match_reason": "LLM-Auswahl unter DB-Kandidaten: Gemüsebrühe entspricht zubereiteter Gemüsebouillon; alle anderen Kandidaten passen nicht.",
+        "confidence": 0.86,
+        "kcal": 6.1
+      },
+      {
+        "original": "4 Eier",
+        "ingredient_id": "i7",
+        "db_id": "290",
+        "db_name": "Hühnerei, ganz, roh",
+        "db_basis": "pro 100g essbarer Anteil",
+        "amount_in_basis": 220.0,
+        "basis_unit": "g",
+        "grams": 220.0,
+        "conversion": "4 Stück × 55 g (Durchschnittsgewicht, Annahme)",
+        "assumption": true,
+        "match": "llm",
+        "match_reason": "LLM-Auswahl unter DB-Kandidaten: Eier entspricht rohen ganzen Hühnereiern; Rohvariante bevorzugt.",
+        "confidence": 0.55,
+        "kcal": 308.0
+      }
+    ],
+    "unmatched": [],
+    "negligible": [
+      {
+        "original": "1 Msp. Muskat, frisch gerieben",
+        "ingredient_id": "i10",
+        "estimated_grams": 0.6,
+        "reason": "Gewürzmenge ≤ 2 g, kein Datenbanktreffer – vernachlässigt"
+      }
+    ],
+    "per_serving": {
+      "kcal": 365,
+      "kj": 1519,
+      "fat_g": 19,
+      "sat_fat_g": 9.0,
+      "carbs_g": 29,
+      "sugar_g": 5.8,
+      "fiber_g": null,
+      "protein_g": 15,
+      "salt_g": 0.7
+    },
+    "incomplete": false,
+    "coverage": {
+      "ingredients_calculated": 7,
+      "ingredients_needing_calc": 7,
+      "share": 1.0,
+      "mean_confidence": 0.83,
+      "quality": "hoch"
+    },
+    "notes": [
+      "Schwarzer Pfeffer, frisch gemahlen: Salz/Pfeffer ohne Menge (nach Geschmack) nicht eingerechnet",
+      "Salz: Salz/Pfeffer ohne Menge (nach Geschmack) nicht eingerechnet",
+      "1 Msp. Muskat, frisch gerieben: ca. 0.6 g Gewürz, nicht eingerechnet (vernachlässigbar, dokumentierte Annahme)"
+    ],
+    "db": {
+      "source": "Schweizer_Nahrwertdatenbank(Generische Lebensmittel).csv",
+      "version": "7.1",
+      "synthetic_fixture": false
+    }
+  }
+]

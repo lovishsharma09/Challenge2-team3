@@ -15,13 +15,14 @@ from .trend_agent import TrendAgent
 
 
 class ChallengeOrchestrator:
-    def __init__(self, log_path: Path | None = None):
+    def __init__(self, log_path: Path | None = None, archive_manifest: Path | None = None):
         self.root = ROOT
         self.log = DecisionLog(log_path or (self.root / "logs" / "decisions.jsonl"))
         self.trend = TrendAgent(
             self.root / "data" / "trends" / "google-trends"
         )
-        archive_path = ARCHIVE_MANIFEST_PATH if ARCHIVE_MANIFEST_PATH.exists() else None
+        manifest = Path(archive_manifest) if archive_manifest else ARCHIVE_MANIFEST_PATH
+        archive_path = manifest if manifest.exists() else None
         self.proposals = ProposalAgent(archive_path)
         self.recipe = RecipeAgent()
         self.review = ReviewAgent()
@@ -33,14 +34,24 @@ class ChallengeOrchestrator:
         )
         self.renderer = HtmlRenderer()
 
-    def generate_proposals(self, limit: int = 5) -> dict[str, list[dict]]:
+    def generate_proposals(self, limit: int = 5, llm: bool = False, progress=None) -> dict[str, list[dict]]:
+        """llm=True rewrites titles/recipe ideas in German with the gateway LLM (proposal_llm.py); the ranking,
+        scores and evidence are produced exactly as before. progress(message) is an optional UI callback."""
+        tell = progress or (lambda message: None)
+        tell("Reading the Google Trends rising topics")
         signals = self.trend.propose_from_local_signals(limit=12)
         end = date(2026, 11, 18)
         start = end - timedelta(days=29)
         for signal in signals:
+            tell(f"Collecting evidence for {signal['topic']} (Brave, Wikimedia pageviews)")
             signal = self.trend.enrich_with_brave(signal)
             signal = self.trend.enrich_with_wikimedia(signal, start, end)
+        tell("Brand fit, archive check and ranking")
         accepted, rejected = self.proposals.build(signals, limit=limit)
+        from .proposal_llm import add_risks, enrich_payload
+        if llm:
+            enrich_payload(accepted, progress=tell)
+        add_risks(accepted)                    # after the text pass: "still template text" is one of the risks
         payload = {
             "proposals": accepted,
             "rejected_topics": rejected,

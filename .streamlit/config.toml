@@ -1,6 +1,14 @@
-# Editor desk look: das schmeckt! green instead of Streamlit red, no "Deploy" button in the demo.
+# das schmeckt! look (shared by the editor desk and the prototype): brand green, cream background, no Streamlit chrome.
 [theme]
 primaryColor = "#006642"
+backgroundColor = "#fcfbf7"
+secondaryBackgroundColor = "#edf2e9"
+textColor = "#183e30"
+font = "sans serif"
 
 [client]
 toolbarMode = "minimal"
+showErrorDetails = false
+
+[browser]
+gatherUsageStats = false

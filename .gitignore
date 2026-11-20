@@ -6,6 +6,10 @@ logs/
 output/
 src/challenge2/secrets_local.py
 
-
 # local-only proposal batches and any file that may contain archive data
 data/local/
+
+# prototype: live runs stay local (keys/paths); only prototype/demo_cache is committed
+prototype/runs/
+prototype/screenshots/*.html
+prototype/*.log

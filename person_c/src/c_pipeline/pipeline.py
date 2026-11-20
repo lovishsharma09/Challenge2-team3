@@ -27,6 +27,8 @@ def _now() -> str:
 
 class Log:
     """Every decision/assumption goes here (feeds Person B's decision log + the impact panel)."""
+    listeners: list = []          # UI hooks called with (stage, event, data); a failing hook never stops the run
+
     def __init__(self):
         self.events: list[dict] = []
         self.t0 = time.time()
@@ -34,6 +36,11 @@ class Log:
     def add(self, stage: str, event: str, **data):
         self.events.append({"t": round(time.time() - self.t0, 1), "stage": stage, "event": event, **data})
         print(f"[{stage}] {event}" + (f" {json.dumps(data, ensure_ascii=False)[:160]}" if data else ""))
+        for fn in list(Log.listeners):
+            try:
+                fn(stage, event, data)
+            except Exception:  # noqa: BLE001
+                pass
 
 
 def _read(path: Path):

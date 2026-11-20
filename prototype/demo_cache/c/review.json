@@ -1,0 +1,391 @@
+[
+  {
+    "recipe_id": "r1",
+    "iteration": 1,
+    "round_type": "auto",
+    "editor_comment": null,
+    "recipe_version": 1,
+    "criteria": {
+      "title": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "subheadings": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "quantity_plausibility": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "quantity_completeness": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "all_ingredients_used": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "units_consistent": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "tbsp_tsp": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "step_order": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      }
+    },
+    "extras": {
+      "brand_fit": {
+        "pass": true,
+        "issues": [
+          "[LLM] Die Zutatenmengen werden in den Schritten nicht mit genannt (z. B. 'Das Butterschmalz' statt '2 EL Butterschmalz'), was der Vorgabe 'Zutat mit Menge bei erstmaliger Verwendung nennen' widerspricht.",
+          "[LLM] Der Serviertipp sollte gemäß Vorlage mit der Überschrift 'Unser Tipp' versehen sein."
+        ],
+        "fix": null
+      },
+      "differentiation": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "culinary_plausibility": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "food_safety": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "completeness": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      }
+    },
+    "overall": "pass",
+    "correction_report": "",
+    "code_findings": {},
+    "archive_matches": [
+      {
+        "id": "doc85jzorxwnpc1kx8zdilr",
+        "title": "Vegetarischer Grünkohl",
+        "modified": "2026-04-24",
+        "similarity": 0.32,
+        "title_overlap": 0.25,
+        "ingredient_overlap": 0.38
+      },
+      {
+        "id": "doc85jzk7guddx1i5rpldnl",
+        "title": "Grünkohlpfanne",
+        "modified": "2026-04-24",
+        "similarity": 0.3,
+        "title_overlap": 0.33,
+        "ingredient_overlap": 0.28
+      },
+      {
+        "id": "doc7edbl0iooj9p57xv1rr",
+        "title": "Kassler Lachs auf Grünkohlgemüse",
+        "modified": "2022-04-20",
+        "similarity": 0.28,
+        "title_overlap": 0.5,
+        "ingredient_overlap": 0.11
+      },
+      {
+        "id": "doc7k8upr6j2nredy5ycbw",
+        "title": "MFI_1/21_GQ_Klassischer Erbseneintopf",
+        "modified": "2025-08-04",
+        "similarity": 0.28,
+        "title_overlap": 0.25,
+        "ingredient_overlap": 0.3
+      },
+      {
+        "id": "doc7ik917dfw80f1g9q2c4",
+        "title": "Klassische Gulaschsuppe",
+        "modified": "2025-07-27",
+        "similarity": 0.24,
+        "title_overlap": 0.25,
+        "ingredient_overlap": 0.24
+      }
+    ],
+    "llm_used": true
+  },
+  {
+    "recipe_id": "r2",
+    "iteration": 1,
+    "round_type": "auto",
+    "editor_comment": null,
+    "recipe_version": 1,
+    "criteria": {
+      "title": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "subheadings": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "quantity_plausibility": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "quantity_completeness": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "all_ingredients_used": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "units_consistent": {
+        "pass": false,
+        "issues": [
+          "[LLM] Für die Spiegeleier (Schritt 7) wird zusätzlich 'wenig Butter' verwendet, die in der Zutatenmenge (3 EL) nicht enthalten ist – die Butter ist mit 2 EL (Schritt 3) und 1 EL (Schritt 4) bereits vollständig verplant."
+        ],
+        "fix": "Entweder die Butter-Menge auf 4 EL erhöhen und Schritt 7 präzisieren ('1 EL Butter erhitzen') oder in Schritt 7 auf Öl bzw. die Restpfanne verweisen."
+      },
+      "tbsp_tsp": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "step_order": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      }
+    },
+    "extras": {
+      "brand_fit": {
+        "pass": false,
+        "issues": [
+          "[LLM] Die Einleitung verspricht 'in unter 30 Minuten', die Zeitangaben ergeben aber 15 Min. Vorbereitung + 20 Min. Garzeit = 35 Min.",
+          "[LLM] Der Serviertipp ist nicht mit der vorgeschriebenen Überschrift 'Unser Tipp' betitelt.",
+          "[LLM] Tippfehler im Serviertipp: 'bracht' statt 'brät'.",
+          "[LLM] Schritt 1 und 2 bündeln mehrere Zutaten; nach Stilvorgabe sollten Schritte kleinschrittiger formuliert sein (Zutat mit Menge bei erster Verwendung nennen)."
+        ],
+        "fix": "Einleitung auf 'in ca. 35 Minuten' korrigieren oder Zeiten anpassen; Tipp als 'Unser Tipp' auszeichnen und Tippfehler beheben."
+      },
+      "differentiation": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "culinary_plausibility": {
+        "pass": true,
+        "issues": [
+          "[LLM] Anmerkung: 100 ml Gemüsebrühe für 400 g Grünkohl sind knapp, aber für die kurze Schmellzeit von 6 Min. mit Deckel ausreichend – kein zwingender Mangel."
+        ],
+        "fix": null
+      },
+      "food_safety": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "completeness": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      }
+    },
+    "overall": "revise",
+    "correction_report": "1. [units_consistent] [LLM] Für die Spiegeleier (Schritt 7) wird zusätzlich 'wenig Butter' verwendet, die in der Zutatenmenge (3 EL) nicht enthalten ist – die Butter ist mit 2 EL (Schritt 3) und 1 EL (Schritt 4) bereits vollständig verplant. → Korrektur: Entweder die Butter-Menge auf 4 EL erhöhen und Schritt 7 präzisieren ('1 EL Butter erhitzen') oder in Schritt 7 auf Öl bzw. die Restpfanne verweisen.\n2. [brand_fit] [LLM] Die Einleitung verspricht 'in unter 30 Minuten', die Zeitangaben ergeben aber 15 Min. Vorbereitung + 20 Min. Garzeit = 35 Min. | [LLM] Der Serviertipp ist nicht mit der vorgeschriebenen Überschrift 'Unser Tipp' betitelt. | [LLM] Tippfehler im Serviertipp: 'bracht' statt 'brät'. | [LLM] Schritt 1 und 2 bündeln mehrere Zutaten; nach Stilvorgabe sollten Schritte kleinschrittiger formuliert sein (Zutat mit Menge bei erster Verwendung nennen). → Korrektur: Einleitung auf 'in ca. 35 Minuten' korrigieren oder Zeiten anpassen; Tipp als 'Unser Tipp' auszeichnen und Tippfehler beheben.",
+    "code_findings": {},
+    "archive_matches": [
+      {
+        "id": "doc7srlb97qzkyk8iarofw",
+        "title": "FR2344t047054_Food_Beihefter_Kartoffel_Eintopf_txt",
+        "modified": "2024-12-03",
+        "similarity": 0.38,
+        "title_overlap": 0.14,
+        "ingredient_overlap": 0.57
+      },
+      {
+        "id": "doc86iwqwrtflzvctsk9v8",
+        "title": "Möhrengemüse mit Kartoffeln",
+        "modified": "2026-07-01",
+        "similarity": 0.37,
+        "title_overlap": 0.2,
+        "ingredient_overlap": 0.5
+      },
+      {
+        "id": "doc7dtohxwlyqq180ximffl",
+        "title": "IM2004_Schnell_und gut_Montag",
+        "modified": "2024-12-03",
+        "similarity": 0.35,
+        "title_overlap": 0.0,
+        "ingredient_overlap": 0.64
+      },
+      {
+        "id": "doc85q4bb964qrq1e4r7yn",
+        "title": "Kartoffel-Zucchini-Auflauf",
+        "modified": "2026-05-06",
+        "similarity": 0.35,
+        "title_overlap": 0.17,
+        "ingredient_overlap": 0.5
+      },
+      {
+        "id": "doc870d4g19x8o15hnfbfhm",
+        "title": "Döppekooche (Kartoffelkuchen)",
+        "modified": "2026-08-04",
+        "similarity": 0.33,
+        "title_overlap": 0.2,
+        "ingredient_overlap": 0.44
+      }
+    ],
+    "llm_used": true
+  },
+  {
+    "recipe_id": "r2",
+    "iteration": 2,
+    "round_type": "auto",
+    "editor_comment": null,
+    "recipe_version": 2,
+    "criteria": {
+      "title": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "subheadings": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "quantity_plausibility": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "quantity_completeness": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "all_ingredients_used": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "units_consistent": {
+        "pass": true,
+        "issues": [
+          "[LLM] Code-Warnung zu Knoblauchzehe ist ein False Positive: '1 Knoblauchzehe' im Schritt entspricht der Mengenangabe (1 Zehe) in der Liste.",
+          "Hinweis: Knoblauchzehe: Einheit im Schritt (None) weicht von der Liste (Zehe) ab"
+        ],
+        "fix": null
+      },
+      "tbsp_tsp": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "step_order": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      }
+    },
+    "extras": {
+      "brand_fit": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "differentiation": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "culinary_plausibility": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "food_safety": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      },
+      "completeness": {
+        "pass": true,
+        "issues": [],
+        "fix": null
+      }
+    },
+    "overall": "pass",
+    "correction_report": "",
+    "code_findings": {
+      "units_consistent": [
+        {
+          "severity": "warning",
+          "message": "Knoblauchzehe: Einheit im Schritt (None) weicht von der Liste (Zehe) ab",
+          "where": "Knoblauchzehe"
+        }
+      ]
+    },
+    "archive_matches": [
+      {
+        "id": "doc7srlb97qzkyk8iarofw",
+        "title": "FR2344t047054_Food_Beihefter_Kartoffel_Eintopf_txt",
+        "modified": "2024-12-03",
+        "similarity": 0.38,
+        "title_overlap": 0.14,
+        "ingredient_overlap": 0.57
+      },
+      {
+        "id": "doc86iwqwrtflzvctsk9v8",
+        "title": "Möhrengemüse mit Kartoffeln",
+        "modified": "2026-07-01",
+        "similarity": 0.37,
+        "title_overlap": 0.2,
+        "ingredient_overlap": 0.5
+      },
+      {
+        "id": "doc7dtohxwlyqq180ximffl",
+        "title": "IM2004_Schnell_und gut_Montag",
+        "modified": "2024-12-03",
+        "similarity": 0.35,
+        "title_overlap": 0.0,
+        "ingredient_overlap": 0.64
+      },
+      {
+        "id": "doc85q4bb964qrq1e4r7yn",
+        "title": "Kartoffel-Zucchini-Auflauf",
+        "modified": "2026-05-06",
+        "similarity": 0.35,
+        "title_overlap": 0.17,
+        "ingredient_overlap": 0.5
+      },
+      {
+        "id": "doc870d4g19x8o15hnfbfhm",
+        "title": "Döppekooche (Kartoffelkuchen)",
+        "modified": "2026-08-04",
+        "similarity": 0.33,
+        "title_overlap": 0.2,
+        "ingredient_overlap": 0.44
+      }
+    ],
+    "llm_used": true
+  }
+]

@@ -2,6 +2,25 @@
 
 Turn food trends into two recipe drafts for *das schmeckt!*.
 
+## Run the prototype
+
+```bash
+./run_prototype.sh          # creates .venv, installs requirements, opens http://localhost:8501
+```
+
+One page, six steps, the whole flow live: **1 Trend evidence** (Google Trends CSVs + live Wikipedia pageviews) →
+**2 Five proposals** (brand fit, archive check with dates, risks, rejected topics) → **3 Editor choice** (Person B's editor desk
+writes `selection.json`) → **4 Recipes** (Person C: two drafts, review loop, FLUX images with vision check) →
+**5 Review & nutrition** (every round, 8 criteria, corrections, nutrition per ingredient) → **6 Cards & impact** (A4 cards,
+downloads, measured numbers).
+
+- Keys: copy `person_c/.env.example` to `person_c/.env` (Tesseracted gateway + Black Forest Labs). Never commit it.
+- **Demo mode** (sidebar toggle, or `http://localhost:8501/?mode=demo`) replays a real run saved in `prototype/demo_cache/` – no network needed.
+  Every live run is stored under `prototype/runs/<timestamp>/` (git-ignored) and can be replayed from the sidebar.
+- Optional one-click PDF export: `PROTOTYPE_PDF=1 ./run_prototype.sh` (installs Playwright + Chromium).
+- Tests: `python -m unittest discover -s tests` (A) · `python -m unittest discover -s editor/tests -t .` (B) ·
+  `python -m unittest discover -s person_c/tests` (C) · `python -m unittest discover -s prototype/tests -t .` (prototype glue + page).
+
 | Folder | What it contains |
 |---|---|
 | [`briefing/`](briefing/) | [Full challenge brief](briefing/Case%20Burda%20Media.docx). |
