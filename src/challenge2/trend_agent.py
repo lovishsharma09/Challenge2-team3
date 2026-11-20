@@ -46,7 +46,7 @@ class TrendAgent:
                 interest_score = int(interest)
             except ValueError:
                 interest_score = 0
-            score = min(100, interest_score * 2)
+            score = min(100, max(0, interest_score))
             proposals.append(
                 self.score_topic(row.get("topic", ""), str(score), "")
             )

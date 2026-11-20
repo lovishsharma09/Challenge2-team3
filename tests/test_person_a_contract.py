@@ -25,6 +25,14 @@ class PersonAContractTest(unittest.TestCase):
     def tearDown(self):
         self.wikimedia_patch.stop()
         self.brave_patch.stop()
+
+    def test_google_trends_score_uses_exported_scale_directly(self):
+        from src.challenge2.trend_agent import TrendAgent
+        from pathlib import Path
+
+        trend = TrendAgent(Path("data/trends/google-trends"))
+        scored = trend.score_topic("Cookie", "98")
+        self.assertEqual(scored["trend_score"], 98)
     def test_proposals_have_stable_handoff_fields(self):
         payload = ChallengeOrchestrator().generate_proposals(limit=5)
 

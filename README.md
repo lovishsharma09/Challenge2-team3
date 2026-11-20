@@ -112,7 +112,7 @@ The Trend Agent reads the supplied Rising Topics CSV for Germany.
 For each topic it reads `search interest` and calculates:
 
 ```text
-Google Trends score = min(100, max(0, search interest x 2))
+Google Trends score = min(100, max(0, search interest))
 ```
 
 The score is stored with a dated point:
@@ -124,8 +124,7 @@ period: 2026-10-18 to 2026-11-18
 value: original search interest
 ```
 
-Example: a topic with search interest `23` receives
-`23 x 2 = 46 / 100`.
+Example: a topic with search interest `23` receives `23 / 100`.
 
 ### 2. Brave Search evidence
 
