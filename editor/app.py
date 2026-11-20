@@ -8,7 +8,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import streamlit as st
 
+from editor import llm
+from editor.agents import Agents
 from editor.display import archive_summary, wikimedia_summary
+from editor.llm_agents import with_llm
 from editor.workflow import EditorWorkflow, WorkflowError
 
 st.set_page_config(page_title="Editor Desk · das schmeckt!", layout="wide")
@@ -46,6 +49,13 @@ with st.sidebar:
     for item in wf.trail:
         detail = {k: v for k, v in item.items() if k != "event"}
         st.caption(f"**{item['event']}** {detail if detail else ''}")
+    if llm.configured():
+        use_llm = st.checkbox("Real LLM for review and revision (Tesseracted)", value=False,
+                              help="Sends the recipe text to the hackathon gateway. Off = mock agents.")
+        wf.agents = with_llm(wf.agents) if use_llm else Agents(propose=wf.agents.propose, generate=wf.agents.generate,
+                                                                 nutrition=wf.agents.nutrition)
+    else:
+        st.caption("Real LLM: not configured (no .env).")
     if st.button("Reset"):
         wf.reset()
         st.rerun()
