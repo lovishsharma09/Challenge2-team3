@@ -47,6 +47,13 @@ The `.env` file is gitignored. Do not paste the key into `.env.example` or sourc
 
 The key is sent only as the Brave `x-subscription-token` header.
 
+### Wikimedia pageviews
+
+The Trend Agent also queries the keyless Wikimedia REST pageviews API for
+selected German Wikipedia articles. Requests use a descriptive
+`Challenge2-Team3` User-Agent. Results include article name, date, daily
+pageviews, availability status, and a transparent 0-100 change score.
+
 ### Run
 
 ```powershell

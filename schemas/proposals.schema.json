@@ -27,6 +27,20 @@
                 }
               },
               "sparkline": {"type": "array", "items": {"type": "number"}},
+              "wikimedia": {
+                "type": "object",
+                "required": ["status", "article", "score", "points", "error"],
+                "properties": {
+                  "status": {"enum": ["available", "no_article_found", "no_data", "unavailable"]},
+                  "article": {"type": ["string", "null"]},
+                  "score": {"type": ["number", "null"]},
+                  "points": {"type": "array"},
+                  "error": {"type": ["string", "null"]},
+                  "period_start": {"type": ["string", "null"]},
+                  "period_end": {"type": ["string", "null"]},
+                  "method": {"type": ["string", "null"]}
+                }
+              },
               "why_relevant": {"type": "string"},
               "sources": {"type": "array", "items": {"type": "string"}}
             }

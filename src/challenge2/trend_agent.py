@@ -3,14 +3,17 @@ from __future__ import annotations
 import csv
 from datetime import date
 import re
+from datetime import date
 from pathlib import Path
 
 from .brave_search import BraveSearchError, brave_web_search
+from .wikimedia_agent import WikimediaAgent
 
 
 class TrendAgent:
     def __init__(self, google_trends_dir: Path):
         self.google_trends_dir = google_trends_dir
+        self.wikimedia = WikimediaAgent()
 
     def load_rising_topics(self) -> list[dict[str, str]]:
         path = self.google_trends_dir / (
@@ -91,5 +94,39 @@ class TrendAgent:
             "source": "Brave Web Search",
             "query": topic_name,
         })
+        return topic
+
+    def enrich_with_wikimedia(
+        self,
+        topic: dict,
+        start: date,
+        end: date,
+    ) -> dict:
+        result = self.wikimedia.fetch_pageviews(topic["topic"], start, end)
+        topic["wikimedia"] = {
+            "status": result["status"],
+            "article": result["article"],
+            "score": result.get("score"),
+            "error": result.get("error"),
+            "period_start": start.isoformat(),
+            "period_end": end.isoformat(),
+            "method": (
+                "Available series: compare average daily pageviews of the "
+                "first half with the second half, normalized to a 0-100 score."
+            ),
+        }
+        topic["wikimedia_points"] = [
+            {
+                "date": (
+                    f"{point['date'][:4]}-{point['date'][4:6]}-{point['date'][6:]}"
+                    if len(point["date"]) == 8
+                    else point["date"]
+                ),
+                "value": point["value"],
+                "source": point["source"],
+                "article": point["article"],
+            }
+            for point in result["points"]
+        ]
         return topic
 

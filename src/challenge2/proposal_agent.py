@@ -29,6 +29,16 @@ class ProposalAgent:
                     "sparkline": [
                         point["value"] for point in signal.get("trend_points", [])
                     ],
+                    "wikimedia": {
+                        "status": signal.get("wikimedia", {}).get("status", "unavailable"),
+                        "article": signal.get("wikimedia", {}).get("article"),
+                        "score": signal.get("wikimedia", {}).get("score"),
+                        "points": signal.get("wikimedia_points", []),
+                        "error": signal.get("wikimedia", {}).get("error"),
+                        "period_start": signal.get("wikimedia", {}).get("period_start"),
+                        "period_end": signal.get("wikimedia", {}).get("period_end"),
+                        "method": signal.get("wikimedia", {}).get("method"),
+                    },
                     "why_relevant": signal["why_relevant"],
                     "sources": signal["sources"],
                 },

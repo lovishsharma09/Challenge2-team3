@@ -1,9 +1,30 @@
 import unittest
+from unittest.mock import patch
 
 from src.challenge2.orchestrator import ChallengeOrchestrator
 
 
 class PersonAContractTest(unittest.TestCase):
+    def setUp(self):
+        self.brave_patch = patch(
+            "src.challenge2.trend_agent.brave_web_search",
+            return_value=[],
+        )
+        self.wikimedia_patch = patch(
+            "src.challenge2.trend_agent.WikimediaAgent.fetch_pageviews",
+            return_value={
+                "status": "no_article_found",
+                "article": "test",
+                "points": [],
+                "error": "Test fixture",
+            },
+        )
+        self.brave_patch.start()
+        self.wikimedia_patch.start()
+
+    def tearDown(self):
+        self.wikimedia_patch.stop()
+        self.brave_patch.stop()
     def test_proposals_have_stable_handoff_fields(self):
         payload = ChallengeOrchestrator().generate_proposals(limit=5)
 

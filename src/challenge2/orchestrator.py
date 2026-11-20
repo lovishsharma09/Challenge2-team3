@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+from datetime import date, timedelta
 
 from .config import ROOT
 from .logging import DecisionLog
@@ -33,10 +34,11 @@ class ChallengeOrchestrator:
 
     def generate_proposals(self, limit: int = 5) -> dict[str, list[dict]]:
         signals = self.trend.propose_from_local_signals(limit=12)
-        signals = [
-            self.trend.enrich_with_brave(signal)
-            for signal in signals
-        ]
+        end = date(2026, 11, 18)
+        start = end - timedelta(days=29)
+        for signal in signals:
+            signal = self.trend.enrich_with_brave(signal)
+            signal = self.trend.enrich_with_wikimedia(signal, start, end)
         accepted, rejected = self.proposals.build(signals, limit=limit)
         payload = {
             "proposals": accepted,
