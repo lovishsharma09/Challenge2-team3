@@ -84,9 +84,10 @@ class WorkflowTest(unittest.TestCase):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
         self.log = Path(tmp.name) / "audit.jsonl"
+        self.cards = Path(tmp.name) / "cards"
 
     def wf(self, agents=None):
-        wf = EditorWorkflow(agents or Agents(), self.log)
+        wf = EditorWorkflow(agents or Agents(), self.log, self.cards)
         wf.start()
         return wf
 
@@ -97,7 +98,8 @@ class WorkflowTest(unittest.TestCase):
         with self.assertRaises(WorkflowError):
             wf.select("nope")
 
-    def test_stub_loop_fixes_hard_issues_then_approval_works(self):
+    # ---- loop + approval rules
+    def test_stub_loop_fixes_hard_issues_then_approval_exports_two_cards(self):
         wf = self.wf()
         wf.select(wf.proposals[0]["id"], "weeknight-friendly")
         self.assertEqual(len(wf.rounds), AUTO_ROUNDS)          # round 1 had issues, round 2 clean
@@ -106,11 +108,28 @@ class WorkflowTest(unittest.TestCase):
         wf.approve()
         self.assertEqual(wf.stage, "approved")
         self.assertEqual(wf.result["nutrition"][0]["nutrition"]["status"], "pending")
+        self.assertEqual(len(wf.result["cards"]), 2)
+        self.assertTrue(all(Path(c).is_file() for c in wf.result["cards"]))
+
+    def test_no_cards_are_exported_before_approval(self):
+        wf = self.wf()
+        wf.select(wf.proposals[0]["id"], STUCK)
+        self.assertFalse(self.cards.exists() and any(self.cards.iterdir()))
 
     def test_hard_issues_block_approval_when_never_fixed(self):
         wf = self.wf()
         wf.select(wf.proposals[0]["id"], STUCK)
         self.assertLessEqual(len(wf.rounds), AUTO_ROUNDS)
+        self.assertFalse(wf.can_approve()[0])
+        with self.assertRaises(WorkflowError):
+            wf.approve()
+
+    def test_hard_issues_can_not_be_dismissed(self):
+        wf = self.wf()
+        wf.select(wf.proposals[0]["id"], STUCK)
+        for issue in [i for i in wf.issues if i["kind"] == "hard"]:
+            with self.assertRaises(WorkflowError):
+                wf.acknowledge(issue["key"], "I know better")
         self.assertFalse(wf.can_approve()[0])
         with self.assertRaises(WorkflowError):
             wf.approve()
@@ -125,41 +144,102 @@ class WorkflowTest(unittest.TestCase):
         with self.assertRaises(WorkflowError):
             wf.send_back("one more")
 
-    def test_dismiss_needs_reason_unblocks_and_is_audited(self):
-        wf = self.wf()
-        wf.select(wf.proposals[0]["id"], STUCK)
-        for issue in [i for i in wf.issues if i["kind"] == "hard"]:
-            with self.assertRaises(WorkflowError):
-                wf.dismiss(issue["key"], "")
-            wf.dismiss(issue["key"], "step 2 does use it")
-        self.assertTrue(wf.can_approve()[0])
-        wf.approve()
-        self.assertTrue(wf.result["approved_with_warnings"])
-        self.assertIn("editor_dismissed", self.log.read_text(encoding="utf-8"))
-
-    def test_dismissal_survives_next_round(self):
-        wf = self.wf()
-        wf.select(wf.proposals[0]["id"], STUCK)
-        target = next(i for i in wf.issues if i["kind"] == "hard")
-        wf.dismiss(target["key"], "false alarm")
-        wf.send_back("tweak")
-        same = next(i for i in wf.issues if i["key"] == target["key"])
-        self.assertEqual(same["status"], "dismissed")
-
-    def test_soft_issue_does_not_block(self):
+    def test_soft_issue_does_not_block_needs_reason_to_acknowledge_and_survives_rounds(self):
         wf = self.wf()
         wf.select(wf.proposals[0]["id"], "demo-soft")
-        self.assertTrue(any(i["kind"] == "soft" for i in wf.issues))
+        soft = next(i for i in wf.issues if i["kind"] == "soft")
         self.assertTrue(wf.can_approve()[0])
+        with self.assertRaises(WorkflowError):
+            wf.acknowledge(soft["key"], "")
+        wf.acknowledge(soft["key"], "title is fine")
+        wf.send_back("tweak")
+        same = next(i for i in wf.issues if i["key"] == soft["key"])
+        self.assertEqual(same["status"], "dismissed")
         wf.approve()
         self.assertTrue(wf.result["approved_with_warnings"])
+        self.assertIn("editor_acknowledged_soft", self.log.read_text(encoding="utf-8"))
+
+    # ---- review finding 1: a failed review must never leave an unreviewed draft approvable
+    def test_failed_review_after_send_back_keeps_previous_reviewed_draft(self):
+        agents = Agents()
+        wf = self.wf(agents)
+        wf.select(wf.proposals[0]["id"], "demo-soft")
+        before_bundle, before_issues, before_rounds = wf.bundle, [dict(i) for i in wf.issues], len(wf.rounds)
+        def broken_review(bundle, notes):
+            raise RuntimeError("review timeout")
+        agents.review = broken_review
+        with self.assertRaises(WorkflowError):
+            wf.send_back("add more garlic")
+        self.assertIs(wf.bundle, before_bundle)                     # old reviewed draft stays
+        self.assertEqual(wf.issues, before_issues)
+        self.assertEqual(len(wf.rounds), before_rounds)
+        self.assertEqual(wf.editor_rounds_left(), EDITOR_ROUNDS)    # the failed attempt is not counted
+        self.assertIn("revision_discarded", self.log.read_text(encoding="utf-8"))
+        agents.review = Agents().review                             # provider is back: normal flow continues
+        wf.send_back("add more garlic")
+        self.assertIn("garlic", wf.bundle["recipes"][0]["subtitle"])
+
+    def test_failed_revision_also_keeps_previous_draft(self):
+        agents = Agents()
+        wf = self.wf(agents)
+        wf.select(wf.proposals[0]["id"], "demo-soft")
+        before = wf.bundle
+        def broken(*a):
+            raise RuntimeError("down")
+        agents.revise = broken
+        with self.assertRaises(WorkflowError):
+            wf.send_back("x")
+        self.assertIs(wf.bundle, before)
+
+    def test_first_review_failure_leaves_a_clean_state(self):
+        def broken(bundle, notes):
+            raise RuntimeError("down")
+        wf = self.wf(Agents(review=broken))
+        with self.assertRaises(WorkflowError):
+            wf.select(wf.proposals[0]["id"])
+        self.assertEqual((wf.stage, wf.bundle, wf.issues, wf.rounds), ("proposals", None, [], []))
+
+    def test_auto_revision_failure_still_reaches_review_with_notice_and_blocks(self):
+        def broken(*a):
+            raise RuntimeError("down")
+        wf = self.wf(Agents(revise=broken))
+        wf.select(wf.proposals[0]["id"])                            # stub recipes have hard issues
+        self.assertEqual(wf.stage, "review")
+        self.assertTrue(wf.notices)
+        self.assertFalse(wf.can_approve()[0])
+
+    def test_discard_is_the_way_out_of_a_dead_end(self):
+        wf = self.wf()
+        wf.select(wf.proposals[0]["id"], STUCK)
+        wf.discard("nothing works")
+        self.assertEqual((wf.stage, wf.bundle, wf.selected), ("proposals", None, None))
+        wf.select(wf.proposals[1]["id"], "")
+        self.assertEqual(wf.stage, "review")
+        self.assertIn("editor_discarded_recipes", self.log.read_text(encoding="utf-8"))
+
+    # ---- offline end-to-end: select -> review two drafts -> approve with soft warning -> two HTML cards
+    def test_end_to_end_with_soft_warning_produces_two_cards(self):
+        wf = self.wf()
+        wf.select(wf.proposals[0]["id"], "weeknight-friendly demo-soft")
+        self.assertEqual(len(wf.bundle["recipes"]), 2)
+        self.assertTrue(wf.can_approve()[0])
+        wf.approve()
+        cards = [Path(c) for c in wf.result["cards"]]
+        self.assertEqual(len(cards), 2)
+        for card, recipe in zip(cards, wf.bundle["recipes"]):
+            page = card.read_text(encoding="utf-8")
+            self.assertIn("KI-generierter Rezeptentwurf", page)
+            self.assertIn(recipe["title"], page)
+        warned = next(i for i in wf.result["approved_with_warnings"])
+        self.assertEqual(warned["recipe_index"], 0)             # the soft finding concerns recipe 1 only
+        self.assertIn("Redaktionell freigegeben mit offenen Prüfhinweisen", cards[0].read_text(encoding="utf-8"))
+        self.assertNotIn("Redaktionell freigegeben", cards[1].read_text(encoding="utf-8"))
 
     def test_reject_all_gives_new_topics_and_runs_out_cleanly(self):
         wf = self.wf()
         seen = {p["topic"] for p in wf.proposals}
         wf.reject_all("none fit")
-        now = {p["topic"] for p in wf.proposals}
-        self.assertFalse(seen & now)
+        self.assertFalse(seen & {p["topic"] for p in wf.proposals})
         wf.reject_all()
         with self.assertRaises(WorkflowError):          # pool of 12 topics exhausted
             wf.reject_all()
@@ -195,7 +275,7 @@ class WorkflowTest(unittest.TestCase):
 
     def test_empty_proposals_is_a_clear_error(self):
         with self.assertRaises(WorkflowError):
-            EditorWorkflow(Agents(propose=lambda e, n: ([], [])), self.log).start()
+            EditorWorkflow(Agents(propose=lambda e, n: ([], [])), self.log, self.cards).start()
 
 
 if __name__ == "__main__":

@@ -111,17 +111,23 @@ if wf.stage in ("review", "approved"):
                 st.write(f"🟢 fixed: {i['message']}")
 
     if wf.stage == "review":
+        for notice in wf.notices:
+            st.warning(notice)
         open_issues = [i for i in wf.issues if i["status"] == "open"]
         st.markdown("**Open issues**" if open_issues else "**No open issues.**")
         for n, i in enumerate(open_issues):
             with st.container(border=True):
-                st.write(f"{'🛑 HARD (blocks approval)' if i['kind'] == 'hard' else '⚠️ soft'} · {i['criterion']}")
-                st.write(i["message"])
-                reason = st.text_input("Reason if this is a false alarm", key=f"reason{n}")
-                if st.button("Dismiss as false alarm", key=f"dismiss{n}"):
-                    act(wf.dismiss, i["key"], reason)
+                if i["kind"] == "hard":
+                    st.write(f"🛑 HARD (blocks approval, cannot be dismissed) · {i['criterion']}")
+                    st.write(i["message"])
+                else:
+                    st.write(f"⚠️ soft (does not block) · {i['criterion']}")
+                    st.write(i["message"])
+                    reason = st.text_input("Note for the record (optional: acknowledge this warning)", key=f"reason{n}")
+                    if st.button("Acknowledge warning", key=f"ack{n}"):
+                        act(wf.acknowledge, i["key"], reason)
         for i in (x for x in wf.issues if x["status"] == "dismissed"):
-            st.caption(f"⚪ dismissed: {i['message']} — reason: {i['dismiss_reason']}")
+            st.caption(f"⚪ acknowledged: {i['message']} — {i['dismiss_reason']}")
 
         st.subheader("Your decision")
         comment = st.text_area("Comment for the recipe agent (needed to send back)")
@@ -133,8 +139,14 @@ if wf.stage in ("review", "approved"):
             act(wf.send_back, comment)
         if not ok:
             c1.caption(why)
+        with st.expander("Not happy with these recipes at all?"):
+            why_discard = st.text_input("Reason (optional)", key="discard_reason")
+            if st.button("Discard these recipes and choose another proposal"):
+                act(wf.discard, why_discard)
     else:
-        st.success("Approved. HTML cards are the next step (renderer).")
+        st.success("Approved. The two recipe cards were exported:")
+        for path in wf.result["cards"]:
+            st.code(path)
         warnings = wf.result["approved_with_warnings"]
         if warnings:
             st.warning("Approved with open or dismissed issues:\n\n" +
