@@ -26,6 +26,18 @@ Configure through environment variables or an untracked `.env` in the repo root:
 
 **Keep local, never commit:** `.env`, the recipe export, and any proposal batch. Put batches in `data/local/` (git-ignored).
 
+## Recipe engines (sidebar)
+
+| Engine | What it does |
+|---|---|
+| Built-in mock samples (default) | Fixed lentil-soup samples with a planted flaw: rehearses the review and export flow. Flagged MOCK. |
+| Person C pipeline · offline mock | Person C's own fixtures and synthetic nutrition data, no network. Flagged MOCK; nutrition says "TESTDATEN". |
+| Person C pipeline · live text gateway | Real recipes, review, revision and nutrition (real Swiss database) through the hackathon text gateway. Sends the pitch text and the recipe text, never archive titles. No images. |
+
+Live mode needs `TESSERACTED_BASE_URL`, `TESSERACTED_API_KEY` and `EDITOR_LLM_MODEL` in the untracked `.env`
+(`tesseracted-labs-gmbh/zai-org/GLM-5.3-Flash` is the fastest tested model). A whole live run takes about 3 minutes.
+Our workflow stays the controller: Person C only supplies generate / review / revise / nutrition (`editor/c_agents.py`).
+
 ## Flow and rules
 
 1. **Proposals.** Either a saved batch (`editor/batch.py`: strict validation, shown in the supplied rank order, never recalculated;

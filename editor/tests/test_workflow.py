@@ -43,6 +43,15 @@ class MismatchTest(unittest.TestCase):
         self.assertEqual(self.crit([{"name": "Mehl", "amount": 250, "unit": "g"}],
                                    ["150 g Mehl sieben.", "100 g Mehl unterheben."]), [])
 
+    def test_per_item_or_total_wording_is_never_judged_as_a_quantity_mismatch(self):
+        """From a live run: "je 1 TL Senf (insgesamt 4 TL)" is normal German, not 5 TL against 4 TL."""
+        steps = ["Die Rouladen mit je 1 TL Senf bestreichen (insgesamt 4 TL).", "2 TL Senf in die Sauce rühren.", "Mit 1 TL Senf abschmecken."]
+        self.assertEqual(self.crit([{"name": "mittelscharfer Senf", "amount": 4, "unit": "TL"}], steps), [])
+        plain = ["Die Rouladen mit 1 TL Senf bestreichen.", "2 TL Senf in die Sauce rühren.", "Mit 3 TL Senf abschmecken."]   # no wording: still caught
+        self.assertEqual(self.crit([{"name": "mittelscharfer Senf", "amount": 4, "unit": "TL"}], plain), ["quantity_mismatch"])
+        for word in ("pro Portion", "jeweils", "zusammen", "gesamt"):
+            self.assertEqual(self.crit([{"name": "Mehl", "amount": 100, "unit": "g"}], [f"150 g Mehl {word} verwenden."]), [], word)
+
     def test_decimal_comma_and_unrelated_words(self):
         self.assertEqual(self.crit([{"name": "Butter", "amount": 1.5, "unit": "EL"}],
                                    ["1,5 EL Butter schmelzen und 20 Minuten warten."]), [])

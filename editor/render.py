@@ -49,7 +49,7 @@ def wrap(text: str, width_pt: float, font_pt: float) -> list[str]:
     lines: list[str] = []
     for para in str(text).split("\n"):
         cur = ""
-        for word in para.split():
+        for word in [w for w in para.split(" ") if w]:          # plain spaces only: a no-break space keeps "35 g" together
             while len(word) > limit:                       # hard split overlong words
                 if cur:
                     lines.append(cur)
@@ -107,8 +107,34 @@ def nutrition_lines(nut: dict | None) -> list[str]:
     labels = (("kcal", "Energie", "kcal"), ("fat_g", "Fett", "g"), ("carbs_g", "Kohlenhydrate", "g"),
               ("protein_g", "Eiweiß", "g"))
     ps = nut["per_serving"]
-    lines = [f"{label}: {fmt_amount(ps[key])} {unit}" for key, label, unit in labels if ps.get(key) is not None]
+    lines = [f"{label}: {fmt_amount(ps[key])}\u00a0{unit}" for key, label, unit in labels if ps.get(key) is not None]
     return lines
+
+
+MAX_CARD_WARNINGS = 3
+MAX_CARD_ASSUMPTIONS = 0     # the card states how many; the complete list is in the editor desk and in the sidecar file
+
+
+def assumptions_for_card(nut: dict | None) -> tuple[list[dict], int]:
+    """The weakest assumptions (lowest confidence first) up to the card's limit, and how many more exist. Nothing is hidden: the rest is counted
+    on the card and listed in full in the editor desk."""
+    items = [a for a in ((nut or {}).get("assumptions") or []) if isinstance(a, dict)]
+    items.sort(key=lambda a: (a.get("confidence") is None, a.get("confidence") if isinstance(a.get("confidence"), (int, float)) else 0))
+    return items[:MAX_CARD_ASSUMPTIONS], max(0, len(items) - MAX_CARD_ASSUMPTIONS)
+
+
+def nutrition_notes(nut: dict | None) -> list[str]:
+    """Honest context lines for the nutrition block: test data, coverage, ingredients that could not be calculated."""
+    if not nut or nut.get("status") != "ok" or not nut.get("per_serving"):
+        return []
+    notes = []
+    if nut.get("synthetic"):
+        notes.append("TESTDATEN – keine echten Werte.")
+    if nut.get("coverage_text"):
+        notes.append(str(nut["coverage_text"]))
+    if nut.get("unmatched"):
+        notes.append("Nicht eingerechnet: " + ", ".join(str(u) for u in nut["unmatched"]) + ".")
+    return notes
 
 
 def _column_pages(items: list[tuple[list[str], float, float]], first_top: float, later_top: float, gap: float,
@@ -168,10 +194,11 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
                   f'{esc(label)}</div>')
     y += 17 + 6
     if warnings:
-        wl = [f"Redaktionell freigegeben mit offenen Prüfhinweisen:"]
-        for w in warnings:
-            wl += wrap(f"– {w['message']}" + (f" (Hinweis Redaktion: {w['dismiss_reason']})" if w.get("dismiss_reason") else ""),
-                       331.236, 7.7)
+        wl = ["Redaktionell freigegeben mit offenen Prüfhinweisen:"]
+        for w in warnings[:MAX_CARD_WARNINGS]:
+            wl += wrap(f"– {w['message']}" + (f" (Hinweis Redaktion: {w['dismiss_reason']})" if w.get("dismiss_reason") else ""), 331.236, 7.7)
+        if len(warnings) > MAX_CARD_WARNINGS:
+            wl += wrap(f"… und {len(warnings) - MAX_CARD_WARNINGS} weitere Prüfhinweise (vollständig im Redaktionssystem).", 331.236, 7.7)
         blocks.append(text_el(LEFT_X, y, 331.236, 7.7, 10.3, wl, color=MUTED))
         y += 10.3 * len(wl) + 4
 
@@ -210,11 +237,57 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
             tip_at = (len(right_pages) - 1, later_top + 33, need)
 
     nut_lines = nutrition_lines(nutrition)
-    assumptions = []
-    if nut_lines:
-        for a in nutrition.get("assumptions", []):
-            assumptions += wrap(f"Annahme: {a.get('original')} → {a.get('used')} (Sicherheit: {a.get('confidence')})", 134, 7.5)
+
+    def nut_texts(width):
+        txt = []
+        for note in nutrition_notes(nutrition):
+            txt += wrap(note, width, 7.5)
+        shown, rest = assumptions_for_card(nutrition)
+        for a in shown:
+            txt += wrap(f"Annahme: {a.get('original')} → {a.get('used')} (Sicherheit: {a.get('confidence')})", width, 7.5)
+        if rest:
+            txt += wrap(f"{rest} {'Annahme' if rest == 1 else 'Annahmen'} zu Mengen und Zuordnung (Details im Nährwert-Protokoll des Redaktionssystems).", width, 7.5)
+        return txt
+
+    def nut_values(width):
+        return wrap("  ·  ".join(nut_lines), width, 8.7) if width >= 250 else nut_lines
+
+    def nut_height(width):
+        t = nut_texts(width)
+        return 18 + 12 * len(nut_values(width)) + (10 * len(t) + 6 if t else 0)
+
+    def nut_html(x, y, width):
+        t = nut_texts(width)
+        vals = nut_values(width)
+        out_ = [text_el(x, y, width, 11, 14, ["Nährwerte pro Portion"], weight=700, color=GREEN, tag="h2"),
+                text_el(x, y + 18, width, 8.7, 12, vals)]
+        if t:
+            out_.append(text_el(x, y + 18 + 12 * len(vals) + 6, width, 7.5, 10, t, color=MUTED))
+        return out_
+
     n_pages = max(len(left_pages), len(right_pages), 1)
+    nut_at = None                                           # (where, page index, y): the block is ALWAYS shown, never silently dropped
+    if nut_lines:
+        last_l = len(left_pages) - 1
+        end_l = max((yy + 13.5 * len(lines) for (yy, lines, _c) in left_pages[-1]), default=(top1 + 64) if last_l == 0 else later_top + 52)
+        if end_l + 16 + nut_height(134) <= BOTTOM:
+            nut_at = ("left", last_l, end_l + 16)
+        else:
+            last_r = len(right_pages) - 1
+            ends = [yy + max(14.2 * len(lines), 22.0) for (yy, lines, _c) in right_pages[-1]]
+            if tip_at and tip_at[0] == last_r:
+                ends.append(tip_at[1] + tip_at[2])
+            end_r = max(ends, default=(top1 if last_r == 0 else later_top) + 33)
+            if end_r + 14 + nut_height(RIGHT_W - 28) + 14 <= BOTTOM:
+                nut_at = ("right", last_r, end_r + 14)
+            else:
+                nut_at = ("page", n_pages, later_top)
+                n_pages += 1
+
+    def footer(p_):
+        return ('<footer class="page-footer">' + box(34.02, 801, 527.236, 0.6, "#d8ded5") +
+                text_el(34.02, 810, 427.236, 7.5, 10, [f"das schmeckt! · Mit Freude kochen. · {label}"], color=MUTED) +
+                text_el(469.256, 810, 92, 7.5, 10, [f"Seite {p_ + 1} von {{N}}"], color=MUTED) + "</footer>")
 
     pages_html = []
     for p in range(n_pages):
@@ -226,6 +299,13 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
         else:
             out.append(text_el(LEFT_X, 84, 527.236, 11, 14, [f"{title} (Fortsetzung)"], weight=700, color=GREEN))
             out.append(box(LEFT_X, 104, FULL_W, 0.6, "#d8ded5"))
+            if nut_at and nut_at[0] == "page" and p == nut_at[1]:
+                h = nut_height(RIGHT_W - 28)
+                out += [box(LEFT_X, top, FULL_W, h + 28, "#edf2e9"), box(LEFT_X, top, FULL_W, 2.2, "#006642")]
+                out += nut_html(LEFT_X + 14, top + 14, FULL_W - 28)
+                out.append(footer(p))
+                pages_html.append("".join(out))
+                continue
 
         # left column: ingredients (+ nutrition on the page where the list ends)
         labels, end_left = [], (top + 64) if first else (top + 52)
@@ -235,15 +315,10 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
                           f'height:{13.5 * len(lines):.3f}pt;font-size:9.7pt;line-height:13.5pt;font-weight:400;color:{INK};">'
                           f'<input type="checkbox"><span class="ingredient-copy">{spans}</span></label>')
             end_left = max(end_left, yy + 13.5 * len(lines))
-        extra, y2 = [], end_left + 16
-        if nut_lines and p == len(left_pages) - 1:
-            h = 18 + 12 * len(nut_lines) + (10 * len(assumptions) + 6 if assumptions else 0)
-            if y2 + h <= BOTTOM:
-                extra.append(text_el(46.02, y2, 134, 11, 14, ["Nährwerte pro Portion"], weight=700, color=GREEN, tag="h2"))
-                extra.append(text_el(46.02, y2 + 18, 134, 8.7, 12, nut_lines))
-                if assumptions:
-                    extra.append(text_el(46.02, y2 + 18 + 12 * len(nut_lines) + 6, 134, 7.5, 10, assumptions, color=MUTED))
-                end_left = y2 + h
+        extra = []
+        if nut_at and nut_at[0] == "left" and p == nut_at[1]:
+            extra = nut_html(46.02, nut_at[2], 134)
+            end_left = nut_at[2] + nut_height(134)
         panel_end = min(BOTTOM, end_left + 14)
         out.append(box(LEFT_X, top, LEFT_W, panel_end - top, "#edf2e9"))
         out.append(box(LEFT_X, top, LEFT_W, 2.2, "#006642"))
@@ -269,9 +344,12 @@ def render_recipe(recipe: dict, nutrition: dict | None, warnings: list[dict]) ->
                     text_el(227.02, ty + 10, 334.236, 9.2, 12, ["Unser Tipp"], weight=700, color=GREEN, tag="h3"),
                     text_el(227.02, ty + 26, 330, 9.4, 13.3, tip_lines)]
 
-        out.append('<footer class="page-footer">' + box(34.02, 801, 527.236, 0.6, "#d8ded5") +
-                   text_el(34.02, 810, 427.236, 7.5, 10, [f"das schmeckt! · Mit Freude kochen. · {label}"], color=MUTED) +
-                   text_el(469.256, 810, 92, 7.5, 10, [f"Seite {p + 1} von {{N}}"], color=MUTED) + "</footer>")
+        if nut_at and nut_at[0] == "right" and p == nut_at[1]:
+            h = nut_height(RIGHT_W - 28)
+            out += [box(RIGHT_X, nut_at[2], RIGHT_W, h + 28, "#edf2e9"), box(RIGHT_X, nut_at[2], 2, h + 28, "#006642")]
+            out += nut_html(RIGHT_X + 14, nut_at[2] + 14, RIGHT_W - 28)
+
+        out.append(footer(p))
         pages_html.append("".join(out))
 
     n = len(pages_html)
@@ -298,5 +376,8 @@ def render_cards(recipes: list[dict], nutritions: list[dict | None], warnings: l
         mine = [w for w in warnings if w.get("recipe_index") in (None, i)]
         path = out_dir / f"{slug(topic)}-{i + 1}.html"
         path.write_text(render_recipe(recipe, nut, mine), encoding="utf-8")
+        if nut and nut.get("status") == "ok":                 # complete record incl. every assumption, for traceability
+            import json
+            (out_dir / f"{slug(topic)}-{i + 1}-naehrwerte.json").write_text(json.dumps(nut, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
         files.append(path)
     return files

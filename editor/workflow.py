@@ -219,8 +219,8 @@ class EditorWorkflow:
         nutrition = [{"recipe_title": r["title"], "nutrition": self._call("nutrition", self.agents.nutrition, r)}
                      for r in self.bundle["recipes"]]
         try:
-            files = render_cards(self.bundle["recipes"], [n["nutrition"] for n in nutrition], warnings,
-                                 self.selected["topic"], self.cards_dir)
+            files = (self.agents.render or render_cards)(self.bundle["recipes"], [n["nutrition"] for n in nutrition], warnings,
+                                                         self.selected["topic"], self.cards_dir)
         except Exception as exc:  # noqa: BLE001
             self._log("render_error", error=str(exc))
             raise WorkflowError(f"Exporting the recipe cards failed: {exc}") from exc

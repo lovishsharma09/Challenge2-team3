@@ -66,7 +66,13 @@ class RenderTest(unittest.TestCase):
         self.assertIn("Nährwerte pro Portion", text)
         self.assertIn("Energie: 440 kcal", text)
         self.assertNotIn("Kohlenhydrate", text)             # unknown value is left out, not printed as 0
-        self.assertIn("Annahme: Dukkah → Haselnüsse (Sicherheit: mittel)", text)
+        self.assertIn("1 Annahme zu Mengen und Zuordnung", text)                 # the card states the count ...
+        with tempfile.TemporaryDirectory() as d:                                   # ... and the sidecar file keeps every assumption
+            files = render_cards([recipe()], [nut], [], "Kürbis", Path(d))
+            side = (Path(d) / "kurbis-1-naehrwerte.json").read_text(encoding="utf-8")
+        self.assertEqual(len(files), 1)
+        self.assertIn("Dukkah", side)
+        self.assertIn("Haselnüsse", side)
 
     def test_ai_label_and_warnings_on_every_card(self):
         w = [{"message": "Titel könnte präziser sein.", "dismiss_reason": "ok so"}]
@@ -75,6 +81,15 @@ class RenderTest(unittest.TestCase):
         self.assertIn("Redaktionell freigegeben mit offenen Prüfhinweisen", text)
         self.assertIn("Titel könnte präziser sein.", text)
         self.assertNotIn("Redaktionell freigegeben", plain(render_recipe(recipe(), None, [])))
+
+    def test_many_warnings_are_capped_on_the_card_with_an_explicit_count(self):
+        ws = [{"message": f"Hinweis Nummer {i}", "dismiss_reason": ""} for i in range(1, 7)]
+        text = plain(render_recipe(recipe(), None, ws))
+        for i in (1, 2, 3):
+            self.assertIn(f"Hinweis Nummer {i}", text)
+        self.assertNotIn("Hinweis Nummer 4", text)
+        self.assertIn("… und 3 weitere Prüfhinweise (vollständig im Redaktionssystem)", text)       # nothing hidden silently
+        self.assertNotIn("weitere Prüfhinweise", plain(render_recipe(recipe(), None, ws[:3])))        # exactly three: no pointer needed
 
     def test_long_content_continues_on_numbered_pages_with_header_and_footer(self):
         page = render_recipe(recipe(40, 25, serving_tip="Tipp " * 30), None, [])

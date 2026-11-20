@@ -187,3 +187,4 @@ class Agents:
     review: Callable = review
     revise: Callable = revise
     nutrition: Callable = nutrition
+    render: Callable | None = None          # optional card exporter; None = editor.render.render_cards

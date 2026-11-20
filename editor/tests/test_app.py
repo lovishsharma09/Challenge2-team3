@@ -16,6 +16,8 @@ from editor.tests.fixtures import a_style_batch, mutated, sample_batch, team_dra
 APP = str(Path(__file__).resolve().parents[1] / "app.py")
 TRENDS = Path(__file__).resolve().parents[2] / "data" / "trends"
 FALLBACK = "Offline candidate ranking (fallback, not Person A's pitches)"
+ENGINE_C_MOCK = "Person C pipeline · offline mock (no network)"
+ENGINE_C_LIVE = "Person C pipeline · live text gateway (sends text)"
 
 
 def btn(at, prefix):
@@ -231,6 +233,34 @@ class ScreenTest(unittest.TestCase):
         self.assertIn("1 soft warning(s) stay visible and do not block", at.success[0].value)
         self.assertFalse(btn(at, "Approve both recipes").disabled)
 
+    def test_soft_warnings_sit_in_one_collapsed_expander_hard_issues_stay_prominent(self):
+        at = self.screen(write_batch(self.dir))
+        btn(at, "Load the five pitches").click().run()
+        next(b for b in at.button if b.key == "pick-proposal-pastinake").click().run()
+        at.text_area[0].set_value("demo-soft demo-stuck").run()
+        btn(at, "Generate two recipes").click().run()
+        self.assertFalse(at.exception, at.exception)
+        soft = [e for e in at.expander if "soft warning" in e.label]
+        self.assertEqual(len(soft), 1)
+        self.assertEqual(soft[0].label, "1 soft warning (do not block approval)")
+        self.assertFalse(soft[0].proto.expanded)
+        visible = outside_expanders(at)
+        self.assertTrue(any("HARD (blocks approval" in t for t in visible))                       # hard issues are not hidden
+        self.assertFalse(any("soft (does not block)" in t or "⚠️ **" in t for t in visible))      # soft ones are not on the main page
+        self.assertTrue(any(b.label == "Acknowledge warning" for b in at.button))                 # but can still be acknowledged
+
+    def test_the_correction_beside_the_controls_prefers_a_real_fix_over_a_wording_change(self):
+        at = self.screen(write_batch(self.dir))
+        btn(at, "Load the five pitches").click().run()
+        next(b for b in at.button if b.key == "pick-proposal-pastinake").click().run()
+        btn(at, "Generate two recipes").click().run()
+        wf = at.session_state["wf"]
+        wf.rounds[-1]["changes"] = [{"recipe_index": 0, "recipe_title": "T", "where": "Subtitle", "before": "alt", "after": "neu"},
+                                    {"recipe_index": 0, "recipe_title": "T", "where": "Step 2", "before": "Zwiebel", "after": "Zwiebel und Salz"}]
+        at.run()
+        shown = [m.value for m in at.markdown if m.value.startswith("**T · ")]
+        self.assertEqual(shown[:1], ["**T · Step 2**"])
+
     def test_notice_details_are_collapsed_until_asked_for(self):
         at = self.screen(write_batch(self.dir, a_style_batch()))
         btn(at, "Load the five pitches").click().run()
@@ -268,6 +298,62 @@ class ScreenTest(unittest.TestCase):
         self.assertFalse(at.exception, at.exception)
         self.assertEqual(at.session_state["wf"].stage, "review")
         self.assertFalse(btn(at, "Approve both recipes").disabled)
+
+    # ---- Person C's pipeline as the recipe engine
+    def c_screen(self):
+        at = self.screen(write_batch(self.dir))
+        at.sidebar.radio[1].set_value(ENGINE_C_MOCK).run()
+        self.assertFalse(at.exception, at.exception)
+        btn(at, "Load the five pitches").click().run()
+        next(b for b in at.button if b.key == "pick-proposal-pastinake").click().run()
+        btn(at, "Generate two recipes").click().run()
+        self.assertFalse(at.exception, at.exception)
+        return at
+
+    def test_engine_selector_offers_three_engines_and_builtin_is_the_default(self):
+        at = self.screen(write_batch(self.dir))
+        self.assertEqual(at.sidebar.radio[1].value, "Built-in mock samples (default)")
+        self.assertEqual(len(at.sidebar.radio[1].options), 3)
+
+    def test_person_c_offline_engine_runs_through_review_approval_and_cards(self):
+        at = self.c_screen()
+        wf = at.session_state["wf"]
+        self.assertEqual(wf.stage, "review")
+        self.assertIn("Grünkohl", wf.bundle["recipes"][0]["title"])                         # Person C's recipes, not the built-in lentil soup
+        self.assertTrue(any("Person C's offline fixtures" in w.value for w in at.warning))    # mock label stays visible, worded for this engine
+        self.assertTrue(at.success[0].value.startswith("**Ready to approve.**"))              # round 2 passed: the planted defect was corrected
+        self.assertEqual(sum(t.startswith("Before:") for t in outside_expanders(at)), 1)     # one concrete correction beside the controls
+        with mock.patch("editor.workflow.DEFAULT_CARDS", self.dir / "cards"):
+            wf.cards_dir = self.dir / "cards"
+            btn(at, "Approve both recipes").click().run()
+        self.assertFalse(at.exception, at.exception)
+        every = "\n".join(texts(at))
+        self.assertIn("SYNTHETIC test data, not real values", every)                          # the numbers say what they are
+        self.assertIn("nutrition pending (no value is invented)", every)                       # recipe 2: Gouda could not be matched
+        self.assertIn("Gouda", every)
+        self.assertEqual(len(at.get("iframe")), 2)
+        self.assertEqual(len(at.get("download_button")), 2)
+        self.assertTrue(any(e.label.startswith("Nutrition assumptions and gaps") for e in at.expander))
+
+    def test_engine_that_cannot_start_blocks_and_never_falls_back_to_mock_drafts(self):
+        from editor import c_agents
+        at = self.screen(write_batch(self.dir))
+        with mock.patch.object(c_agents, "_env", lambda name: ""):                         # live engine without gateway settings
+            at.sidebar.radio[1].set_value(ENGINE_C_LIVE).run()
+        self.assertFalse(at.exception, at.exception)
+        errors = " ".join(e.value for e in at.error)
+        self.assertIn("recipe engine cannot be used", errors)
+        self.assertIn("TESSERACTED_BASE_URL", errors)
+        self.assertIn("nothing was replaced by mock data", errors)
+        self.assertTrue(btn(at, "Load the five pitches").disabled)
+        self.assertEqual(at.session_state["wf"].proposals, [])
+
+    def test_switching_the_engine_starts_a_clean_workflow(self):
+        at = self.screen(write_batch(self.dir))
+        btn(at, "Load the five pitches").click().run()
+        self.assertEqual(at.session_state["wf"].stage, "proposals")
+        at.sidebar.radio[1].set_value(ENGINE_C_MOCK).run()
+        self.assertEqual(at.session_state["wf"].stage, "idle")
 
     # ---- team draft for review
     def test_team_draft_is_visibly_labelled_not_approved_and_lists_its_changes(self):

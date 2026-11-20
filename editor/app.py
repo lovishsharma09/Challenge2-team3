@@ -12,6 +12,7 @@ import streamlit.components.v1 as components
 from editor import llm
 from editor.agents import Agents, propose_with_archive, propose_with_trends
 from editor.archive import configured_archive
+from editor.c_agents import CAgents, CUnavailable
 from editor.batch import BatchError, is_template_angle, load_batch, propose_from_batch
 from editor.display import coverage_short, evidence_details, highlight_change, md, pitch_fields, short, trail_label
 from editor.llm_agents import with_llm
@@ -22,6 +23,14 @@ st.set_page_config(page_title="Editor Desk · das schmeckt!", layout="wide")
 
 SOURCE_BATCH = "Saved proposal batch (local JSON)"
 SOURCE_FALLBACK = "Offline candidate ranking (fallback, not Person A's pitches)"
+ENGINE_BUILTIN = "Built-in mock samples (default)"
+ENGINE_C_MOCK = "Person C pipeline · offline mock (no network)"
+ENGINE_C_LIVE = "Person C pipeline · live text gateway (sends text)"
+
+
+@st.cache_resource(show_spinner="Loading Person C's pipeline and the nutrition database…")
+def c_engine(mode: str) -> CAgents:
+    return CAgents("live" if mode == ENGINE_C_LIVE else "mock")
 
 
 @st.cache_resource(show_spinner="Reading the local trend data and recipe archive…")
@@ -39,6 +48,10 @@ with st.sidebar:
     st.header("Proposal source")
     source = st.radio("Source", [SOURCE_BATCH, SOURCE_FALLBACK], key="source",
                       help="Person A supplies the five ranked pitches. The fallback is only for when no batch exists and is labelled as such.")
+    st.header("Recipe engine")
+    engine = st.radio("Engine", [ENGINE_BUILTIN, ENGINE_C_MOCK, ENGINE_C_LIVE], key="engine",
+                      help="Who writes, reviews and calculates the two drafts. The live engine sends the pitch and recipe text to the hackathon "
+                           "text gateway (never archive titles) and uses no image generation.")
     batch_path = ""
     if source == SOURCE_BATCH:
         batch_path = st.text_input("Batch file (local JSON, stays on this machine)", value=llm._env("EDITOR_PROPOSALS_JSON"), key="batch_path")
@@ -56,7 +69,18 @@ if source == SOURCE_BATCH:
 else:
     agents, data_notes = fallback_agents()
 
-source_key = (source, batch_path if source == SOURCE_BATCH else "")
+engine_error = ""
+if agents is not None and engine != ENGINE_BUILTIN:
+    try:
+        agents = c_engine(engine).agents(agents)
+    except CUnavailable as exc:
+        engine_error = str(exc)
+        agents = None
+if engine_error:
+    with st.sidebar:
+        st.error(engine_error)
+
+source_key = (source, batch_path if source == SOURCE_BATCH else "", engine)
 if reload_batch or st.session_state.get("source_key") != source_key:     # a different source starts a clean workflow
     st.session_state.wf = EditorWorkflow(agents or Agents())
     st.session_state.source_key = source_key
@@ -94,7 +118,9 @@ with st.sidebar:
     st.header("Decision trail")
     for item in wf.trail:
         st.caption(trail_label(item))
-    if llm.configured():
+    if engine != ENGINE_BUILTIN:
+        st.caption("Review, revision and nutrition come from Person C's pipeline.")
+    elif llm.configured():
         use_llm = st.checkbox("Real LLM for review and revision (Tesseracted)", value=False,
                               help="Sends the recipe text to the hackathon gateway. Off = mock agents.")
         wf.agents = with_llm(wf.agents) if use_llm else Agents(propose=wf.agents.propose, generate=wf.agents.generate,
@@ -106,6 +132,8 @@ with st.sidebar:
         st.rerun()
 
 if wf.stage == "idle":
+    if engine_error:
+        st.error("The chosen recipe engine cannot be used, and nothing was replaced by mock data: " + engine_error)
     if batch_errors:
         st.error("The Person A batch cannot be used. Nothing was replaced by mock data:\n\n" + "\n".join(f"- {m}" for m in batch_errors))
         st.info("Fix the file or the path, then press 'Reload batch file'. If no batch exists yet, you can switch the source in the sidebar "
@@ -113,7 +141,7 @@ if wf.stage == "idle":
     elif source == SOURCE_BATCH:
         st.success(batch.source_label)
     if st.button("Load the five pitches" if source == SOURCE_BATCH else "Run the offline candidate ranking",
-                 type="primary", disabled=bool(batch_errors)):
+                 type="primary", disabled=bool(batch_errors) or bool(engine_error)):
         act(wf.start)
 
 
@@ -272,8 +300,9 @@ if wf.stage in ("review", "approved"):
     st.info(f"Selected: **{wf.selected['title']}** · steering notes: {wf.notes or 'none'}")
     mock = any(r.get("mock") for r in wf.bundle["recipes"])
     if mock:
-        st.warning("Mock drafts: fixed sample recipes (lentil soup) used to rehearse the review and export flow. "
-                   "They are NOT generated from the selected pitch and are not real results.")
+        st.warning(("Mock drafts: fixed sample recipes (lentil soup) used to rehearse the review and export flow. " if engine == ENGINE_BUILTIN else
+                    "Mock drafts: Person C's offline fixtures, used to rehearse the review and export flow. ")
+                   + "They are NOT generated from the selected pitch and are not real results.")
     st.subheader("Recipes")
     for r in wf.bundle["recipes"]:
         with st.expander(f"{r['title']} · {'Mock draft' if r.get('mock') else 'AI-generated draft'}", expanded=wf.stage == "review"):
@@ -286,17 +315,19 @@ if wf.stage in ("review", "approved"):
         for notice in wf.notices:
             st.warning(notice)
         open_issues = [i for i in wf.issues if i["status"] == "open"]
-        for n, i in enumerate(open_issues):
+        for i in (x for x in open_issues if x["kind"] == "hard"):
             with st.container(border=True):
-                if i["kind"] == "hard":
-                    st.write(f"🛑 HARD (blocks approval, cannot be dismissed) · {i['criterion']}")
-                    st.write(i["message"])
-                else:
-                    st.write(f"⚠️ soft (does not block) · {i['criterion']}")
-                    st.write(i["message"])
+                st.write(f"🛑 HARD (blocks approval, cannot be dismissed) · {i['criterion']}")
+                st.write(i["message"])
+        soft_open = [x for x in open_issues if x["kind"] == "soft"]
+        if soft_open:
+            with st.expander(f"{len(soft_open)} soft warning{'s' if len(soft_open) != 1 else ''} (do not block approval)"):
+                for n, i in enumerate(soft_open):
+                    st.markdown(f"⚠️ **{md(i['criterion'])}**: {md(i['message'])}")
                     reason = st.text_input("Note for the record (optional: acknowledge this warning)", key=f"reason{n}")
                     if st.button("Acknowledge warning", key=f"ack{n}"):
                         act(wf.acknowledge, i["key"], reason)
+                    st.divider()
         for i in (x for x in wf.issues if x["status"] == "dismissed"):
             st.caption(f"⚪ acknowledged: {i['message']} — {i['dismiss_reason']}")
 
@@ -307,7 +338,7 @@ if wf.stage in ("review", "approved"):
             st.markdown("**Latest correction**")
             changes = (last or {}).get("changes") or []
             if last and last["round"] > 1 and changes:
-                show_change(changes[0])
+                show_change(next((c for c in changes if c["where"].startswith(("Step", "Ingredient"))), changes[0]))     # a real fix beats wording
                 if len(changes) > 1:
                     st.caption(f"+{len(changes) - 1} more change(s) in the review history below.")
             elif last and last["round"] > 1:
@@ -341,6 +372,20 @@ if wf.stage in ("review", "approved"):
                        "\n".join(f"- [{w['status']}] {w['message']} {w['dismiss_reason']}" for w in warnings))
         for item in wf.result["nutrition"]:
             n = item["nutrition"]
-            st.write(f"**{item['recipe_title']}**: " + ("nutrition pending (Person C)" if n["status"] == "pending"
-                                                       else str(n["per_serving"])))
+            if n["status"] == "pending":
+                gaps = f" Not calculated: {md(', '.join(str(u) for u in n.get('unmatched', [])))}." if n.get("unmatched") else ""
+                st.write(f"**{md(item['recipe_title'])}**: nutrition pending (no value is invented)." + gaps)
+                continue
+            ps = n["per_serving"]
+            head = " · ".join(f"{label} {ps[k]}" for k, label in (("kcal", "kcal"), ("fat_g", "fat g"), ("carbs_g", "carbs g"), ("protein_g", "protein g"))
+                              if ps.get(k) is not None)
+            st.write(f"**{md(item['recipe_title'])}**: per serving {head}" + (" · **SYNTHETIC test data, not real values**" if n.get("synthetic") else ""))
+            if n.get("coverage_text"):
+                st.caption(md(n["coverage_text"]))
+            if n.get("assumptions") or n.get("unmatched"):
+                with st.expander(f"Nutrition assumptions and gaps: {item['recipe_title']}"):
+                    for a in n.get("assumptions", []):
+                        st.markdown(f"- {md(a.get('original'))} → {md(a.get('used'))} (confidence {md(a.get('confidence'))})")
+                    for u in n.get("unmatched", []):
+                        st.markdown(f"- **not calculated:** {md(u)}")
     review_history()

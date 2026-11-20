@@ -1,0 +1,8 @@
+{
+  "_comment": "Team-tunable conversion assumptions (the extension point described in conversions.py; overrides the defaults). ADDED BY PERSON B after a live run: 'keine Umrechnungsregel fuer 2 Gewuerzgurken' left the whole recipe's nutrition empty. Every value is a kitchen approximation (an ASSUMPTION), is labelled as such with low confidence in nutrition.json and on the card, and needs Person C's review. Keys are normalized names (lower case, umlauts folded).",
+  "piece_g": {
+    "gewurzgurke": 45,
+    "essiggurke": 45,
+    "speck": 15
+  }
+}
