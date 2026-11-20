@@ -12,7 +12,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-STEPS = {1: "trend-evidence", 2: "five-proposals", 3: "editor-choice", 4: "recipes", 5: "review-nutrition", 6: "cards-impact"}
+STEPS = {1: "signals", 2: "proposals", 3: "decision", 4: "recipes", 5: "result"}
 
 
 def settle(page, seconds: float = 2.5):
@@ -39,7 +39,7 @@ def main() -> int:
         page = browser.new_page(viewport={"width": a.width, "height": 900}, device_scale_factor=1)
         for n, name in STEPS.items():
             page.goto(f"{a.base}/?mode={a.mode}&step={n}", wait_until="domcontentloaded", timeout=90_000)
-            settle(page, 3.5 if n in (4, 6) else 2.5)
+            settle(page, 3.5 if n in (4, 5) else 2.5)
             path = out / f"step{n}-{name}.png"
             page.screenshot(path=str(path), full_page=True)
             print(f"saved {path} ({page.evaluate('document.body.scrollHeight')} px high)")

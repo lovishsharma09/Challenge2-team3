@@ -43,6 +43,19 @@ class TextPass(unittest.TestCase):
                 "why_now": "Das Suchinteresse an Plätzchen steigt im November um 90 %."}
         self.assertEqual(pl.validate_text(good), [])
 
+    def test_recipe_ideas_sent_as_a_json_string_are_accepted(self):
+        obj = {"title": "Mandel-Plätzchen mit Zimt für den Advent", "why_now": "Das Suchinteresse an Plätzchen steigt im November um 90 %.",
+               "recipe_ideas": '["Knusprige Mandelplätzchen aus Mürbeteig, im Ofen gebacken", "Weiche Haferkekse mit Äpfeln aus der Pfanne"]'}
+        self.assertEqual(pl.validate_text(obj), [])
+        self.assertIsInstance(obj["recipe_ideas"], list)          # normalised in place, so the caller gets a list
+        self.assertEqual(len(obj["recipe_ideas"]), 2)
+        self.assertTrue(pl.validate_text({**obj, "recipe_ideas": "not a list"}))
+
+    def test_claim_filter_is_word_bounded(self):
+        ok = {"title": "Plätzchen für den Heiligabend mit Mandeln", "recipe_ideas": ["a" * 20, "b" * 20], "why_now": "x" * 30}
+        self.assertEqual(pl.validate_text(ok), [])
+        self.assertTrue(pl.validate_text({**ok, "title": "Kekse, die heilen und gesund machen"}))
+
     def test_llm_text_replaces_templates_and_keeps_the_original(self):
         p = proposal()
         good = {"title": "Mandel-Plätzchen mit Zimt für den Advent", "recipe_ideas": ["Knusprige Mandelplätzchen aus Mürbeteig, im Ofen gebacken",

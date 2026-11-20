@@ -27,7 +27,8 @@ GERMAN_TOPIC = {
     "pancake": "Pfannkuchen", "cake": "Kuchen", "pumpkin": "Kürbis", "chestnut": "Maronen", "goose": "Gans", "duck": "Ente",
 }
 TEMPLATE_ANGLE = re.compile(r"^(Einfache|Saisonale|Klassische) .+(-Variante in einem 30-Minuten-Format|-Version zum Vorbereiten|-Version mit klarer Wochenendoption)$")
-FORBIDDEN = re.compile(r"superfood|detox|gesund(heit)?s?|abnehm|diät|heil", re.I)
+# health/diet promises (brand rule "no health claims"); word-bounded so 'Heiligabend' or 'Diätetik' in a title do not trip it
+FORBIDDEN = re.compile(r"\bsuperfood|\bdetox|\bgesundheit|\bgesund\b|\babnehm|\bdiät\b|\bheilt?\b|\bheilend|\bheilwirkung", re.I)
 SYSTEM = ("Du bist Redakteur:in der deutschen Kochzeitschrift 'das schmeckt!'. Du formulierst Rezeptvorschläge nur aus den "
           "gelieferten Belegen; du erfindest keine Fakten, Zahlen oder Herkunftsgeschichten. Antworte mit genau einem JSON-Objekt.")
 
@@ -94,6 +95,13 @@ def validate_text(obj) -> list[str]:
     elif LABEL_RE.search(title) or re.search(r"\b(Food|Vegetable|modernes das schmeckt)\b", title):
         errs.append("title: deutscher Rezepttitel ohne englisches Themenlabel")
     ideas = obj.get("recipe_ideas")
+    if isinstance(ideas, str):                      # the gateway model sometimes returns the list JSON-encoded as a string
+        try:
+            parsed = json.loads(ideas)
+            if isinstance(parsed, list):
+                obj["recipe_ideas"] = ideas = parsed
+        except ValueError:
+            pass
     if not isinstance(ideas, list) or len(ideas) != 2 or not all(isinstance(i, str) and 15 <= len(i.strip()) <= 160 for i in ideas):
         errs.append("recipe_ideas: genau 2 konkrete Ideen à 15-160 Zeichen")
     elif any(TEMPLATE_ANGLE.match(i.strip()) for i in ideas):

@@ -215,7 +215,7 @@ class PageInDemoMode(unittest.TestCase):
         txt = self._texts(at)
         for p in demo["proposals"]["proposals"]:
             self.assertIn(p["title"].split()[0], txt)
-        self.assertTrue(any("rejected" in e.label for e in at.expander))
+        self.assertTrue(any("Rejected" in e.label for e in at.expander))
         self._goto(at, 3)
         self.assertIn("Selected", self._texts(at))
         self.assertTrue(at.radio(key="pick").disabled)
@@ -224,17 +224,16 @@ class PageInDemoMode(unittest.TestCase):
         for r in demo["c"]["recipes"]:
             self.assertIn(r["title"], txt)
         self.assertIn("Zutaten", txt)
+        self.assertIn("Round 1", txt)                       # review inside the recipe
+        self.assertIn("Pro Portion", txt)                   # nutrition inside the recipe
+        self.assertIn("Database match", txt)
         self.assertTrue(all(b.disabled for b in at.button if str(b.key).startswith("btn_sendback")))
         self._goto(at, 5)
         txt = self._texts(at)
-        self.assertIn("Round 1", txt)
-        self.assertIn("Nutrition per serving", txt)
-        self.assertIn("Image verification", txt)
-        self._goto(at, 6)
-        txt = self._texts(at)
-        self.assertIn("Seconds per stage", txt)
         self.assertIn("pages per card", txt)
+        self.assertIn("issues caught", txt)
         self.assertTrue(any(b.label.startswith("Download") for b in at.get("download_button")))
+        self.assertNotIn("Person", txt)
 
     def test_live_buttons_are_not_offered_in_demo_mode(self):
         at = self._page()
