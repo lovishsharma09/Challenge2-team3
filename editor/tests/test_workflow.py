@@ -56,11 +56,11 @@ class DisplayTest(unittest.TestCase):
         self.assertIn("could NOT be checked", text)
 
     def test_no_match_and_matches_and_legacy_shape(self):
-        self.assertIn("No similar recipe", archive_summary({"archive": {"match_status": "no_match_found",
+        self.assertIn("no credible match", archive_summary({"archive": {"match_status": "no_match_found",
                                                                          "similar_recipes": [], "repetition_risk": "low"}})[1])
         self.assertIn("Pasta", archive_summary({"archive": {"match_status": "matches_found", "repetition_risk": "high",
                                                              "similar_recipes": [{"title": "Pasta"}]}})[1])
-        self.assertIn("No similar recipe", archive_summary({"archive": {"similar_recipes": [], "repetition_risk": "low"}})[1])
+        self.assertIn("no credible match", archive_summary({"archive": {"similar_recipes": [], "repetition_risk": "low"}})[1])
         self.assertEqual(archive_summary({})[0], "warn")          # missing block: unknown risk, warn
 
     def test_wikimedia_states(self):

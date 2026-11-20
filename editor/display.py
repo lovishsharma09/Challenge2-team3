@@ -8,23 +8,43 @@ Missing information must never be shown as "nothing found".
 from __future__ import annotations
 
 
+def _md(text) -> str:
+    """Escape markdown so archive titles can never format or inject anything in the UI."""
+    return "".join("\\" + c if c in "\\`*_{}[]()#+-.!|<>~$" else c for c in str(text))
+
+
 def archive_summary(proposal: dict) -> tuple[str, str]:
-    """Returns (level, text); level is 'ok' | 'warn' for the UI."""
+    """Returns (level, markdown text); level is 'ok' | 'warn' for the UI."""
     a = proposal.get("archive") or {}
-    similar = [r.get("title", "?") for r in a.get("similar_recipes", [])]
+    source = {"export": "Archive (real local export)", "mock": "Archive (MOCK data)"}.get(a.get("source"), "Archive")
+    similar = a.get("similar_recipes", [])
     risk = a.get("repetition_risk", "unknown")
     gap = a.get("content_gap", "")
     status = a.get("match_status")
     if status == "archive_unavailable" or a.get("available") is False:
-        return "warn", ("Archive not available: similar recipes and repetition risk could NOT be checked."
-                        + (f" Note: {a['assumption']}" if a.get("assumption") else ""))
+        return "warn", (f"**{source}: not available.** Similar recipes and repetition risk could NOT be checked."
+                        + (f" {_md(a['assumption'])}" if a.get("assumption") else ""))
     if status == "no_match_found" or (not similar and status is None):
-        head = "No similar recipe found in the archive."
+        head = f"**{source}:** no credible match in this export."
     else:
-        head = f"Similar archive recipes: {', '.join(similar)}."
-    tail = f" Repetition risk: {risk}." + (f" Gap: {gap}" if gap else "")
+        lines = []
+        for r in similar:
+            line = f"- {_md(r.get('title', '?'))}" + (f" ({_md(r['category'])})" if r.get("category") else "")
+            if r.get("why"):
+                line += f": {_md(r['why'])}"
+            if "publication_date" in r:
+                line += f". {_md(r.get('publication_note') or 'Publication date unavailable.')}"
+            lines.append(line)
+        count = a.get("match_count")
+        head = f"**{source}:** similar recipes" + (f" ({count} credible match(es) in this export, top {len(similar)} shown)" if count else "") + ":\n" + "\n".join(lines)
+    if risk == "not_assessed":
+        tail = "\n\nRepetition risk: **not assessed** (needs a comparison with the specific pitch, matches only show topic coverage)."
+    else:
+        tail = f"\n\nRepetition risk: **{_md(risk)}**."
+    if gap:
+        tail += f" {_md(gap)}"
     if a.get("assumption"):
-        tail += f" Assumption: {a['assumption']}"
+        tail += f"\n\n*Assumption: {_md(a['assumption'])}*"
     return ("warn" if risk == "unknown" else "ok"), head + tail
 
 

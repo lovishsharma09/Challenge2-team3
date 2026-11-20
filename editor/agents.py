@@ -21,12 +21,12 @@ TOPICS = [
 def archive_for(topic: str, risk: str) -> dict:
     """MOCK archive block incl. the unavailable / no-match states of the handoff contract."""
     if topic == "Haferflocken":
-        return {"status": "unavailable", "available": False, "match_status": "archive_unavailable",
+        return {"source": "mock", "status": "unavailable", "available": False, "match_status": "archive_unavailable",
                 "similar_recipes": [], "repetition_risk": "unknown", "content_gap": "", "assumption": "MOCK: export not loaded."}
     if topic == "Quitte":
-        return {"status": "ok", "available": True, "match_status": "no_match_found", "similar_recipes": [],
+        return {"source": "mock", "status": "ok", "available": True, "match_status": "no_match_found", "similar_recipes": [],
                 "repetition_risk": "low", "content_gap": "MOCK: untouched topic.", "assumption": ""}
-    return {"status": "ok", "available": True, "match_status": "matches_found",
+    return {"source": "mock", "status": "ok", "available": True, "match_status": "matches_found",
             "similar_recipes": [{"title": f"{topic}-Klassiker"}], "repetition_risk": risk,
             "content_gap": f"MOCK: no modern {topic} main course.", "assumption": ""}
 
@@ -54,6 +54,19 @@ def propose(exclude: set[str], limit: int = 5):
         })
     rejected = [{"topic": t[0], "reason": "MOCK: not in the top five."} for t in pool[limit:limit + 2]]
     return accepted, rejected
+
+
+def propose_with_archive(archive, base=None):
+    """propose() whose archive evidence comes from the REAL local export (trend and brand parts stay mock)."""
+    from .archive import lookup
+    base = base or propose
+
+    def propose_real_archive(exclude: set[str], limit: int = 5):
+        accepted, rejected = base(exclude, limit)
+        for p in accepted:
+            p["archive"] = lookup(archive, p["topic"])
+        return accepted, rejected
+    return propose_real_archive
 
 
 def generate(proposal: dict, notes: str = "") -> dict:

@@ -9,14 +9,20 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import streamlit as st
 
 from editor import llm
-from editor.agents import Agents
+from editor.agents import Agents, propose_with_archive
+from editor.archive import configured_archive
 from editor.display import archive_summary, wikimedia_summary
 from editor.llm_agents import with_llm
 from editor.workflow import EditorWorkflow, WorkflowError
 
 st.set_page_config(page_title="Editor Desk · das schmeckt!", layout="wide")
+@st.cache_resource(show_spinner="Reading the local recipe archive…")
+def archive_agents() -> Agents:
+    return Agents(propose=propose_with_archive(configured_archive()))
+
+
 if "wf" not in st.session_state:
-    st.session_state.wf = EditorWorkflow()
+    st.session_state.wf = EditorWorkflow(archive_agents())
 wf: EditorWorkflow = st.session_state.wf
 
 
@@ -38,7 +44,7 @@ def act(fn, *args):
 
 
 st.title("Editor Desk · das schmeckt!")
-st.caption("The system prepares the decision. The editor decides. (Agents are mock stubs for now.)")
+st.caption("The system prepares the decision. The editor decides. Still mock: trends, brand fit, recipe generation, nutrition. Real: archive lookup.")
 current = {"idle": "start", "proposals": "proposals", "review": "review", "approved": "approved"}[wf.stage]
 st.markdown(" → ".join(f"**{s}**" if s == current else s for s in ("start", "proposals", "review", "approved")))
 if "error" in st.session_state:
