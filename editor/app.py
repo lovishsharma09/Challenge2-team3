@@ -18,13 +18,18 @@ wf: EditorWorkflow = st.session_state.wf
 
 def act(fn, *args):
     """Run a workflow action; show a clear error instead of a stack trace."""
-    try:
-        with st.spinner("Working…"):
+    with st.status("Working…", expanded=True) as status:
+        wf.on_progress = lambda message: status.write(message)
+        try:
             fn(*args)
-    except WorkflowError as exc:
-        st.session_state.error = str(exc)
-    else:
-        st.session_state.pop("error", None)
+        except WorkflowError as exc:
+            st.session_state.error = str(exc)
+            status.update(label="Failed", state="error")
+        else:
+            st.session_state.pop("error", None)
+            status.update(label="Done", state="complete")
+        finally:
+            wf.on_progress = lambda message: None
     st.rerun()
 
 

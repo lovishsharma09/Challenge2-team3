@@ -125,6 +125,21 @@ class WorkflowTest(unittest.TestCase):
         with self.assertRaises(WorkflowError):
             wf.select(wf.proposals[0]["id"])
 
+    def test_progress_messages_are_reported_in_order_including_retries(self):
+        calls = {"n": 0}
+        def flaky(prop, notes):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise RuntimeError("timeout")
+            return Agents().generate(prop, notes)
+        wf = self.wf(Agents(generate=flaky))
+        seen = []
+        wf.on_progress = seen.append
+        wf.select(wf.proposals[0]["id"])
+        self.assertEqual(seen[:3], ["Generating two recipes…", "Generating two recipes… (retry 1)",
+                                    "Reviewing the recipes…"])
+        self.assertIn("Revising the recipes…", seen)
+
     def test_empty_proposals_is_a_clear_error(self):
         with self.assertRaises(WorkflowError):
             EditorWorkflow(Agents(propose=lambda e, n: ([], [])), self.log).start()

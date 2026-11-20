@@ -19,6 +19,8 @@ AUTO_ROUNDS = 2      # automatic review/revise rounds after generation
 EDITOR_ROUNDS = 2    # extra rounds the editor may request with a comment
 MAX_RETRIES = 1
 DEFAULT_LOG = Path(__file__).resolve().parent.parent / "logs" / "editor_audit.jsonl"
+STEP_LABELS = {"proposals": "Researching trends and building proposals", "recipes": "Generating two recipes",
+               "review": "Reviewing the recipes", "revise": "Revising the recipes", "nutrition": "Calculating nutrition"}
 
 
 class WorkflowError(ValueError):
@@ -29,6 +31,7 @@ class EditorWorkflow:
     def __init__(self, agents: Agents | None = None, log_path: Path | None = None):
         self.agents = agents or Agents()
         self.log_path = Path(log_path) if log_path else DEFAULT_LOG
+        self.on_progress: Callable[[str], None] = lambda message: None   # the UI sets this to show live steps
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
         self.reset()
 
@@ -57,6 +60,8 @@ class EditorWorkflow:
         """Run an agent call, validate its output, retry once, otherwise raise a clear WorkflowError."""
         last = None
         for attempt in range(MAX_RETRIES + 1):
+            suffix = f" (retry {attempt})" if attempt else ""
+            self.on_progress(f"{STEP_LABELS.get(label, label)}…{suffix}")
             try:
                 out = fn(*args)
                 return check(out) if check else out
