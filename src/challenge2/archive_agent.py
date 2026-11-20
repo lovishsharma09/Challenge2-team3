@@ -3,6 +3,9 @@ from __future__ import annotations
 import csv
 import json
 import hashlib
+import math
+import re
+from datetime import date
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
@@ -141,6 +144,7 @@ class ArchiveAgent:
                 "recurring_ingredients": [],
                 "recurring_methods": [],
                 "repetition_risk": "unknown",
+                "novelty_score": 50.0,
                 "content_gap": "Archive export unavailable; content gap cannot be verified.",
                 "assumption": (
                     "The supplied archive export contains topic mappings, not a complete "
@@ -148,41 +152,50 @@ class ArchiveAgent:
                 ),
             }
 
-        keywords = {
-            word.strip("(),")
-            for word in topic.casefold().replace("_", " ").split()
-            if len(word.strip("(),")) >= 3
-            and word.strip("(),") not in {"food", "dish", "cabbage", "vegetable"}
-        }
+        topic_tokens = _topic_tokens(topic)
         matches = []
         for recipe in self.recipes:
-            ingredient_names = []
-            for ingredient in recipe.get("ingredients", []):
-                if isinstance(ingredient, dict):
-                    ingredient_names.append(ingredient.get("name", "").casefold())
-                else:
-                    ingredient_names.append(str(ingredient).casefold())
-            searchable = " ".join([recipe["title"].casefold(), *ingredient_names])
-            if any(keyword in searchable for keyword in keywords):
-                matches.append(recipe)
-            elif keyword_match(topic, recipe["title"]):
-                matches.append(recipe)
+            match = _archive_match(topic_tokens, recipe)
+            if match is not None:
+                matched_recipe = dict(recipe)
+                matched_recipe["archive_match_score"] = round(match["score"], 3)
+                matched_recipe["match_level"] = match["level"]
+                matches.append(matched_recipe)
+        matches.sort(
+            key=lambda recipe: (
+                recipe["match_level"] == "whole",
+                recipe["archive_match_score"],
+            ),
+            reverse=True,
+        )
+
+        novelty_score = _novelty_score(matches)
         if not matches:
             risk = "low"
             gap = "No close archived match was found."
             match_status = "no_match_found"
-        elif len(matches) >= 2:
+        elif novelty_score < 45:
             risk = "high"
-            gap = "Strong overlap exists; a clearly differentiated format is required."
+            gap = "Several strong or recent overlaps exist; a clearly differentiated format is required."
+            match_status = "matches_found"
+        elif novelty_score < 75:
+            risk = "medium"
+            if any(recipe["match_level"] == "whole" for recipe in matches):
+                gap = "Comparable whole-topic recipes exist, but the format or seasonal angle can be differentiated."
+            else:
+                gap = "The archive contains component-level overlap, but no whole-topic recipe was found."
             match_status = "matches_found"
         else:
-            risk = "medium"
-            gap = "A nearby recipe exists, but the format or seasonal angle can be differentiated."
+            risk = "low"
+            gap = "Only limited or weak overlap was found."
             match_status = "matches_found"
 
+        comparable_matches = [
+            recipe for recipe in matches if recipe["match_level"] == "whole"
+        ] or matches
         dates = [
             recipe.get("published") or recipe.get("publication_date")
-            for recipe in matches
+            for recipe in comparable_matches
         ]
         dates = [value for value in dates if value]
         recurring_ingredients = sorted({
@@ -207,21 +220,110 @@ class ArchiveAgent:
             "status": "available",
             "available": True,
             "match_status": match_status,
-            "similar_recipes": matches,
+            "similar_recipes": matches[:25],
+            "whole_match_count": sum(
+                recipe["match_level"] == "whole" for recipe in matches
+            ),
+            "word_match_count": sum(
+                recipe["match_level"] == "word" for recipe in matches
+            ),
             "most_recent_comparable_publication": max(dates) if dates else None,
             "recurring_ingredients": recurring_ingredients,
             "recurring_methods": recurring_methods,
             "repetition_risk": risk,
+            "novelty_score": round(novelty_score, 1),
             "content_gap": gap,
             "assumption": "Matched against the supplied archive export.",
         }
 
 
-def keyword_match(topic: str, title: str) -> bool:
-    stop_words = {"and", "or", "der", "die", "das", "food", "vegetable"}
-    terms = {
-        term
-        for term in topic.lower().replace("(", " ").replace(")", " ").split()
-        if term not in stop_words
+def _topic_tokens(topic: str) -> set[str]:
+    stop_words = {
+        "and", "or", "der", "die", "das", "food", "dish", "cabbage", "vegetable",
     }
-    return bool(terms.intersection(title.lower().split()) - stop_words)
+    return {
+        token.rstrip("s")
+        for token in re.findall(r"[a-z0-9äöüß]+", topic.casefold())
+        if len(token) >= 3 and token not in stop_words
+    }
+
+
+def _recipe_tokens(recipe: dict) -> tuple[set[str], set[str]]:
+    title_tokens = {
+        token.rstrip("s")
+        for token in re.findall(r"[a-z0-9äöüß]+", str(recipe.get("title", "")).casefold())
+    }
+    ingredient_tokens = set()
+    ingredients = recipe.get("ingredients", [])
+    if not isinstance(ingredients, list):
+        ingredients = str(ingredients).split(",")
+    for ingredient in ingredients:
+        name = ingredient.get("name", "") if isinstance(ingredient, dict) else str(ingredient)
+        ingredient_tokens.update(
+            token.rstrip("s")
+            for token in re.findall(r"[a-z0-9äöüß]+", name.casefold())
+        )
+    return title_tokens, ingredient_tokens
+
+
+def _archive_match(topic_tokens: set[str], recipe: dict) -> dict | None:
+    if not topic_tokens:
+        return None
+    title_tokens, ingredient_tokens = _recipe_tokens(recipe)
+    title_overlap = len(topic_tokens & title_tokens) / len(topic_tokens)
+    ingredient_overlap = len(topic_tokens & ingredient_tokens) / len(topic_tokens)
+    word_overlap = len(topic_tokens & (title_tokens | ingredient_tokens)) / len(topic_tokens)
+    if word_overlap == 0:
+        return None
+    if title_overlap == 1.0:
+        return {
+            "level": "whole",
+            "score": 0.75 * title_overlap + 0.25 * ingredient_overlap,
+        }
+    return {
+        "level": "word",
+        "score": 0.35 * title_overlap + 0.15 * ingredient_overlap,
+    }
+
+
+def _novelty_score(matches: list[dict]) -> float:
+    if not matches:
+        return 100.0
+    whole_matches = [
+        recipe for recipe in matches if recipe["match_level"] == "whole"
+    ]
+    word_matches = [
+        recipe for recipe in matches if recipe["match_level"] == "word"
+    ]
+    strongest_whole = max(
+        (recipe["archive_match_score"] for recipe in whole_matches),
+        default=0.0,
+    )
+    strongest_word = max(
+        (recipe["archive_match_score"] for recipe in word_matches),
+        default=0.0,
+    )
+    whole_volume_pressure = 1 - math.exp(-len(whole_matches) / 3)
+    word_volume_pressure = 1 - math.exp(-len(word_matches) / 30)
+    recent_pressure = 0.0
+    dated_matches = []
+    for recipe in matches:
+        published = recipe.get("published") or recipe.get("publication_date")
+        try:
+            dated_matches.append((date.today() - date.fromisoformat(published)).days)
+        except (TypeError, ValueError):
+            continue
+    if dated_matches:
+        recent_pressure = max(0.0, 1 - max(0, min(dated_matches)) / (365 * 5))
+
+    # Whole-topic matches are strongest. Word-level matches still matter, but
+    # their volume is deliberately capped so a generic ingredient cannot look
+    # like an exact duplicate.
+    pressure = (
+        15 * strongest_whole
+        + 38 * whole_volume_pressure
+        + 8 * strongest_word
+        + 28 * word_volume_pressure
+        + 6 * recent_pressure
+    )
+    return max(0.0, min(100.0, 100.0 - pressure))

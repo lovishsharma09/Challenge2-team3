@@ -45,6 +45,58 @@ class BrandArchiveTest(unittest.TestCase):
         self.assertEqual(result["match_status"], "matches_found")
         self.assertEqual(result["most_recent_comparable_publication"], "2026-09-04")
         self.assertIn("kürbis", result["recurring_ingredients"])
+        self.assertGreater(result["novelty_score"], 0)
+
+    def test_one_match_is_not_treated_like_many_matches(self):
+        one_data = [
+            {
+                "title": "Kürbisauflauf",
+                "published": "2020-10-12",
+                "ingredients": ["kürbis"],
+            },
+        ]
+        many_data = one_data + [
+            {
+                "title": "Kürbisauflauf mit Käse",
+                "published": "2020-10-12",
+                "ingredients": ["kürbis"],
+            },
+            {
+                "title": "Kürbisauflauf vegetarisch",
+                "published": "2020-10-12",
+                "ingredients": ["kürbis"],
+            },
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            one_path = Path(directory) / "one.json"
+            many_path = Path(directory) / "many.json"
+            one_path.write_text(json.dumps(one_data), encoding="utf-8")
+            many_path.write_text(json.dumps(many_data), encoding="utf-8")
+            one_match = ArchiveAgent(one_path).check("Kürbisauflauf")
+            many_matches = ArchiveAgent(many_path).check("Kürbisauflauf")
+
+        self.assertEqual(len(one_match["similar_recipes"]), 1)
+        self.assertGreater(one_match["novelty_score"], many_matches["novelty_score"])
+        self.assertNotEqual(one_match["repetition_risk"], "high")
+
+    def test_multi_word_topic_keeps_generic_word_evidence_separate(self):
+        data = [
+            {
+                "title": "Schokoladenkuchen",
+                "published": "2025-01-01",
+                "ingredients": ["schokolade"],
+            }
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "archive.json"
+            path.write_text(json.dumps(data), encoding="utf-8")
+            result = ArchiveAgent(path).check("Dubai Schokolade")
+
+        self.assertEqual(result["match_status"], "matches_found")
+        self.assertEqual(result["whole_match_count"], 0)
+        self.assertEqual(result["word_match_count"], 1)
+        self.assertEqual(result["similar_recipes"][0]["match_level"], "word")
+        self.assertLess(result["novelty_score"], 100)
 
     def test_supplied_manifest_is_loaded_when_available(self):
         manifest = Path(r"C:\Users\User\Documents\OMMAX Hackathon\auswahl_manifest.json")

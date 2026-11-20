@@ -33,9 +33,23 @@ for proposal in payload["proposals"]:
             st.metric("Trend", proposal["trend"]["score"])
             st.metric("Marken-Fit", proposal["brand_fit"]["score"])
             st.metric("Gesamt", proposal["rank_score"])
+        components = proposal.get("rank_components", {})
+        st.caption(
+            "Ranking: "
+            f"Google Trends {components.get('google_trends', {}).get('contribution', 0):.1f}"
+            " + "
+            f"Marken-Fit {components.get('brand_fit', {}).get('contribution', 0):.1f}"
+            " + "
+            f"Archiv {components.get('archive_novelty', {}).get('contribution', 0):.1f}"
+        )
         st.markdown(
             "**Archiv:** "
             + ", ".join(recipe["title"] for recipe in proposal["archive"]["similar_recipes"])
+        )
+        st.caption(
+            f"Archiv-Novelty {proposal['archive'].get('novelty_score', 50):.1f} · "
+            f"Whole-Level {proposal['archive'].get('whole_match_count', 0)} · "
+            f"Word-Level {proposal['archive'].get('word_match_count', 0)}"
         )
         st.markdown(
             f"**Risiko:** {proposal['archive']['repetition_risk']}  \n"
