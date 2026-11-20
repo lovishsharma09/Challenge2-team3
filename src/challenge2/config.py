@@ -16,6 +16,15 @@ def get_brave_api_key() -> str:
     if environment_key:
         return environment_key
 
+    env_path = ROOT / ".env"
+    if env_path.exists():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                name, value = line.split("=", 1)
+                if name.strip() == "BRAVE_SEARCH_API_KEY":
+                    return value.strip().strip('"').strip("'")
+
     try:
         from .secrets_local import BRAVE_SEARCH_API_KEY as local_key
     except ImportError:

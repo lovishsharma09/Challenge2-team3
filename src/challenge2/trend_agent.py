@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import csv
+from datetime import date
+import re
 from pathlib import Path
 
 from .brave_search import BraveSearchError, brave_web_search
@@ -33,6 +35,8 @@ class TrendAgent:
 
     def propose_from_local_signals(self, limit: int = 8) -> list[dict]:
         proposals: list[dict] = []
+        period_start = "2026-10-18"
+        period_end = "2026-11-18"
         for row in self.load_rising_topics()[:limit]:
             interest = row.get("search interest", "0")
             try:
@@ -43,6 +47,13 @@ class TrendAgent:
             proposals.append(
                 self.score_topic(row.get("topic", ""), str(score), "")
             )
+            proposals[-1]["trend_points"] = [{
+                "date": period_end,
+                "value": interest_score,
+                "source": "Google Trends Rising Topics",
+                "period_start": period_start,
+                "period_end": period_end,
+            }]
         return proposals
 
     def enrich_with_brave(self, topic: dict) -> dict:
@@ -72,5 +83,13 @@ class TrendAgent:
             }
             for result in results
         ]
+        if "trend_points" not in topic:
+            topic["trend_points"] = []
+        topic["trend_points"].append({
+            "date": date.today().isoformat(),
+            "value": len(results),
+            "source": "Brave Web Search",
+            "query": topic_name,
+        })
         return topic
 

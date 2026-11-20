@@ -12,6 +12,7 @@ MOCK_ARCHIVE = [
 
 class ArchiveAgent:
     def check(self, topic: str) -> dict:
+        archive_available = False
         keywords = topic.lower().split()
         matches = [
             recipe
@@ -20,9 +21,8 @@ class ArchiveAgent:
             or keyword_match(topic, recipe["title"])
         ]
         if not matches:
-            matches = MOCK_ARCHIVE[:1]
             risk = "low"
-            gap = "No close archived match was found."
+            gap = "No close archive match can be established from the supplied fixture."
         elif len(matches) >= 2:
             risk = "high"
             gap = "Strong overlap exists; a clearly differentiated format is required."
@@ -30,9 +30,17 @@ class ArchiveAgent:
             risk = "medium"
             gap = "A nearby recipe exists, but the format or seasonal angle can be differentiated."
         return {
+            "status": "mock_fixture",
+            "available": archive_available,
+            "match_status": "no_match_found" if not matches else "matches_found",
             "similar_recipes": matches,
             "repetition_risk": risk,
             "content_gap": gap,
+            "assumption": (
+                "The archive export is unavailable; the mock fixture is illustrative only."
+                if archive_available is False
+                else "Matched against the supplied archive export."
+            ),
         }
 
 

@@ -37,8 +37,13 @@ Set the key either in the environment:
 $env:BRAVE_SEARCH_API_KEY="YOUR_KEY"
 ```
 
-or create `src/challenge2/secrets_local.py` from
-`src/challenge2/secrets_local.py.example` and place the key there.
+or create a local `.env` file by copying `.env.example` and replacing the value:
+
+```dotenv
+BRAVE_SEARCH_API_KEY=YOUR_KEY
+```
+
+The `.env` file is gitignored. Do not paste the key into `.env.example` or source files.
 
 The key is sent only as the Brave `x-subscription-token` header.
 

@@ -14,9 +14,37 @@
           "id": {"type": "string"},
           "title": {"type": "string"},
           "topic": {"type": "string"},
-          "trend": {"type": "object"},
+          "trend": {
+            "type": "object",
+            "required": ["score", "points", "why_relevant", "sources"],
+            "properties": {
+              "score": {"type": "number"},
+              "points": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["date", "value", "source"]
+                }
+              },
+              "sparkline": {"type": "array", "items": {"type": "number"}},
+              "why_relevant": {"type": "string"},
+              "sources": {"type": "array", "items": {"type": "string"}}
+            }
+          },
           "brand_fit": {"type": "object"},
-          "archive": {"type": "object"},
+          "archive": {
+            "type": "object",
+            "required": ["status", "available", "match_status", "similar_recipes", "repetition_risk", "content_gap", "assumption"],
+            "properties": {
+              "status": {"type": "string"},
+              "available": {"type": "boolean"},
+              "match_status": {"enum": ["matches_found", "no_match_found", "archive_unavailable"]},
+              "similar_recipes": {"type": "array"},
+              "repetition_risk": {"enum": ["low", "medium", "high", "unknown"]},
+              "content_gap": {"type": "string"},
+              "assumption": {"type": "string"}
+            }
+          },
           "recipe_ideas": {"type": "array", "items": {"type": "string"}},
           "rank_score": {"type": "number"},
           "rank": {"type": "integer", "minimum": 1}

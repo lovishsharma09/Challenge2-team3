@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from .brand_agent import BrandAgent
 from .archive_agent import ArchiveAgent
 
@@ -14,15 +16,19 @@ class ProposalAgent:
         rejected: list[dict] = []
         for index, signal in enumerate(trend_signals, start=1):
             topic = signal["topic"]
+            stable_key = re.sub(r"[^a-z0-9]+", "-", topic.casefold()).strip("-")
             brand = self.brand.score(topic)
             archive = self.archive.check(topic)
             proposal = {
-                "id": f"proposal-{index}",
+                "id": f"proposal-{stable_key or index}",
                 "title": f"{topic}: ein modernes das schmeckt! Rezept",
                 "topic": topic,
                 "trend": {
                     "score": signal["trend_score"],
-                    "sparkline": [],
+                    "points": signal.get("trend_points", []),
+                    "sparkline": [
+                        point["value"] for point in signal.get("trend_points", [])
+                    ],
                     "why_relevant": signal["why_relevant"],
                     "sources": signal["sources"],
                 },
