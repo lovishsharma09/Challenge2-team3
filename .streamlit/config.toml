@@ -1,0 +1,6 @@
+# Editor desk look: das schmeckt! green instead of Streamlit red, no "Deploy" button in the demo.
+[theme]
+primaryColor = "#006642"
+
+[client]
+toolbarMode = "minimal"
