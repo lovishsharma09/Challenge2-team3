@@ -27,6 +27,27 @@ class HardCheckTest(unittest.TestCase):
         self.assertEqual(hard_checks(recipe, 0), [])
 
 
+class MismatchTest(unittest.TestCase):
+    def crit(self, ingredients, steps):
+        return sorted(i["criterion"] for i in hard_checks({"title": "T", "ingredients": ingredients, "steps": steps}, 0))
+
+    def test_tbsp_tsp_mixup(self):
+        self.assertEqual(self.crit([{"name": "Olivenöl", "amount": 2, "unit": "EL"}], ["3 TL Olivenöl erhitzen."]),
+                         ["unit_mismatch"])
+
+    def test_steps_exceed_list(self):
+        self.assertEqual(self.crit([{"name": "Mehl", "amount": 200, "unit": "g"}],
+                                   ["150 g Mehl sieben.", "100 g Mehl unterheben."]), ["quantity_mismatch"])
+
+    def test_split_amounts_within_list_are_fine(self):
+        self.assertEqual(self.crit([{"name": "Mehl", "amount": 250, "unit": "g"}],
+                                   ["150 g Mehl sieben.", "100 g Mehl unterheben."]), [])
+
+    def test_decimal_comma_and_unrelated_words(self):
+        self.assertEqual(self.crit([{"name": "Butter", "amount": 1.5, "unit": "EL"}],
+                                   ["1,5 EL Butter schmelzen und 20 Minuten warten."]), [])
+
+
 class DisplayTest(unittest.TestCase):
     def test_archive_unavailable_is_never_shown_as_no_match(self):
         level, text = archive_summary({"archive": {"match_status": "archive_unavailable", "available": False,
