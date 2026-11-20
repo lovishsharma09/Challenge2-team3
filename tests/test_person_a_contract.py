@@ -33,6 +33,28 @@ class PersonAContractTest(unittest.TestCase):
         trend = TrendAgent(Path("data/trends/google-trends"))
         scored = trend.score_topic("Cookie", "98")
         self.assertEqual(scored["trend_score"], 98)
+
+    def test_rank_score_is_transparent_and_not_wikimedia_averaged(self):
+        from pathlib import Path
+        from src.challenge2.proposal_agent import ProposalAgent
+
+        proposal_agent = ProposalAgent(Path(r"C:\Users\User\Documents\OMMAX Hackathon\auswahl_manifest.json"))
+        if not proposal_agent.archive.archive_available:
+            self.skipTest("Shared archive not present")
+        proposals, _ = proposal_agent.build([{
+            "topic": "Cookie (Food)",
+            "trend_score": 98,
+            "trend_points": [],
+            "why_relevant": "Rising.",
+            "sources": ["Google Trends supplied data"],
+            "wikimedia": {"status": "available", "score": 28},
+        }], limit=1)
+
+        proposal = proposals[0]
+        self.assertFalse(
+            proposal["rank_components"]["wikimedia"]["used_in_numeric_rank"]
+        )
+        self.assertEqual(proposal["rank_score"], 75.2)
     def test_proposals_have_stable_handoff_fields(self):
         payload = ChallengeOrchestrator().generate_proposals(limit=5)
 

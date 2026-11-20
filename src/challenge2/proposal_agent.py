@@ -50,13 +50,50 @@ class ProposalAgent:
                     f"Klassische {topic}-Version mit klarer Wochenendoption",
                 ],
             }
-            combined = (signal["trend_score"] + brand["score"]) / 2
-            wikimedia_score = signal.get("wikimedia", {}).get("score")
-            if isinstance(wikimedia_score, (int, float)):
-                combined = combined * 0.75 + wikimedia_score * 0.25
-            if archive["repetition_risk"] == "high":
-                combined -= 8
-            proposal["rank_score"] = round(combined, 1)
+            trend_score = signal["trend_score"]
+            brand_score = brand["score"]
+
+            archive_scores = {
+                "low": 100,
+                "medium": 60,
+                "high": 20,
+                "unknown": 50,
+            }
+            archive_score = archive_scores[archive["repetition_risk"]]
+            rank_score = (
+                trend_score * 0.50
+                + brand_score * 0.30
+                + archive_score * 0.20
+            )
+            proposal["rank_components"] = {
+                "google_trends": {
+                    "score": trend_score,
+                    "weight": 0.50,
+                    "contribution": round(trend_score * 0.50, 1),
+                },
+                "brand_fit": {
+                    "score": brand_score,
+                    "weight": 0.30,
+                    "contribution": round(brand_score * 0.30, 1),
+                },
+                "archive_novelty": {
+                    "score": archive_score,
+                    "risk": archive["repetition_risk"],
+                    "weight": 0.20,
+                    "contribution": round(archive_score * 0.20, 1),
+                },
+                "wikimedia": {
+                    "score": signal.get("wikimedia", {}).get("score"),
+                    "status": signal.get("wikimedia", {}).get("status"),
+                    "used_in_numeric_rank": False,
+                },
+            }
+            proposal["rank_method"] = (
+                "50% Google Trends + 30% brand fit + 20% archive novelty "
+                "(high risk=20, medium=60, low=100, unknown=50). "
+                "Wikimedia is corroborating evidence and is not added to this numeric rank."
+            )
+            proposal["rank_score"] = round(rank_score, 1)
             candidates.append(proposal)
 
         candidates.sort(key=lambda item: item["rank_score"], reverse=True)

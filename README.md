@@ -227,26 +227,32 @@ Archive repetition risk is:
 - `high` when two or more close matches exist.
 
 ### 6. Combined proposal rank
-
-The initial combined score is:
-
-```text
-combined = (Google Trends score + Brand-fit score) / 2
-```
-
-If a valid Wikimedia score exists, it gets a 25% influence:
+The final rank is a weighted evidence score:
 
 ```text
-combined = combined x 0.75 + Wikimedia score x 0.25
+rank_score =
+  Google Trends score x 0.50
+  + Brand-fit score x 0.30
+  + archive novelty score x 0.20
 ```
 
-The score is then reduced by `8` points when archive repetition risk is
-`high`. It is rounded to one decimal and the proposals are sorted by
-descending `rank_score`.
+Archive novelty is derived from repetition risk:
 
-```text
-rank_score = round(adjusted combined, 1)
-```
+| Archive risk | Novelty score |
+|---|---:|
+| low | 100 |
+| medium | 60 |
+| high | 20 |
+| unknown | 50 |
+
+Wikimedia is kept as corroborating trend evidence. It is not added to this
+numeric rank until a separate, documented Wikimedia averaging method is
+approved. This avoids one changing pageview series changing the main score
+through a hidden 25% multiplier.
+
+Each proposal contains `rank_components`, which shows every raw score,
+weight and contribution. The result is rounded to one decimal and sorted
+by descending `rank_score`.
 
 Rejected topics are reported with the reason that prevented them from
 entering the top five, including low brand fit, high repetition risk,

@@ -61,7 +61,9 @@
           },
           "recipe_ideas": {"type": "array", "items": {"type": "string"}},
           "rank_score": {"type": "number"},
-          "rank": {"type": "integer", "minimum": 1}
+          "rank": {"type": "integer", "minimum": 1},
+          "rank_method": {"type": "string"},
+          "rank_components": {"type": "object"}
         }
       }
     },
