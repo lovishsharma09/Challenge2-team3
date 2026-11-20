@@ -175,7 +175,12 @@ def run_stage_c(cfg: Config, selection_path: Path, proposals_path: Path, out: Pa
     log = Log()
     sel, props = _read(selection_path), _read(proposals_path)
     pid = sel["selected_ids"][0]
-    proposal = next(p for p in props["recommended"] if p["id"] == pid)
+    # Person A's live handoff is {"proposals": [...], "rejected_topics": [...]} (schemas/proposals.schema.json);
+    # CONTRACTS.md documents {"recommended": [...], "rejected": [...]}. Accept both, fail with a readable message.
+    candidates = props.get("recommended") or props.get("proposals") or []
+    proposal = next((p for p in candidates if p.get("id") == pid), None)
+    if proposal is None:
+        raise ValueError(f"selected proposal '{pid}' not found in proposals.json (ids: {[p.get('id') for p in candidates]})")
     steering = sel.get("steering_notes") or []
     log.add("selection", f"editor selected {pid}: {proposal['title']}", steering=steering, picks=sel.get("picks"))
 

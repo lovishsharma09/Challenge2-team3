@@ -77,10 +77,26 @@ def normalize_recipe(raw: dict, rid: str, proposal_id: str | None, variant: str,
     return r
 
 
+def compact_proposal(proposal: dict, max_similar: int = 8) -> dict:
+    """The proposal as the recipe writer needs it: Person A's real handoff carries trend point series, Wikimedia
+    series, rank components and up to dozens of archive matches (60+ KB for one pitch) – evidence for the editor,
+    noise for the prompt. Keeps every text field, drops the numeric series, caps the archive list."""
+    p = {k: v for k, v in proposal.items() if k not in ("rank_components", "rank_method")}
+    if isinstance(p.get("trend"), dict):
+        p["trend"] = {k: v for k, v in p["trend"].items() if k not in ("points", "sparkline")}
+        if isinstance(p["trend"].get("wikimedia"), dict):
+            p["trend"]["wikimedia"] = {k: v for k, v in p["trend"]["wikimedia"].items() if k != "points"}
+    if isinstance(p.get("archive"), dict) and isinstance(p["archive"].get("similar_recipes"), list):
+        sim = p["archive"]["similar_recipes"]
+        p["archive"] = {**p["archive"], "similar_recipes": sim[:max_similar],
+                        **({"similar_recipes_total": len(sim)} if len(sim) > max_similar else {})}
+    return p
+
+
 def generate_recipes(client, proposal: dict, steering: list[str], brand_rules: dict, archive_titles: list[str],
                      servings: int = 4) -> list[dict]:
     prompt = fill(load_prompt("recipe_generate.md"),
-                  PROPOSAL=json.dumps(proposal, ensure_ascii=False, indent=1),
+                  PROPOSAL=json.dumps(compact_proposal(proposal), ensure_ascii=False, indent=1),
                   STEERING="\n".join(f"- {s}" for s in steering) or "(none)",
                   BRAND=brand_text(brand_rules),
                   ARCHIVE="\n".join(f"- {t}" for t in archive_titles) or "(archive not available)",

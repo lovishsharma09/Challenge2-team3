@@ -18,7 +18,7 @@ from c_pipeline.config import Config                              # noqa: E402
 from c_pipeline.llm import OpenAICompatClient, extract_json       # noqa: E402
 from c_pipeline.nutrition_agent import compute_nutrition, load_overrides, match_ingredient  # noqa: E402
 from c_pipeline.nutrition_db import NutritionDB                   # noqa: E402
-from c_pipeline.recipe_agent import faithful_image_prompt         # noqa: E402
+from c_pipeline.recipe_agent import compact_proposal, faithful_image_prompt  # noqa: E402
 from c_pipeline.schemas import image_components_problems, image_prompt_problems, validate_recipe  # noqa: E402
 from c_pipeline.render import fmt_amount, ingredient_line, render_recipe_pages, wrap_items  # noqa: E402
 from c_pipeline.review_agent import code_checks                   # noqa: E402
@@ -499,6 +499,56 @@ class IngredientOverrides(unittest.TestCase):
         self.assertEqual(row["match"], "closest_category")
         self.assertTrue(any("nächstliegender Eintrag (Annahme)" in n for n in runs[0]["notes"]))
 
+
+
+class PersonAHandoff(unittest.TestCase):
+    """Person A's live proposals.json ({proposals, rejected_topics}, schemas/proposals.schema.json) must be accepted as-is."""
+    def _person_a_file(self, d: Path) -> Path:
+        base = json.loads((FIX / "mock_proposals.json").read_text(encoding="utf-8"))["recommended"][0]
+        big = {**base, "id": "proposal-curly-kale", "topic": "Curly kale (Vegetable)", "rank": 1, "rank_score": 54.9,
+               "rank_components": {"google_trends": {"contribution": 11.5}},
+               "trend": {"score": 23, "why_relevant": "rising", "sources": ["Google Trends"],
+                         "points": [{"date": "2026-11-01", "value": i, "source": "gt"} for i in range(300)],
+                         "wikimedia": {"status": "available", "article": "Grünkohl", "score": 55, "error": None,
+                                       "points": [{"date": "2026-11-01", "views": i} for i in range(30)]}},
+               "archive": {"status": "available", "available": True, "match_status": "matches_found",
+                           "similar_recipes": [{"title": f"Grünkohl {i}"} for i in range(19)], "repetition_risk": "high",
+                           "content_gap": "none", "assumption": "export"}}
+        p = Path(d) / "proposals_person_a.json"
+        p.write_text(json.dumps({"proposals": [big], "rejected_topics": [{"id": "x", "topic": "Y", "reason": "low"}]},
+                                ensure_ascii=False), encoding="utf-8")
+        return p
+
+    def test_compact_proposal_keeps_text_and_drops_series(self):
+        with tempfile.TemporaryDirectory() as d:
+            full = json.loads(self._person_a_file(d).read_text(encoding="utf-8"))["proposals"][0]
+        c = compact_proposal(full)
+        self.assertEqual(c["title"], full["title"])
+        self.assertEqual(c["recipe_ideas"], full["recipe_ideas"])
+        self.assertEqual(c["archive"]["content_gap"], full["archive"]["content_gap"])
+        self.assertNotIn("points", c["trend"]); self.assertNotIn("points", c["trend"]["wikimedia"])
+        self.assertNotIn("rank_components", c)
+        self.assertEqual(len(c["archive"]["similar_recipes"]), 8)
+        self.assertEqual(c["archive"]["similar_recipes_total"], 19)
+        self.assertLess(len(json.dumps(c)), len(json.dumps(full)) / 4)
+        self.assertEqual(len(full["trend"]["points"]), 300)          # the original is untouched
+
+    def test_run_stage_c_accepts_person_a_shape(self):
+        os.environ["OFFLINE"] = "1"
+        os.environ["NUTRITION_CSV"] = str(FIX / "nutrition_mini_SYNTHETIC.csv")
+        os.environ["ARCHIVE_DIR"] = ""
+        cfg = Config.from_env()
+        with tempfile.TemporaryDirectory() as d:
+            props = self._person_a_file(d)
+            sel = Path(d) / "selection.json"
+            sel.write_text(json.dumps({"picks": 1, "selected_ids": ["proposal-curly-kale"], "selected_by": "t",
+                                       "timestamp": "2026-11-20T00:00:00+00:00", "steering_notes": ["alltagstauglich"]}), encoding="utf-8")
+            res = pipeline.run_stage_c(cfg, sel, props, Path(d) / "out", make_image=False)
+            self.assertEqual(len(res["recipes"]), 2)
+            self.assertEqual(json.loads((Path(d) / "out" / "stage_c_log.json").read_text(encoding="utf-8"))["proposal_id"], "proposal-curly-kale")
+            sel.write_text(json.dumps({"picks": 1, "selected_ids": ["nope"], "steering_notes": []}), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                pipeline.run_stage_c(cfg, sel, props, Path(d) / "out2", make_image=False)
 
 if __name__ == "__main__":
     unittest.main()

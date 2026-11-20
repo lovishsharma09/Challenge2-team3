@@ -45,6 +45,9 @@ If only the topic map is available, set `data_basis` to `topic_map_only` and say
    "risks": ["..."], "validate_next": ["..."], "confidence": "high|medium|low"}],
  "rejected": [{"topic": "Kürbissuppe", "reason": "Google -30%, Wikipedia -11%"}]}
 ```
+Person A's implemented handoff (`schemas/proposals.schema.json`) uses the top-level keys `proposals` / `rejected_topics`
+with `id`, `title`, `topic`, `trend`, `brand_fit`, `archive`, `recipe_ideas`, `rank`, `rank_score`. Person C accepts both
+shapes (`pipeline.run_stage_c`); only `id`, `title` and `recipe_ideas` are required, numeric evidence series are not sent to the LLM.
 
 ## selection.json  (stage 05 -> 06)
 ```json
