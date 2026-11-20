@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from typing import Iterable
+import csv
+import json
+from pathlib import Path
 
 
 MOCK_ARCHIVE = [
@@ -11,36 +13,99 @@ MOCK_ARCHIVE = [
 
 
 class ArchiveAgent:
+    def __init__(self, archive_path: Path | None = None):
+        self.archive_path = archive_path
+        self.archive_available = False
+        self.recipes = []
+        if archive_path is not None and archive_path.exists():
+            self.recipes = self._load(archive_path)
+            self.archive_available = bool(self.recipes)
+
+    @staticmethod
+    def _load(path: Path) -> list[dict]:
+        if path.suffix.casefold() == ".json":
+            data = json.loads(path.read_text(encoding="utf-8"))
+            return data if isinstance(data, list) else data.get("recipes", [])
+        if path.suffix.casefold() == ".csv":
+            with path.open("r", encoding="utf-8-sig", newline="") as handle:
+                return list(csv.DictReader(handle))
+        return []
+
     def check(self, topic: str) -> dict:
-        archive_available = False
+        if not self.archive_available:
+            return {
+                "status": "archive_unavailable",
+                "available": False,
+                "match_status": "archive_unavailable",
+                "similar_recipes": [],
+                "most_recent_comparable_publication": None,
+                "recurring_ingredients": [],
+                "recurring_methods": [],
+                "repetition_risk": "unknown",
+                "content_gap": "Archive export unavailable; content gap cannot be verified.",
+                "assumption": (
+                    "The supplied archive export contains topic mappings, not a complete "
+                    "recipe export. No claim is made about archive matches."
+                ),
+            }
+
         keywords = topic.lower().split()
         matches = [
             recipe
-            for recipe in MOCK_ARCHIVE
-            if any(keyword in " ".join(recipe["ingredients"]).lower() for keyword in keywords)
+            for recipe in self.recipes
+            if any(
+                keyword in " ".join(
+                    recipe.get("ingredients", [])
+                    if isinstance(recipe.get("ingredients", []), list)
+                    else str(recipe.get("ingredients", "")).split(",")
+                ).lower()
+                for keyword in keywords
+            )
             or keyword_match(topic, recipe["title"])
         ]
         if not matches:
             risk = "low"
-            gap = "No close archive match can be established from the supplied fixture."
+            gap = "No close archived match was found."
+            match_status = "no_match_found"
         elif len(matches) >= 2:
             risk = "high"
             gap = "Strong overlap exists; a clearly differentiated format is required."
+            match_status = "matches_found"
         else:
             risk = "medium"
             gap = "A nearby recipe exists, but the format or seasonal angle can be differentiated."
+            match_status = "matches_found"
+
+        dates = [
+            recipe.get("published") or recipe.get("publication_date")
+            for recipe in matches
+        ]
+        dates = [value for value in dates if value]
+        recurring_ingredients = sorted({
+            ingredient.lower()
+            for recipe in matches
+            for ingredient in (
+                recipe.get("ingredients", [])
+                if isinstance(recipe.get("ingredients", []), list)
+                else str(recipe.get("ingredients", "")).split(",")
+            )
+        })
+        recurring_methods = sorted({
+            str(recipe.get("method"))
+            for recipe in matches
+            if recipe.get("method")
+        })
         return {
-            "status": "mock_fixture",
-            "available": archive_available,
-            "match_status": "no_match_found" if not matches else "matches_found",
+            "status": "available",
+            "available": True,
+            "match_status": match_status,
             "similar_recipes": matches,
+            "most_recent_comparable_publication": max(dates) if dates else None,
+            "recurring_ingredients": recurring_ingredients,
+            "recurring_methods": recurring_methods,
             "repetition_risk": risk,
             "content_gap": gap,
-            "assumption": (
-                "The archive export is unavailable; the mock fixture is illustrative only."
-                if archive_available is False
-                else "Matched against the supplied archive export."
-            ),
+            "assumption": "Matched against the supplied archive export.",
         }
 
 

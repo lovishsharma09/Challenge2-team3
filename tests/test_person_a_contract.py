@@ -44,7 +44,7 @@ class PersonAContractTest(unittest.TestCase):
 
         result = ArchiveAgent().check("unknown seasonal topic")
         self.assertFalse(result["available"])
-        self.assertIn(result["match_status"], {"no_match_found", "matches_found"})
+        self.assertEqual(result["match_status"], "archive_unavailable")
         self.assertIn("archive export", result["assumption"].lower())
 
 

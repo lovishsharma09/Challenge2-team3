@@ -66,5 +66,14 @@ The test run is:
 python -m unittest discover -s tests -v
 ```
 
+To start the mock Person-A HTML page and JSON backend:
+
+```powershell
+python -m src.challenge2.api_server
+```
+
+Open `http://127.0.0.1:8000/mock` or request
+`http://127.0.0.1:8000/api/proposals`.
+
 Generated proposals, review reports and assumptions are written to
 `logs/decisions.jsonl`. Generated HTML is written to `output/recipes.html`.

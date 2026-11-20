@@ -12,8 +12,7 @@ class ProposalAgent:
         self.archive = ArchiveAgent()
 
     def build(self, trend_signals: list[dict], limit: int = 5) -> tuple[list[dict], list[dict]]:
-        accepted: list[dict] = []
-        rejected: list[dict] = []
+        candidates: list[dict] = []
         for index, signal in enumerate(trend_signals, start=1):
             topic = signal["topic"]
             stable_key = re.sub(r"[^a-z0-9]+", "-", topic.casefold()).strip("-")
@@ -47,21 +46,35 @@ class ProposalAgent:
                 "recipe_ideas": [
                     f"Einfache {topic}-Variante in einem 30-Minuten-Format",
                     f"Saisonale {topic}-Version zum Vorbereiten",
+                    f"Klassische {topic}-Version mit klarer Wochenendoption",
                 ],
             }
             combined = (signal["trend_score"] + brand["score"]) / 2
+            wikimedia_score = signal.get("wikimedia", {}).get("score")
+            if isinstance(wikimedia_score, (int, float)):
+                combined = combined * 0.75 + wikimedia_score * 0.25
             if archive["repetition_risk"] == "high":
                 combined -= 8
             proposal["rank_score"] = round(combined, 1)
-            if len(accepted) < limit:
-                accepted.append(proposal)
-            else:
-                rejected.append({
-                    "id": proposal["id"],
-                    "topic": topic,
-                    "reason": "Not included in the top-ranked shortlist.",
-                })
-        accepted.sort(key=lambda item: item["rank_score"], reverse=True)
+            candidates.append(proposal)
+
+        candidates.sort(key=lambda item: item["rank_score"], reverse=True)
+        accepted = candidates[:limit]
+        rejected = []
+        for proposal in candidates[limit:]:
+            reason = "Not included in the top five after combined trend and brand ranking."
+            if proposal["brand_fit"]["fit"] == "low":
+                reason = "Low estimated das schmeckt! brand fit."
+            elif proposal["archive"]["repetition_risk"] == "high":
+                reason = "High repetition risk against comparable archive recipes."
+            elif proposal["archive"]["match_status"] == "archive_unavailable":
+                reason = "Kept outside the shortlist because the archive export is unavailable."
+            rejected.append({
+                "id": proposal["id"],
+                "topic": proposal["topic"],
+                "reason": reason,
+                "rank_score": proposal["rank_score"],
+            })
         for rank, proposal in enumerate(accepted, start=1):
             proposal["rank"] = rank
         return accepted, rejected

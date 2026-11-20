@@ -65,6 +65,12 @@
         }
       }
     },
-    "rejected_topics": {"type": "array"}
+    "rejected_topics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "topic", "reason"]
+      }
+    }
   }
 }
